@@ -1,0 +1,364 @@
+{% load static staticfiles %}
+{% block head %}
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+
+    <title>{% block title  %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="{% static 'html/css/grid.css'%}">
+    <link rel="stylesheet" href="{% static 'html/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'html/css/normalize.css'%}">
+
+    <script src="{% static 'html/js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+    <script src="{% static 'html/js/html5.js' %}"></script>
+    <script src="{% static 'html/js/main.js' %}"></script>
+    <script src="{% static 'html/js/radio.js' %}"></script>
+    <script src="{% static 'html/js/checkbox.js' %}"></script>
+    <script src="{% static 'html/js/selectBox.js' %}"></script>
+    <script src="{% static 'html/js/jquery.carouFredSel-5.2.2-packed.js' %}"></script>
+    <script src="{% static 'html/js/jquery.jqzoom-core.js' %}"></script>
+    <script src="{% static 'html/js/jquery.transit.js' %}"></script>
+    <script src="{% static 'html/js/jquery.easing.1.2.js' %}"></script>
+    <script src="{% static 'html/js/jquery.anythingslider.js' %}"></script>
+    <script src="{% static 'html/js/jquery.anythingslider.fx.js' %}"></script>
+</head>
+{% endblock %}
+<body>
+{% block body %}
+    <div id="top">
+        <div class="container_12">
+            <div class="grid_12">
+                <nav>
+                    <ul>
+                        <li class=""><a href="#">用户：{{ user }}</a></li>
+                        <li class="current"><a href="#">我的账户</a></li>
+                        <li><a href="#">我的收藏</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="login.html">个人资料</a></li>
+                        {% else%}
+                        <li><a href="login.html">登录</a></li>
+                        <li><a href="login.html">注册 </a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container_12">
+            <div class="grid_3">
+                <hgroup>
+                    <h1 id="site_logo"><a href="index.html" title=""><img src="{% static 'html/img/logo.png'%}" alt="Online Store Theme Logo"></a></h1>
+                    <h2 id="site_description">在线商店</h2>
+                </hgroup>
+            </div>
+            <div class="grid_9">
+                <div class="top_header">
+                    <div class="welcome">
+                        {% if user.is_authenticated %}
+                            欢迎 <b>{{ user }}</b>，您可以 <a href="login.html">查看商品</a> 或者 <a href="login.html">查看购物车</a>.
+                        {% else %}
+                              欢迎访客，您可以 <a href="login.html">登录</a> 或者 <a href="login.html">创建一个用户</a>.
+                        {% endif %}
+
+                    </div>
+                    <ul id="cart_nav">
+                        <li>
+                            <a class="cart_li" href="#">
+                                <div class="cart_ico"></div>
+                                购物车
+                                <span>$0.00</span> {#  购物车的结算    #}
+                            </a>
+                            <ul class="cart_cont">
+                                <li class="no_border recently">加入购物车的物品</li>
+                                <li>
+                                    {#                购物车的物品显示         #}
+                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img.png' %}" alt="Product 1" title=""></div></a>
+                                    <div class="cont_cart">
+                                        <h4>Faddywax Fragrance Diffuser Set <br>Gardenia</h4>
+                                        <div class="price">1 x <span>$399.00</span></div>
+                                    </div>
+                                    <a title="close" class="close" href="#"></a>
+                                    <div class="clear"></div>
+                                </li>
+
+                                <li>
+                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img2.png' %}" alt="Product 2" title=""></div></a>
+                                    <div class="cont_cart">
+                                        <h4>Caldrea Linen and Room Spray</h4>
+                                        <div class="price">1 x <span>$123.00</span></div>
+                                    </div>
+                                    <a title="close" class="close" href="#"></a>
+                                    <div class="clear"></div>
+                                </li>;
+                                <li class="no_border">
+                                    <a href="shopping_cart.html" class="view_cart">查看购物车</a>
+                                    <a href="checkout.html" class="checkout">去支付</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <form class="search">
+                        <input type="submit" class="search_button" value="">
+                        <input type="text" name="search" class="search_form" value="" placeholder="搜索">
+                    </form>
+                </div>
+                <nav class="primary">
+                    <ul>
+                        <li class="curent"><a href="index.html">首页</a></li>
+                         <li class="parent">
+                            <a href="catalog_grid.html">材质</a>
+                            <ul class="sub">
+                                <li><a href="catalog_grid.html">铂金</a></li>
+                                <li><a href="catalog_grid.html">银</a></li>
+                                <li><a href="catalog_grid.html">玫瑰金</a></li>
+                                <li><a href="catalog_grid.html">黄金</a></li>
+                                <li><a href="catalog_grid.html">精钢</a></li>
+                            </ul>
+                        </li>
+                        <li class="parent">
+                            <a href="catalog_grid.html">宝石</a>
+                            <ul class="sub">
+                                <li><a href="catalog_grid.html">陶瓷</a></li>
+                                <li><a href="catalog_grid.html">彩色宝石</a></li>
+                                <li><a href="catalog_grid.html">钻石</a></li>
+                                <li><a href="catalog_grid.html">祖母绿</a></li>
+                                <li><a href="catalog_grid.html">彩色宝石</a></li>
+                                <li><a href="catalog_grid.html">不透明宝石</a></li>
+                                <li><a href="catalog_grid.html">缟玛瑙</a></li>
+                                <li><a href="catalog_grid.html">珍珠层</a></li>
+                                <li><a href="catalog_grid.html">钻石</a></li>
+                                <li><a href="catalog_grid.html">翠玉</a></li>
+                            </ul>
+                        </li>
+                        <li class="parent"><a href="#">查看所有</a>
+                        </li>
+                    </ul>
+                </nav><!-- .primary -->
+            </div><!-- .grid_9 -->
+        </div>
+    </header>
+
+    <div id="slider_body">
+        <ul id="slider">
+            <li>
+                <div class="slid_content">
+                    <h2 style="color:#6f566f;">Engagement Rings</h2>
+                    <p style="color:#6f566f;">Bulgari宝格丽戒指堪称是设计中的精髓<br>
+                    不论是搭配简单的黄金，还是巧妙地饰以宝石、钻石或是古币<br>
+                    这些戒指将精致优雅与坚毅果敢汇集于一身。设计款式丰富多样，适合所有风格。</p>
+                    <a class="buy_now" href="#">Buy now</a>
+                </div><!-- .slid_content -->
+                <img src="{% static 'html/img/content/slid-1.png' %}" alt="Slid 1" title="">
+            </li>
+
+            <li>
+                <div class="slid_content">
+                    <h2 style="color:#744747;">Precious Metals</h2>
+                    <p style="color:#744747;">精美非常的艺术品。精美奢华的戒指一向以独特的设计、夸张的外观尺寸、<br>
+                    珍稀钻石和绚彩宝石而闻名，是数百个小时的工艺打造与对细节的不懈追求的结晶。<br>
+                    </p>
+                    <a class="buy_now" href="#">Buy now</a>
+                </div><!-- .slid_content -->
+                <img src="{% static 'html/img/content/slid-2.png' %}" alt="Slid 2" title="">
+            </li>
+
+            <li>
+                <div class="slid_content">
+                    <h2 style="color:#6d5956;">Handmade jewelry</h2>
+                    <p style="color:#6d5956;">不论是采用写实风格还是几何抽象风格<br>
+                    每一枚 Serpenti 戒指都将BVLGARI宝格丽最具代表性的标志汇聚在一起<br>
+                    绚丽的色彩、混搭的材料、创新工艺，以及柔软舒适的佩戴性</p>
+                    <a class="buy_now" href="#">Buy now</a>
+                </div><!-- .slid_content -->
+                <img src="{% static 'html/img/content/slid-3.png'%}" alt="Slid 3" title="">
+            </li>
+        </ul>
+    </div><!-- #slider_body -->
+    
+    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
+
+    <div id="home_banners">
+        <div class="container_12">
+            <div class="grid_6">
+                <a href="#" class="banner banner1"><strong>订单超过 ￥5000</strong>免费邮费</a>
+            </div><!-- .grid_6 -->
+
+            <div class="grid_6">
+                <a href="#" class="banner banner2"><strong>全新的</strong>折扣</a>
+            </div><!-- .grid_6 -->
+        </div>
+    </div><!-- #home_banners -->
+
+    <section id="main" class="home">
+        <div class="container_12">
+            <div id="content">
+                <div class="grid_12">
+                    <h2 class="product-title">热销系列</h2>
+                </div>
+                <div class="clear"></div>
+                <div class="products">
+               {% for i in goods %}
+                    <article class="grid_3 article">
+                        {% if i.state == '1' %}
+                             <img class="sale" src="{% static 'html/img/new.png'%}" alt="New">
+                        {% endif %}
+                         <div class="prev">
+                           <a href="product_page.html"><img src="/{{ i.Commodity_img }}" title="{{ i.Commodity_name }}"></a>
+                        </div><!-- .prev -->
+                        <h3 class="title">{{ i.Commodity_name }}<br>{{ i.describe|safe|truncatechars:"10" }}</h3>
+                        <div class="cart">
+
+                        <div class="price">
+
+                        <div class="vert">
+                            ${{ i.Price }}
+                            <div class="price_old">${{ i.Price }}</div>
+                        </div>
+                        </div>
+                        <a href="#" class="obn"></a>
+                        <a href="#" class="like"></a>
+                        <a href="#" class="bay"><img src="{% static 'html/img/bg_cart.png'%}" alt="Buy" title=""></a>
+                        </div>
+                    </article>
+                    {% endfor %}
+
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div id="content_bottom">
+                <div class="grid_6">
+                    <div class="bottom_block about_as">
+                        <h3>关于我们</h3>
+                        <p>其实大部分都是模板修改过来的，我只是做了，汉化还有一点点修改</p>
+                        <p>以及后台数据的显示</p>
+                        <p>2333</p>
+                    </div><!-- .about_as -->
+                </div><!-- .grid_6 -->
+
+                <div class="grid_6">
+                    <div class="bottom_block news">
+                        <h3>关系状况</h3>
+                        <ul>
+                            <li>
+                                <time datetime="2018-08-16">2018-08-16</time>
+                                <a href="#">完成初步的汉化，以及用户登录和注册</a>
+                            </li>
+
+                            <li>
+                                <time datetime="2018-08-17">2018-08-17</time>
+                                <a href="#">初步的完成商品数据表的创建和显示，和订单表的添加，订单详情表的添加</a>
+                            </li>
+
+                            <li>
+                                <time datetime="2018-8-20">2018-8-20</time>
+                                <a href="#">完成后台商品的添加和用户列表查看，商品列表查看，商品分类查看</a>
+                            </li>　
+                        </ul>
+                    </div><!-- .news -->
+                </div><!-- .grid_6 -->
+                <div class="clear"></div>
+            </div><!-- #content_bottom -->
+        </div><!-- .container_12 -->
+    </section><!-- #main.home -->
+{% endblock %}
+    <footer>
+        <div class="footer_navigation">
+            <div class="container_12">
+                <div class="grid_3">
+                     <h3>联系我</h3>
+                    <ul class="f_contact">
+                        <li>2333</li>
+                        <li>110</li>
+                        <li>不存在@233.com</li>
+                    </ul><!-- .f_contact -->
+                </div><!-- .grid_3 -->
+
+                <div class="grid_3">
+                    <h3>信息</h3>
+                    <nav class="f_menu">
+                        <ul>
+                            <li><a href="#">关于我</a></li>
+                            <li><a href="#">隐私政策</a></li>
+                            <li><a href="#">条款与条件</a></li>
+                            <li><a href="#">安全支付</a></li>
+                        </ul>
+                    </nav><!-- .private -->
+                </div><!-- .grid_3 -->
+
+                <div class="grid_3">
+                    <h3>客户服务</h3>
+                    <nav class="f_menu">
+                        <ul>
+                            <li><a href="#">联系</a></li>
+
+                            <li><a href="#">常见问题解答</a></li>
+                            <li><a href="#">网站地图</a></li>
+                        </ul>
+                    </nav><!-- .private -->
+                </div><!-- .grid_3 -->
+
+                <div class="grid_3">
+                    <h3>我的帐户</h3>
+                    <nav class="f_menu">
+                        <ul>
+                            <li><a href="#">我的帐户</a></li>
+                            <li><a href="#">订单历史</a></li>
+                            <li><a href="#">愿望清单</a></li>
+                            <li><a href="#">简讯</a></li>
+                        </ul>
+                    </nav><!-- .private -->
+                </div><!-- .grid_3 -->
+
+                <div class="grid_12 newsletter-payments">
+                    <div class="newsletter">
+                        <div class="icon-mail">时事通讯</div>
+                        <p>订阅关于我们，我们会通知您关于商店折扣的最新消息</p>
+                        <form>
+                            <input type="submit" value="">
+                            <input type="email" name="newsletter" value="" placeholder="输入您的邮箱">
+                        </form>
+                    </div><!-- .newsletter -->
+
+                    <div class="payments">
+                        <img src="{% static 'html/img/payments.png'%}" alt="Payments">
+                    </div><!-- .payments -->
+                </div><!-- .grid_12.newsletter-payments -->
+
+                <div class="clear"></div>
+            </div><!-- .container_12 -->
+        </div><!-- .footer_navigation -->
+
+        <div class="footer_info">
+            <div class="container_12">
+                <div class="grid_6">
+                    <p class="copyright">使用了模板 2333 </p>
+                </div><!-- .grid_6 -->
+
+                <div class="grid_6">
+                    <div class="soc">
+                        <a class="google" href="#"></a>
+                        <a class="twitter" href="#"></a>
+                        <a class="facebook" href="#"></a>
+                    </div><!-- .soc -->
+                </div><!-- .grid_6 -->
+
+                <div class="clear"></div>
+            </div><!-- .container_12 -->
+        </div><!-- .footer_info -->
+    </footer>
+
+</body>
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+</html>
