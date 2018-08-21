@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+  <input type="search" name="q" placeholder="搜索" required>
+  <button type="submit"><span class="ion-ios-search-strong"></span></button>
+</form>
+
+
+<div class="pagination">
+    <ul class="pagination fy">
+        {% if contacts.has_previous %}
+            <li><a href="?page=1">首页</a></li>
+            <li> <a href="?page={{ contacts.previous_page_number }}">上一页</a></li>
+            {% endif %}
+        {% for contact_list in hq1 %}
+            {%  if contact_list == contacts.number %}
+                <li class="active"><a href="?page={{ contact_list }}">{{ contact_list}}</a></li>
+                {% else %}
+                <li class=""><a href="?page={{ contact_list }}">{{ contact_list}}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% if contacts.has_next %}
+             <li><a href="?page={{ contacts.next_page_number }}">下一页</a></li>
+            <li><a href="?page={{ contacts.paginator.num_pages }}">尾页 &raquo;</a></li>
+            {% endif %}
+    </ul>
+    <p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
+</div>
+
+</body>
+</html>

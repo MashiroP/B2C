@@ -2,11 +2,12 @@ import os
 
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.shortcuts import render,HttpResponse
 from django.conf.urls.static import static
-
+from user.models import profile
 from BC2_html.form import Commodity_editor
 from user import models
 from .models import commodity,category
@@ -17,7 +18,7 @@ import random
 
 def BC2_index(request):
     context={}
-    context['goods']=commodity.objects.all()
+    context['goods']=commodity.objects.all()[0:9]
     return render(request,'BC2_html/index.html',context)
 
 
@@ -75,8 +76,19 @@ def BC2_admin_index(request):
 
 def BC2_admin_User(request):
     context={}
-    context['User']=User.objects.all()
+    context['user']=profile.objects.all()
+    if request.is_ajax():
+        id = request.GET.get('uid')
+        get_user=profile.objects.get(id=id)
+        return JsonResponse({})
+
     return render(request, 'BC2_admin/BC2_User.html', context)
+
+
+
+
+
+
 
 
 def upload_data(request):
@@ -92,6 +104,9 @@ def upload_data(request):
     data.pop('csrfmiddlewaretoken')
     data.pop('Commodity_category')
     data['Commodity_img']=img
+
+
+
     commo=commodity.objects.create(**data)
 
     ts = category.objects.get(id=request.POST.get('Commodity_category'))
@@ -111,4 +126,21 @@ def commodity_list(request,uid):
 
 
 def sous(request):
-    return render(request,'sous.html')
+    contact_list = commodity.objects.all()
+    paginator = Paginator(contact_list, 5)  # Show 25 contacts per page
+    page = request.GET.get('page', 2)
+    contacts = paginator.page(page)
+    hq = contacts.number
+    hq1 = list(range(max(hq - 2, 1), hq)) + list(range(hq, min(hq + 2, paginator.num_pages) + 1))
+    contacts1 = {}
+    contacts1['hq1'] = hq1
+    contacts1['contacts'] = contacts
+    contacts1['contact_list'] = contact_list
+    return render(request,'sous.html',contacts1)
+
+
+
+
+
+
+

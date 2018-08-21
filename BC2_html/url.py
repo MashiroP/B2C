@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'upload_data',upload_data,name='upload_data'),
     url(r'BC2_admin_commodity/([0-9]+)',commodity_list,name='comm_list'),
     url(r'so',sous,name='so'),
+    # url(r'User_data',User_data,name='User_data')
 
 
 

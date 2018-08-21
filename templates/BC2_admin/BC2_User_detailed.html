@@ -1,0 +1,85 @@
+{% extends 'admin_head.html' %}
+{% load static staticfiles %}
+{% block title %}
+用户详情
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block body %}
+    <style>
+    p{
+        font-size: 20px;
+    }
+
+    img{
+        overflow: hidden;
+
+    }
+     img{
+        cursor: pointer;
+        transition: all 0.6s;
+    }
+     img:hover{
+
+        transform: scale(2);
+    }
+
+
+    </style>
+<div class=" layui-col-xs-offset3">
+<fieldset class="layui-elem-field layui-field-title ">
+  <legend>用户详细信息</legend>
+  <div class="layui-field-box">
+    <p >用户ID ：{{ user.id }}</p>
+  </div>
+
+  <div class="layui-field-box">
+   <p> 用户头像 ：<img src=".{{ user.headimage }}" style="width:60px;height:60px;margin-right:10px;border-radius:50%"></p>
+  </div>
+
+  <div class="layui-field-box">
+    <p >账号 ：{{ user.user }}</p>
+  </div>
+  <div class="layui-field-box">
+    <p >姓名 ：{{ user.name }}</p>
+  </div>
+  <div class="layui-field-box">
+    <p >邮箱 ：{{ user.email }}</p>
+  </div>
+
+  <div class="layui-field-box">
+    <p > 性别 ：{% if user.sex == '1' %} 男 {% else %}女 {% endif %}</p>
+  </div>
+  <div class="layui-field-box">
+    <p >联系电话 ：{{ user.Phone }}</p>
+  </div>
+  <div class="layui-field-box">
+    <p >收货地址 ：{{ user.address }}</p>
+  </div>
+  <div class="layui-field-box">
+    <p >注册时间 ：{{ user.addtime }}</p>
+  </div>
+
+  <div class="layui-field-box">
+    <p >最后登录时间 ：{{ user.Last_login }}</p>
+  </div>
+
+  <div class="layui-field-box">
+      <p  >用户状态 ：
+          <samp class="layui-bg-green">{% if user.state == '0' %}活动
+          {% else %}
+          <samp class="layui-bg-red">禁用</samp>{% endif %} </samp></p>
+  </div>
+
+
+</fieldset>
+
+</div>
+
+{% endblock %}

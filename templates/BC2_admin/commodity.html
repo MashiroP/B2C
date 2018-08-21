@@ -10,10 +10,7 @@
 {% endblock %}
 
 
-{% block js %}
-<script src="{% static 'assets/js/amazeui.js' %}" charset="utf-8"></script>
-<script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
-{% endblock %}
+
 
 
 {% block body %}
@@ -94,12 +91,13 @@
     是删除逻辑删除，不是真正的删除。
     </div>
     <div class="am-modal-footer">
-      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
       <span class="am-modal-btn am-modal-actions-danger " data-am-modal-confirm>确定</span>
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+
     </div>
   </div>
 </div>
-<script src="{% static 'assets/js/amazeui.js' %}" charset="utf-8"></script>
+<script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
 <script>
 
 $(function() {
@@ -120,9 +118,5 @@ $(function() {
 });
 </script>
 
-
-
-
-
-
+<script src="{% static 'assets/js/amazeui.js' %}" charset="utf-8"></script>
 {% endblock %}

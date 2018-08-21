@@ -56,7 +56,7 @@ class Order(models.Model):
     addtime = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
     state = models.CharField(max_length=2, verbose_name='订单状态')
 
-#
+
 # class Order_details(models.Model):
 #     订单id
 #     商品id号

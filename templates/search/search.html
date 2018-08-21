@@ -18,26 +18,22 @@
   {% for result in page.object_list %}
     <a href="/{{ result.object.id }}/" rel="external nofollow" >{% highlight result.object.Commodity_name with query  css_class "highlight_me_please" %}</a><br/>
 
-
-
-
-      {{ result.object.Commodity_name }}
   {% empty %}
     <p>啥也没找到</p>
   {% endfor %}
 
   {% if page.has_previous or page.has_next %}
     <div>
-      {% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}" rel="external nofollow" >{% endif %}« 上一页{% if page.has_previous %}</a>{% endif %}
-    |
-      {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}" rel="external nofollow" >{% endif %}下一页 »{% if page.has_next %}</a>{% endif %}
+      {% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}"  >{% endif %}« 上一页{% if page.has_previous %}</a>{% endif %}
+
+      {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}" >{% endif %}下一页 »{% if page.has_next %}</a>{% endif %}
     </div>
 
   {% endif %}
 {% endif %}
 
 
-
+{{ page.page_number }}
 
 </body>
 </html>
