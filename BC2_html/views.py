@@ -32,18 +32,25 @@ def BC2_User(request):
     data={}
     if request.POST:
         email=request.POST.get('email')
+        # 获取用户输入的邮箱 和  密码
         password=request.POST.get('password')
         active=User.objects.filter(email=email).first()
+        # 判断邮箱是否 被注册
         if active:
             if active.is_active == False:
+                # 判断用户邮箱密码是否正确
+                
                 data['ERRO'] = 3
                 return JsonResponse(data)
             use = auth.authenticate(request, username=email, password=password)
+            # 如果正确就把用户对象传入
             if use != None:
+                # 传入然后对象 使用auth.login 进行登录
                 auth.login(request, use)
                 data['ERRO'] = 2
                 return JsonResponse(data)
             else:
+                #如果邮箱没有被注册则帮助用户注册
                 try:
                     user_data = User.objects.create_user(username=email, password=password, is_active=True, email=email)
                 except :
@@ -72,20 +79,6 @@ def BC2_admin_index(request):
     Writeblog=Commodity_editor()
     context['from'] = Writeblog
     return render(request, 'BC2_admin/index.html', context)
-
-
-def BC2_admin_User(request):
-    context={}
-    context['user']=profile.objects.all()
-    if request.is_ajax():
-        id = request.GET.get('uid')
-        get_user=profile.objects.get(id=id)
-        return JsonResponse({})
-
-    return render(request, 'BC2_admin/BC2_User.html', context)
-
-
-
 
 
 

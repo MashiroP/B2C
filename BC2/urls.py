@@ -19,9 +19,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^search/', include('haystack.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'BC2_admin/',include('BC2_admin.url')),
     url(r"^",include('BC2_html.url')),
-    url(r'^search/', include('haystack.urls')),
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+
 ]

@@ -16,7 +16,7 @@
         {% if contacts.has_previous %}
             <li><a href="?page=1">首页</a></li>
             <li> <a href="?page={{ contacts.previous_page_number }}">上一页</a></li>
-            {% endif %}
+        {% endif %}
         {% for contact_list in hq1 %}
             {%  if contact_list == contacts.number %}
                 <li class="active"><a href="?page={{ contact_list }}">{{ contact_list}}</a></li>

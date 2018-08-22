@@ -14,10 +14,12 @@
 
 
 {% block body %}
+
+
 <h1 class="layui-col-xs-offset4">用户详情资料 </h1>
     <hr>
     <br>
-<form class="layui-form layui-col-xs-offset2" action='{% url 'BC2_User_modify' %}' method="post" id="fo"  enctype="multipart/form-data">
+<form class="layui-form layui-col-xs-offset2" action='{% url 'UP_user_data' %}' method="post" id="fo"  enctype="multipart/form-data">
 {% csrf_token %}
 
 
@@ -27,14 +29,14 @@
 <div class="layui-form-item layui-col-" style="width: 850px;">
     <label class="layui-form-label">姓　　名</label>
     <div class="layui-input-block">
-      <input type="text" name="username" placeholder="姓名" autocomplete="off" class="layui-input" value="{{ user.user }}">
+      <input type="text" name="username" placeholder="姓名" autocomplete="off"  required="required" class="layui-input" value="{{ user.user }}" lay-verify="required"  >
     </div>
 </div>
+<input type="hidden" name="user_id" value="{{user.id }}">
 
 
 
-
-        <div class="layui-form-item" style="width: 850px;">
+     <div class="layui-form-item" style="width: 850px;">
             <label class="layui-form-label">选择地区</label>
             <div class="layui-input-inline">
                 <select name="P1" id="province"  lay-filter="province" >
@@ -52,8 +54,6 @@
                 </select>
             </div>
         </div>
-
-
   </div>
     <div class="layui-form-item layui-hide">
     <label class="layui-form-label">您选择了：</label>
@@ -63,19 +63,25 @@
    </div>
 
 
-
+  <div class="layui-form-item" style="width: 850px;">
+    <label class="layui-form-label">详细地址</label>
+    <div class="layui-input-block">
+      <input type="text" name="address" placeholder="请输入收货详细地址" autocomplete="off" class="layui-input" required="required" value="{{ user.address }}">
+    </div>
+  </div>
 
 
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">邮　　箱</label>
     <div class="layui-input-block">
-      <input type="text" name="username" placeholder="邮箱" autocomplete="off" class="layui-input" value="{{ user.email }}">
+      <input type="text" name="email" placeholder="邮箱" autocomplete="off" class="layui-input" value="{{ user.email }}" required="required">
     </div>
 </div>
+
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">性　　别</label>
     <div class="layui-input-block">
-        <input type="radio" name="sex" value="0" title="女" checked>
+        <input type="radio" name="sex" value="0" title="女" checked required="required">
        {% if user.sex == '1' %}
         <input type="radio" name="sex" value="1" title="男" checked>
        {% else %}
@@ -87,11 +93,14 @@
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">用户状态</label>
     <div class="layui-input-block">
-       <input type="radio" name="state" value="0" title="活动" checked>
+
        {% if user.state == '1' %}
+        <input type="radio" name="state" value="0" title="活动"  required="required" >
         <input type="radio" name="state" value="1" title="禁用" checked>
-       {% else %}
-        <input type="radio" name="state" value="0" title="禁用" >
+       {% elif user.state == '0' %}
+        <input type="radio" name="state" value="0" title="活动" checked>
+        <input type="radio" name="state" value="1" title="禁用" >
+
        {% endif %}
     </div>
 </div>
@@ -99,100 +108,76 @@
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">联系电话</label>
     <div class="layui-input-block">
-      <input type="text" name="username" placeholder="联系电话" autocomplete="off" class="layui-input">
+      <input type="text" name="Phone" placeholder="联系电话" autocomplete="off" class="layui-input" required="required" value="{{ user.Phone }}">
     </div>
 </div>
 
-
-
-
-
   <div class="layui-form-item" style="width: 850px;">
-    <label class="layui-form-label">详细地址</label>
+    <label class="layui-form-label">上传头像</label>
     <div class="layui-input-block">
-      <input type="text" name="username" placeholder="请输入收货详细地址" autocomplete="off" class="layui-input">
+    <label id="realBtn" class="btn btn-info">
+    <img src="" alt="" width="100">
+     <input type="file" id="file" name="file" class="mFileInput" style="left:-9999px;position:absolute;" onchange="previewFile()"  >
+     <span class="layui-btn">上传头像</span>
+     <span id="hade"></span>
+     </label>
     </div>
   </div>
-
-<div class="layui-form-item" style="width: 850px;">
-
-  </div>
-  </div>
-
-
 
   <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label"></label>
     <div class="layui-input-block">
-       <button type="button" class="layui-btn" id="test1">上传头像</button>
-    <div class="layui-upload-list">
-    <img class="layui-upload-img" id="demo1">
-    <p id="demoText"></p>
+      <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+     <div class="layui-upload-list">
     </div>
   </div>
+  </div>
 
-
-<button type="submit">提交</button>
 </form>
 
 
 <script>
 
-layui.use('upload', function(){
-  var upload = layui.upload;
-  //执行实例
-  var uploadInst = upload.render({
-    elem: '#test1' //绑定元素
-    ,url: '/upload/' //上传接口
-    ,auto:false
-    ,bindAction: '#testListAction'
+function getFileName(path) {
+    var pos1 = path.lastIndexOf('/');
+    var pos2 = path.lastIndexOf('\\');
+    var pos = Math.max(pos1, pos2);
+    if (pos < 0) {
+        return path;
+    }
+    else {
+        return path.substring(pos + 1);
+    }
+}
 
-    ,done: function(res){
-      //上传完毕回调
-    }
-    ,error: function(){
-      //请求异常回调
-    }
-  });
+$(document).ready(function () {
+    $('#file').change(function () {
+        var scr=$(this).attr("src");
+        var str = $(this).val();
+        var fileName = getFileName(str);
+        var scr=$('#hade').text(fileName)
+    });
 });
 
+ function previewFile() {
+      var preview = document.querySelector('img');
+      var file    = document.querySelector('input[type=file]').files[0];
+      var reader  = new FileReader();
 
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
 </script>
-
-
 <script src="{% static 'js/jquery-1.11.0.js' %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'layui-v1.0.4/layui/lay/dest/layui.all.js' %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'js/citys.js' %}" type="text/javascript" charset="utf-8"></script>
-
 <script type="text/javascript">
     pca.init('select[name=P1]', 'select[name=C1]', 'select[name=A1]');
-
-$("#fo").submit(function () {
-
-    var a= $("#pca-hide-province").val()
-    var c=$("#pca-hide-area").val()
-    var d=$("#pca-hide-city").val()
-    //data = {};
-    $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
-    $.ajax({
-        type: "post",
-        url: "{% url 'BC2_User_modify' %}",
-        dataType: "json",
-        data:$(this).serialize(),
-        success: function(data) {
-            if (data.ERRO==1){
-            }
-            else if(data.ERRO==2)
-            {window.location.href="{% url 'BC2_User_modify' %}";}
-        },error:function (xhr) {
-        }
-    });
-
-    return false;
-    })
-
-$.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
-
 </script>
 
 {% endblock %}

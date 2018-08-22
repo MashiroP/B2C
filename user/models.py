@@ -8,7 +8,6 @@ class profile(models.Model):
     address = models.CharField(verbose_name='地址', max_length=100, blank=True)
     Phone = models.CharField(verbose_name='电话号码', max_length=13, blank=True)
     sex = models.CharField(verbose_name='性别',blank=True, default=0, max_length=2)
-    BC2_admin=models.BooleanField(verbose_name='管理员',default=False)
     headimage = models.ImageField(upload_to='./static/media/goods/', default='./static/media/img/1.jpg')
     addtime = models.DateTimeField(auto_now_add=True)
     password=models.CharField(max_length=200)
@@ -17,7 +16,6 @@ class profile(models.Model):
     """
     0普通
     1会员
-    3禁用
     """
 
 
