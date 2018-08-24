@@ -29,7 +29,7 @@
 <div class="layui-form-item layui-col-" style="width: 850px;">
     <label class="layui-form-label">姓　　名</label>
     <div class="layui-input-block">
-      <input type="text" name="username" placeholder="姓名" autocomplete="off"  required="required" class="layui-input" value="{{ user.user }}" lay-verify="required"  >
+      <input type="text" name="username" placeholder="姓名" autocomplete="off"  required="required" class="layui-input" value="{{ user.username }}" lay-verify="required"  >
     </div>
 </div>
 <input type="hidden" name="user_id" value="{{user.id }}">
@@ -66,7 +66,7 @@
   <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">详细地址</label>
     <div class="layui-input-block">
-      <input type="text" name="address" placeholder="请输入收货详细地址" autocomplete="off" class="layui-input" required="required" value="{{ user.address }}">
+      <input type="text" name="address" placeholder="请输入收货详细地址" autocomplete="off" class="layui-input" required="required" value="{{ user.profile.address }}">
     </div>
   </div>
 
@@ -82,7 +82,7 @@
     <label class="layui-form-label">性　　别</label>
     <div class="layui-input-block">
         <input type="radio" name="sex" value="0" title="女" checked required="required">
-       {% if user.sex == '1' %}
+       {% if user.profile.sex == '1' %}
         <input type="radio" name="sex" value="1" title="男" checked>
        {% else %}
         <input type="radio" name="sex" value="1" title="男" >
@@ -94,12 +94,12 @@
     <label class="layui-form-label">用户状态</label>
     <div class="layui-input-block">
 
-       {% if user.state == '1' %}
-        <input type="radio" name="state" value="0" title="活动"  required="required" >
-        <input type="radio" name="state" value="1" title="禁用" checked>
-       {% elif user.state == '0' %}
-        <input type="radio" name="state" value="0" title="活动" checked>
-        <input type="radio" name="state" value="1" title="禁用" >
+       {% if user.is_active %}
+        <input type="radio" name="state" value="1" title="活动"  required="required" checked>
+        <input type="radio" name="state" value="0" title="禁用" >
+       {% else %}
+        <input type="radio" name="state" value="1" title="活动" >
+        <input type="radio" name="state" value="0" title="禁用" checked>
 
        {% endif %}
     </div>
@@ -108,7 +108,7 @@
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">联系电话</label>
     <div class="layui-input-block">
-      <input type="text" name="Phone" placeholder="联系电话" autocomplete="off" class="layui-input" required="required" value="{{ user.Phone }}">
+      <input type="text" name="Phone" placeholder="联系电话" autocomplete="off" class="layui-input" required="required" value="{{ user.profile.Phone }}">
     </div>
 </div>
 
@@ -116,14 +116,13 @@
     <label class="layui-form-label">上传头像</label>
     <div class="layui-input-block">
     <label id="realBtn" class="btn btn-info">
-    <img src="" alt="" width="100">
+    <img src=".{{ user.profile.headimage }}" alt="" width="100">
      <input type="file" id="file" name="file" class="mFileInput" style="left:-9999px;position:absolute;" onchange="previewFile()"  >
      <span class="layui-btn">上传头像</span>
      <span id="hade"></span>
      </label>
     </div>
   </div>
-
   <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label"></label>
     <div class="layui-input-block">
@@ -134,7 +133,6 @@
   </div>
 
 </form>
-
 
 <script>
 

@@ -1,10 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'admin_head.html' %}
+{% load static staticfiles %}
+{% block title %}
+商品分类管理
+{% endblock %}
+
+{% block body %}
+
+    <br>
+    <hr>
+<fieldset class="layui-elem-field">
+  <legend><h1>商品分类管理</h1></legend>
+  <div class="layui-field-box">
+   <form class="layui-form layui-col-xs-offset3 " lay-filter="*" action="{% url 'BC2_category' %}" method="post" >
+    <div class="layui-form-item " id="category_div">
+    {% csrf_token %}
+
+        <label class="layui-form-label">父类别</label>
+        <div class="layui-input-inline">
+            <select name="category" lay-verify="" >
+            <option value="0" id="category_select" >{{ i.category_father  }}</option>
+            {% for i in gory %}
+            <option value="{{ i.id  }}">{{ i.category_father  }}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+    <label class="layui-form-label" id="Subcategory_label">添加子类别</label>
+    <div class="layui-input-inline">
+      <input type="text" name="Subcategory" placeholder="请输入"  class="layui-input" id="int">
+    </div>
+    </div>
+
+    <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+     <button class="layui-btn" lay-submit  id="Subcategory">立即提交</button>
+     <button class="layui-btn"  type="button" id="category">添加父类</button>
+
+    </div>
+    <input type="hidden" value="1" id="hi_id" name="hiud">
+  </form>
+  </div>
+</fieldset>
+
+<script src="{% static 'jquery-1.8.3.min.js' %}"></script>
+<script>
+//Demo
+
+
+
+
+    layui.use('form', function(){
+      var form = layui.form;
+      form.render(); //更新全部
+      form.render('select'); //刷新select选择框渲染
+      //监听提交
+     $('#category').click(function () {
+        if ($("#hi_id").val()==1 ){
+            $('#category_div').toggleClass("layui-hide");
+            $("#Subcategory_label").text('添加父类别')
+            $("#category").text('添加子类')
+            $("#hi_id").attr('value','2')
+        }
+        else  {
+                $('#category_div').toggleClass("layui-hide");
+                $("#Subcategory_label").text('添加父类别')
+                $("#category").text('添加子类')
+                $("#hi_id").attr('value','1')
+        }
+
+
+     });
+      form.on('submit(*)', function(data){
+          $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
+          $.post('{% url "BC2_category" %}',$(this).serialize(),function(data){
+             layer.msg('提交成功');
+             form.render();
+              },'json')
+        form.render();
+         $('#int').attr("value","")
+        return false
+
+      });
+    });
+</script>
+
+
+
+
+
+
+{% endblock %}

@@ -40,39 +40,39 @@
   </div>
 
   <div class="layui-field-box">
-   <p> 用户头像 ：<img src=".{{ user.headimage }}" style="width:60px;height:60px;margin-right:10px;border-radius:50%"></p>
+   <p> 用户头像 ：<img src=".{{ user.profile.headimage }}" style="width:60px;height:60px;margin-right:10px;border-radius:50%"></p>
   </div>
 
   <div class="layui-field-box">
-    <p >账号 ：{{ user.user }}</p>
+    <p >账号 ：{{ user.profile.user }}</p>
   </div>
   <div class="layui-field-box">
-    <p >姓名 ：{{ user.name }}</p>
+    <p >姓名 ：{{ user.username }}</p>
   </div>
   <div class="layui-field-box">
     <p >邮箱 ：{{ user.email }}</p>
   </div>
 
   <div class="layui-field-box">
-    <p > 性别 ：{% if user.sex == '1' %} 男 {% else %}女 {% endif %}</p>
+    <p > 性别 ：{% if user.profile.sex == '1' %} 男 {% else %}女 {% endif %}</p>
   </div>
   <div class="layui-field-box">
-    <p >联系电话 ：{{ user.Phone }}</p>
+    <p >联系电话 ：{{ user.profile.Phone }}</p>
   </div>
   <div class="layui-field-box">
-    <p >收货地址 ：{{ user.address }}</p>
+    <p >收货地址 ：{{ user.profile.address }}</p>
   </div>
   <div class="layui-field-box">
-    <p >注册时间 ：{{ user.addtime }}</p>
+    <p >注册时间 ：{{ user.date_joined }}</p>
   </div>
 
   <div class="layui-field-box">
-    <p >最后登录时间 ：{{ user.Last_login }}</p>
+    <p >最后登录时间 ：{{ user.last_login }}</p>
   </div>
 
   <div class="layui-field-box">
       <p  >用户状态 ：
-          <samp class="layui-bg-green">{% if user.state == '0' %}活动
+          <samp class="layui-bg-green">{% if user.is_active %}活动
           {% else %}
           <samp class="layui-bg-red">禁用</samp>{% endif %} </samp></p>
   </div>

@@ -6,23 +6,120 @@
 
 {% block body %}
 
-<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-  <ul class="layui-tab-title">
-    <li class="layui-this">网站设置</li>
-    <li>用户管理</li>
-    <li>权限分配</li>
-    <li>商品管理</li>
-    <li>订单管理</li>
-  </ul>
- <div class="layui-tab-content">
-    <div class="layui-tab-item layui-show">内容1</div>
-    <div class="layui-tab-item">内容2</div>
-    <div class="layui-tab-item">内容3</div>
-    <div class="layui-tab-item">内容4</div>
-    <div class="layui-tab-item">内容5</div>
-  </div>
-</div>
 
-</div>
+
+<fieldset class="layui-elem-field layui-col-xs-offset3" style="width: 500px;">
+  <legend>商品类别查看</legend>
+  <div class="layui-field-box">
+
+<table class="layui-table">
+
+
+
+  <thead>
+    <tr>
+
+      <th>顶级类别</th>
+      <th>子级类别</th>
+      <th>操作</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    {% for i in gory %}
+    <td >{{ i.uid.category_father }}</td>
+    <td  class=" aa" data="{{ i.uid.category_father }}" gory_id="{{ i.id }}" >{{ i.Subgrade_name }}</td>
+
+    <td>
+      <div class="layui-input-inline" style="color: white; padding-left: 50px;">
+      <a class="layui-btn layui-btn-danger layui-btn-small del" lay-event="{{ i.id }}" title="删除">删除<i class="layui-icon">&#xe640;</i></a>
+      </div>
+    </td>
+
+     </tr>
+    {% endfor %}
+    <tr>
+
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+</fieldset>
+{#<input type="text" class="" value="">#}
+
+<script>
+
+
+
+$('.aa').dblclick(function () {
+
+    var mi=$(this)
+    var da=mi.attr('data')
+    var title=mi.attr('gory_id')
+
+     layer.prompt({title: '请输入要修改的值', formType: 3}, function(pass, index){
+     layer.close(index);
+     {#layer.msg( pass );#}
+     if (da ==pass){
+         layer.msg('输入的值一样,提交失败');
+
+
+     }else{
+
+
+
+          $.get('{% url "BC2_View_category" %}',{'upid':title,"title":pass},function(data){
+
+              if (data.msg =='1'){
+                  layer.msg( "修改成功" );
+                  mi.text(pass)
+
+              }
+            },'json')
+
+
+     return false
+     }
+
+});
+})
+$('.del').click(function () {
+    var mi=$(this)
+    var uid=mi.attr('lay-event')
+
+    layer.confirm('确认要删除吗?', {
+      btn: ['确认','取消'] //按钮
+    }, function(){
+
+    $.get('{% url "BC2_View_category" %}',{'upid':uid,'del':'1'},function(data){
+              if (data.msg =='2'){
+                  layer.msg( "删除成功" );
+              mi.parents('tr').remove()
+              }else {
+
+                  layer.msg( "删除失败" );
+
+              }
+            },'json')
+
+
+        layer.msg('的确很重要', {icon: 1});
+
+    });
+
+
+
+
+    return false
+})
+
+
+
+
+
+
+</script>
 
 {% endblock %}

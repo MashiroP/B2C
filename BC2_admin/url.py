@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^dle_user',dle_user,name='dle_user'),
     url(r'UP_user_data',UP_user_data,name='UP_user_data'),
     url(r'BC2_admin_search',search,name='BC2_admin_search'),
-    url(r'aabbbcc',user_test,name='aabbbcc')
+    url(r'BC2_category',BC2_category,name='BC2_category'),
+    url(r'BC2_View_category',BC2_View_category,name='BC2_View_category')
 ]

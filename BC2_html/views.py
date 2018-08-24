@@ -4,13 +4,11 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import JsonResponse
-from django.shortcuts import redirect
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import redirect,render,HttpResponse
 from django.conf.urls.static import static
-from user.models import profile
+from BC2_admin.models import profile
 from BC2_html.form import Commodity_editor
-from user import models
-from .models import commodity,category
+from BC2_admin.models import commodity,category
 import datetime
 import random
 

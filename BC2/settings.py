@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user',
     'BC2_html',
     'ckeditor',
     'BC2_admin',
@@ -134,16 +133,12 @@ STATICFILES_DIRS = [
 
 CKEDITOR_UPLOAD_PATH = "static/media/goods"
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'BC2_html.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
-    },
-}
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+LOGIN_URL = '/'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
-AUTHENTICATION_BACKENDS = (
-    'BC2_admin.email_Backend.EmailBackend',
-)
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+
