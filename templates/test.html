@@ -51,17 +51,17 @@
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  >
         <li class="layui-nav-item ">  <!--layui-nav-itemed -->
-          <a class="" href="javascript:;">商品管理</a>
+          <a class="" href="javascript:;">商品分类管理</a>
           <dl class="layui-nav-child">
               <dd><a href="{% url 'BC2_category' %}" target="iframe_a">添加分类</a></dd>
             <dd><a href="{% url 'BC2_View_category' %}" target="iframe_a">分类列表</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:;">解决方案</a>
+          <a href="javascript:;"> 商品管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="{% url 'BC2_admin_User' %}" target="iframe_a"> 用户列表</a></dd>
-            <dd><a href="{% url 'BC2_admin_User' %}" target="iframe_a">添加用户</a></dd>
+            <dd><a href="{% url 'BC2_admin_index' %}" target="iframe_a">添加商品</a></dd>
+            <dd><a href="{% url 'comm_list' %}" target="iframe_a">商品列表</a></dd>
             <dd><a href="">超链接</a></dd>
           </dl>
         </li>

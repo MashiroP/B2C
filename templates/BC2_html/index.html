@@ -1,4 +1,4 @@
-{% load static staticfiles %}
+ {% load static staticfiles %}
 {% block head %}
 <!DOCTYPE html>
 <html>
@@ -32,26 +32,30 @@
 </head>
 {% endblock %}
 <body>
-{% block body %}
+
     <div id="top">
         <div class="container_12">
             <div class="grid_12">
                 <nav>
                     <ul>
+                        {% if user.is_authenticated %}
                         <li class=""><a href="#">用户：{{ user }}</a></li>
                         <li class="current"><a href="#">我的账户</a></li>
                         <li><a href="#">我的收藏</a></li>
-                        {% if user.is_authenticated %}
-                        <li><a href="login.html">个人资料</a></li>
+
+                        <li><a href="{% url 'create' %}">个人资料</a></li>
+                        <li><a href="{% url 'logut' %}">退出登录</a></li>
                         {% else%}
-                        <li><a href="login.html">登录</a></li>
-                        <li><a href="login.html">注册 </a></li>
+                        <li><a href="{% url 'login' %}">登录</a></li>
+                        <li><a href="{% url 'BC2_User' %}">注册 </a></li>
+
                         {% endif %}
                     </ul>
                 </nav>
             </div>
         </div>
     </div>
+{% block body %}
     <header>
         <div class="container_12">
             <div class="grid_3">
@@ -70,6 +74,7 @@
                         {% endif %}
 
                     </div>
+                 {% if user.is_authenticated %}
                     <ul id="cart_nav">
                         <li>
                             <a class="cart_li" href="#">
@@ -106,7 +111,7 @@
                             </ul>
                         </li>
                     </ul>
-
+                    {% endif %}
                     <form class="search">
                         <input type="submit" class="search_button" value="">
                         <input type="text" name="search" class="search_form" value="" placeholder="搜索">

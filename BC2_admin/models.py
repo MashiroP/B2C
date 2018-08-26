@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 from django.contrib.auth.models import User
 
 
@@ -11,6 +10,7 @@ class profile(models.Model):
     address = models.CharField(verbose_name='地址', max_length=100, blank=True)
     Phone = models.CharField(verbose_name='电话号码', max_length=13, blank=True)
     sex = models.CharField(verbose_name='性别',blank=True, default=0, max_length=2)
+    active=models.BooleanField(default=False)
     headimage = models.ImageField(upload_to='./static/media/goods/', default='./static/media/img/1.jpg')
 
 
@@ -35,13 +35,13 @@ class commodity(models.Model):
     Price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='商品价格')
     Stock = models.IntegerField(verbose_name='库存')
     Sales_volumes = models.IntegerField(verbose_name='销售数量', default=0)
-    Commodity_category = models.ManyToManyField(verbose_name='商品类别', to=category)
+    uid =models.ForeignKey(verbose_name='商品类别', to=category_Subcategory)
     Commodity_img = models.ImageField(verbose_name='商品图片', upload_to='./static/media/goods/')
     state = models.CharField(max_length=2, verbose_name='状态')
     """
-    新发布
-    在售
-    下架
+    1新发布
+    0  在售
+    2 下架
     """
     commodity_delete = models.BooleanField(verbose_name='商品逻辑删除', default=0)
     Clicks = models.IntegerField(verbose_name='点击量', default=0)

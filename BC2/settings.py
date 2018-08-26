@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'BC2_html',
     'ckeditor',
     'BC2_admin',
+    'ueditor',
 
 ]
 

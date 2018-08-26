@@ -12,5 +12,9 @@ urlpatterns = [
     url(r'UP_user_data',UP_user_data,name='UP_user_data'),
     url(r'BC2_admin_search',search,name='BC2_admin_search'),
     url(r'BC2_category',BC2_category,name='BC2_category'),
-    url(r'BC2_View_category',BC2_View_category,name='BC2_View_category')
+    url(r'BC2_View_category',BC2_View_category,name='BC2_View_category'),
+    url(r'upload_data', upload_data, name='upload_data'),
+    url(r'BC2_admin_commodity', commodity_list, name='comm_list'),
+    url(r'commodity_state', commodity_state, name='commodity_state'),
+    url(r'commodity_seve',commodity_seve,name='commodity_seve')
 ]

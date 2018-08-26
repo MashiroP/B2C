@@ -5,30 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    <div id="top">
-        <div class="container_12">
-            <div class="grid_12">
-                <nav>
-                    <ul>
-                        <li class="current"><a href="#">我的账户</a></li>
-                        <li><a href="#">我的收藏</a></li>
-                        <li><a href="login.html">登录</a></li>
-                        <li><a href="login.html">注册 </a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <br>
     <section id="main" class="page-login">
         <div class="container_12">
             <div id="content" class="grid_12">
                 <header>
-                    <h1 class="page_title">登录 帐户或者 创建用户</h1>
+                    <h1 class="page_title">登录用户</h1>
                 </header>
                 <article>
                     <div class="grid_6 new_customers">
-			<h2>新用户</h2>
+			<h2><a href="{% url 'BC2_User' %}">新用户</a></h2>
 			<p>通过在本商店注册，您可以更快地完成结帐流程，存储多个送货地址，查看和跟踪您帐户中的订单等
             </p>
 			<div class="clear"></div>
@@ -36,20 +21,17 @@
                     <div class="grid_6 registed_form">
 			<form class="registed" action="{% url 'BC2_User' %}" method="post" id="fo">
                 {% csrf_token %}
-			    <h2>登录一个帐户或者创建一个用户</h2>
-                <p>输入邮箱登录，如果邮箱已经注册过，则登录 <br> 通过邮箱注册之后可以在个人资料中填写更多信息</p>
+			    <h2>登录一个帐户</h2>
+                <p>输入手机号码登录<br> 通过手机号码之后可以在个人资料中填写更多信息</p>
 			    <div class="email">
-				<strong>邮箱：</strong><sup>*</sup><br>
-				<input type="email" name="email">
+				<strong>手机号码：</strong><sup>*</sup><br>
+				<input type="text" name="email">
 			    </div>
+
 			    <div class="email">
 				<strong>密码:</strong><sup>*</sup><br>
 				<input type="password" name="password" >
                     <samp style="color: red" id="span_password"></samp>
-			    </div>
-			    <div class="remember">
-				<input class="niceCheck" type="checkbox" name="Remember_password">
-				<span class="rem">记住我</span>
 			    </div>
 			    <div class="submit">
 				<input type="submit" value="登录">
@@ -76,17 +58,20 @@
     data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
     $.ajax({
         type: "post",
-        url: "{% url 'BC2_User' %}",
+        url: "{% url 'login' %}",
         dataType: "json",
         data:$(this).serialize(),
         success: function(data){
             if (data.ERRO==1){
-                 $("#span_password").text('密码错误，或者您的邮箱已经别人注册，去点击忘记密码，找回账户');
+                 $("#span_password").text('手机号码输入错误或者密码错误，或者您的手机号码已经别人注册，去点击忘记密码，找回账户');
             }
             else if(data.ERRO==2)
             {window.location.href="{% url 'BC2_index' %}";}
             else if (data.ERRO==3) {
                 $("#span_password").text('你的账户可能已经被管理员禁用，请联系*****');
+            }
+            else if (data.ERRO==4) {
+                $("#span_password").text('请输入正确的手机号码');
             }
         },error:function (xhr) {
         }

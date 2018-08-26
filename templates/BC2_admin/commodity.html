@@ -3,16 +3,6 @@
 {% block title %}
 商品列表
 {% endblock %}
-
-
- {% block css %}
-<link rel="stylesheet" href="{% static 'assets/css/amazeui.css' %}"  media="all">
-{% endblock %}
-
-
-
-
-
 {% block body %}
 
 		<style type="text/css">
@@ -30,93 +20,128 @@
 			}
             </style>
 
-<table class="am-table am-table-bordered am-text-center am-table-hover am-table-centered  am-text-middle">
-  <colgroup>
+<form class="layui-form layui-col-xs-offset3" action="{% url 'comm_list' %}" method="get">
+<input type="hidden" value="{{ contacts.number }}" name="page">
+  <div class="layui-form-item">
+    <div class="layui-input-inline">
+      <select name="city" lay-verify="required">
+        <option value="" selected="selected"></option>
+        <option value="Texture"{% if  request.GET.city ==  'Texture'  %} selected="selected" {% endif %} > 商品类别 </option>
+        <option value="bt"{% if  request.GET.city ==  'bt'  %} selected="selected" {% endif %} >商品标题</option>
+      </select>
+    </div>
+    <div class="layui-input-inline">
+      <input type="text" name="search" required  lay-verify="required" placeholder="搜索" autocomplete="off" class="layui-input" value="{{ request.GET.title }}">
+    </div>
 
-    <col>
-  </colgroup>
+    <div class="layui-input-inline" style="color: white">
+      <button class="layui-btn"  lay-submit lay-filter="formDemo"> <i class="layui-icon" style="color: white">&#xe615;</i></button>
+     </div>
+  </div>
+<div class="layui-form-item">
+</div>
+</form>
+<table class="layui-table lay-size='sm" id="barDemo" >
   <thead>
     <tr>
       <th>ID</th>
-      <th>商品名字</th>
-      <th>商品价格</th>
-      <th>库存</th>
-      <th>销售数量</th>
-      <th>点击量</th>
-      <th>添加时间</th>
       <th>商品图片</th>
+      <th>商品标题</th>
+      <th>商品价格</th>
+      <th>商品库存</th>
+      <th>商品类别</th>
+      <th>点击量</th>
+      <th>创建时间</th>
       <th>状态</th>
-
       <th>操作</th>
     </tr>
   </thead>
   <tbody>
-   {% for i in commodity %}
+  {% for i in contacts.object_list %}
     <tr>
-<div  id="a" >
-      <td >{{ i.id }}</td>
+      <td>{{ i.id }}</td>
+      <td><img src=".{{ i.Commodity_img }}"  height="50"></td>
       <td>{{ i.Commodity_name }}</td>
-      <td>{{ i.Price }}￥</td>
+      <td>{{ i.Price }}</td>
       <td>{{ i.Stock }}</td>
-      <td>{{ i.Sales_volumes }}</td>
+      <td>{{ i.uid.Subgrade_name }}</td>
       <td>{{ i.Clicks }}</td>
       <td>{{ i.addtime }}</td>
-      <td><img src=" /{{ i.Commodity_img }}  "  width="50" alt=""></td>
-    <td>
-        {% if i.state == '1' %} <p class="am-text-success">新发布</p>
-        {% elif i.state == '2' %} 在售
-        {% else %}<p class="am-text-danger">下架</p>
-        {% endif %}
-    </td>
-
+      <td class="selected"><samp data="{{ i.state  }}">{% if  i.state == '1'  %} 新品  {% elif i.state == '0'  %} 在售  {% else %} 下架  {% endif %}</samp> </td>
       <td>
-      <button type="button" class="am-btn am-btn-default   ">修改</button>
-      <a data-id="{{ i.id }}" href="#"></a>
-      <button type="button" class="am-btn am-btn-danger doc-confirm-toggle" id="doc-confirm-toggle">删除</button>
+        <div class="layui-btn-group">
+          <a class="layui-btn layui-btn-md aaa" style="background:#b2b2b2;" lay-event="{{ i.id }}" title="查看">查看</a>
+          <a class="layui-btn layui-btn-md" href="{% url 'commodity_state' %}?uid={{ i.id }}" title="修改">修改</a>
+{#          <samp class="layui-btn layui-btn-danger layui-btn-md del" lay-event="{{ i.id }}" title="下架"> 下架</samp>#}
+        </div>
       </td>
-    </div>
     </tr>
   {% endfor %}
   </tbody>
 </table>
 
-
-
-<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
-  <div class="am-modal-dialog">
-    <div class="am-modal-hd">Amaze UI</div>
-    <div class="am-modal-bd">
-      你，确定要删除这条记录吗？
-        <br>
-    是删除逻辑删除，不是真正的删除。
-    </div>
-    <div class="am-modal-footer">
-      <span class="am-modal-btn am-modal-actions-danger " data-am-modal-confirm>确定</span>
-      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-
-    </div>
-  </div>
+<div class="layui-col-xs-offset3">
+                {% if contacts.has_previous %}
+                    <a class="layui-btn layui-btn-primary" href="?page=1&city={{ request.GET.city}}&title={{ request.GET.title }}">首页</a>
+                    <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">上一页</a>
+                    {% endif %}
+                    {% for i in page_number %}
+                        {%  if i == contacts.number %}
+                          <a class="layui-btn layui-btn-primary layui-bg-orange "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
+                        {% else %}
+                          <a class="layui-btn layui-btn-primary "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
+                        {% endif %}
+                        {% endfor %}
+                {% if contacts.has_next %}
+                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">下一页</a>
+                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&city={{ request.GET.city}}&title={{ request.GET.title }}">尾页 &raquo;</a>
+                    {% endif %}
+<p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
 </div>
 <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
 <script>
 
-$(function() {
-  $('.doc-modal-list').find('.am-icon-close').add('.doc-confirm-toggle').
-    on('click', function() {
-      $('#my-confirm').modal({
-        relatedTarget: this,
-        onConfirm: function(options) {
-          var $link = $(this.relatedTarget).prev('a');
-          var msg = $link.length ?+ $link.data('id') : function () {
-          };
-        },
-        // closeOnConfirm: false,
-        onCancel: function() {
-        }
-      });
+
+
+{#$('.del').on("click",function() {#}
+{##}
+{#    var a=$(this).parents("tr").find('samp')#}
+{#    var data=a.attr('data')#}
+{#    if (data == '1'){#}
+{#        a.text('下架')#}
+{#        $(this).text('在售')#}
+{#        var data=a.attr('data','2')#}
+{#    }else {#}
+{##}
+{#        a.text('在售')#}
+{#        $(this).text('下架')#}
+{#        var data=a.attr('data','1')#}
+{##}
+{##}
+{##}
+{#    }#}
+{##}
+{##}
+{#      $.get('{% url "commodity_state" %}',{'upid':data},function(data){#}
+{##}
+{##}
+{#          #}
+{#         })#}
+{#        });#}
+
+
+layui.use('form', function(){
+  var form = layui.form;
+  form.render(); //更新全部
+  form.render('select'); //刷新select选择框渲染
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+        });
     });
-});
+
+
 </script>
 
-<script src="{% static 'assets/js/amazeui.js' %}" charset="utf-8"></script>
+
 {% endblock %}

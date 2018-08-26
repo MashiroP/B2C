@@ -29,7 +29,7 @@
     <div class="layui-input-block">
       <select name="Commodity_category" lay-filter="aihao" >
         {% for i in category %}
-         <option value="{{ i.id }}">{{ i.category_name }}</option>
+         <option value="{{ i.id }}">{{ i.Subgrade_name }}</option>
         {% endfor %}
       </select>
     </div>
@@ -51,13 +51,17 @@
       <input type="radio" name="state" value="2" title="下架">
     </div>
   </div>
-<div class="layui-form-item">
-    <div class="layui-inline">
-        <label class="layui-form-label">商品图片</label>
-         <div class="layui-input-inline">
-         <input type="file" name="Commodity_img" placeholder="" autocomplete="off" class="layui-btn">
-         </div>
+  <div class="layui-form-item" style="width: 850px;">
+    <label class="layui-form-label">上传商品图片</label>
+    <div class="layui-input-block">
+    <label id="realBtn" class="btn btn-info">
+    <img src="" alt="" width="200">
+     <input type="file" id="file" name="file" class="mFileInput" style="left:-9999px;position:absolute;" onchange="previewFile()"  >
+     <span class="layui-btn">上传图片</span>
+     <span id="hade"></span>
+     </label>
     </div>
+  </div>
 
 
 
@@ -98,7 +102,40 @@ $('#sim').on('click', function(){
   });
   });
 
+function getFileName(path) {
+    var pos1 = path.lastIndexOf('/');
+    var pos2 = path.lastIndexOf('\\');
+    var pos = Math.max(pos1, pos2);
+    if (pos < 0) {
+        return path;
+    }
+    else {
+        return path.substring(pos + 1);
+    }
+}
 
+$(document).ready(function () {
+    $('#file').change(function () {
+        var scr=$(this).attr("src");
+        var str = $(this).val();
+        var fileName = getFileName(str);
+        var scr=$('#hade').text(fileName)
+    });
+});
+
+ function previewFile() {
+      var preview = document.querySelector('img');
+      var file    = document.querySelector('input[type=file]').files[0];
+      var reader  = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
 </script>
 
 {% endblock %}

@@ -1,16 +1,12 @@
 import datetime
 from django.contrib import auth
-from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.shortcuts import render,HttpResponse,HttpResponseRedirect
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect,redirect
 import os
-from django.shortcuts import redirect
-
-import BC2_admin
-from .models import *
 from django.contrib.auth.models import User
-from BC2_admin.models import profile, category, category_Subcategory
+from BC2_admin.models import profile, category, category_Subcategory, commodity
+from BC2_html.form import Commodity_editor
 
 
 def test(USer_data,page=1):
@@ -25,7 +21,6 @@ def test(USer_data,page=1):
      获取获取页码的 前两页和后两页  使用max 和 min 在用list 变成列表 在列表拼接 传过前台
      
     """
-    
     contacts = paginator.page(page)
     number = contacts.number
     page_number = list(range(max(number - 2, 5), number)) + list(
@@ -77,7 +72,7 @@ def UP_user_data(request):
         user.username=request.POST.get('username')
         user.email=request.POST.get('email')
         user.profile.sex=request.POST.get('sex')
-        user.profile.state= request.POST.get('state')
+        user.is_active= request.POST.get('state')
 
         province=request.POST.get('P1')# 省
         city=request.POST.get('C1')# 市
@@ -117,13 +112,9 @@ def UP_user_data(request):
 
 def BC2_admin_User(request):
     paginator=User.objects.all().order_by("id")
-    print(profile.objects.all())
-    print(paginator)
         #  获取用户数据 然后根据ID继续进行排序
     contacts1 = test(paginator,request.GET.get('page', 1) )
     #     使用test 函数 获取 用户分页上数据
-    
-    
     if request.is_ajax():
         id = request.GET.get('uid')
         get_user = User.objects.get(id=id)
@@ -179,7 +170,6 @@ def BC2_category(request):
     
     context['gory']=gory
     if request.POST:
-        print(request.POST)
         cate = request.POST.get('category')
         Subca = request.POST.get('Subcategory')
 
@@ -200,9 +190,14 @@ def BC2_category(request):
     return  render(request,'BC2_admin/BC2_category.html',context)
 
 def BC2_View_category(request):
-    context = { }
+    context = {}
     gory = category_Subcategory.objects.all()
-    context ['gory'] = gory
+
+    paginator = gory.order_by("uid_id")
+    #  获取用户数据 然后根据ID继续进行排序
+    contacts1 = test(paginator, request.GET.get('page', 1))
+    
+    context ['gory'] = contacts1
     if request.is_ajax():
         try:
             if request.GET.get('del'):
@@ -214,7 +209,93 @@ def BC2_View_category(request):
         up_category.Subgrade_name=request.GET.get('title')
         up_category.save()
         return JsonResponse({"msg":'1'})
-    return render(request,'BC2_admin/BC2_View_category.html', context)
+    return render(request,'BC2_admin/BC2_View_category.html', contacts1)
     
 
 
+def upload_data(request):
+    context = {}
+    myfile = request.FILES.get("file", None)
+    name=str(datetime.datetime.now())+'_'+str(request.FILES.get('file'))
+    img=os.path.join('./static/media/goods/'+name)
+    destination = open(img, 'wb+')
+    for i in myfile.chunks():
+        destination.write(i)
+    destination.close()
+    data=request.POST.dict()
+    data.pop('csrfmiddlewaretoken')
+    data['Commodity_img']=img
+    data['uid']=category_Subcategory.objects.get(id=data['Commodity_category'])
+    data.pop('Commodity_category')
+    commo=commodity.objects.create(**data)
+    return redirect('/')
+
+
+def commodity_list(request):
+    city = request.GET.get('city')
+    search_data = request.GET.get('search')
+    data = commodity.objects.filter().order_by('id')
+    # 简单的判断
+    if city =='Texture':
+        data=data.filter(uid__Subgrade_name__icontains=search_data)
+    elif city =='title':
+        data = data.filter(uid__Subgrade_name__icontains=search_data)
+    paginator = data.order_by("id")
+    contacts1 = test(paginator, request.GET.get('page', 1))
+    contacts1 ['gory'] = contacts1
+    return render(request, 'BC2_admin/commodity.html', contacts1)
+
+
+def commodity_state(request):
+    context = {}
+    upid=request.GET.get('uid')
+    
+    comm = commodity.objects.get(id=upid)
+    context['comm']=commodity.objects.get(id=upid)
+    Writeblog=Commodity_editor()
+    context['from'] = Writeblog
+    
+
+    # data['Commodity_name']
+    # data['describe']
+    # data['Price']
+    # data['Stock']
+    # data['Sales_volumes']
+    # data['Commodity_img']
+    # data['state']
+    return render(request,'BC2_admin/commodity_state.html',context)
+
+def commodity_seve(request):
+    if request.POST:
+        comm=commodity.objects.get(id=request.POST.get('upid'))
+        data = request.POST.dict( )
+        myfile = request.FILES.get("file", None)
+        if myfile != None:
+            name = str(datetime.datetime.now( )) + '_' + str(request.FILES.get('file'))
+            img = os.path.join('./static/media/goods/' + name)
+            destination = open(img, 'wb+')
+            for i in myfile.chunks( ):
+                destination.write(i)
+            destination.close( )
+            comm.Commodity_img = img
+        comm.Commodity_name = data['Commodity_name']
+        comm.Price = data['Price']
+        comm.state = data['state']
+        comm.Stock=data['Stock']
+        comm.describe=data['describe']
+        comm.save()
+    return redirect('/BC2_admin/BC2_admin_commodity')
+
+
+
+
+def img_get(request):
+    date_path = datetime.datetime.now().strftime('%Y/%m/%d')
+    myfile = request.FILES.get("file", None)
+    name =str(datetime.datetime.now( )) + '_' + str(request.FILES.get('file'))
+    img = os.path.join('./static/media/goods/'+ name)
+    destination = open(img, 'wb+')
+    for i in myfile.chunks( ):
+        destination.write(i)
+    destination.close()
+    return JsonResponse( {"location":img})

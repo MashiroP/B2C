@@ -1,0 +1,72 @@
+{% extends 'BC2_html/index.html' %}
+{% load static staticfiles %}
+{% block title %}
+    登录
+{% endblock %}
+
+{% block body %}
+    <style>
+            img{
+        overflow: hidden;
+
+    }
+     img{
+        cursor: pointer;
+        transition: all 0.6s;
+    }
+     img:hover{
+
+        transform: scale(2);
+    }
+
+
+    </style>
+    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"  media="all">
+    <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
+    <script src="{% static 'layui/layui.all.js' %}" charset="utf-8"></script>
+
+<form action="{% url 'dx' %}" method="post">
+{% csrf_token %}
+
+<div class="layui-container layui-col-xs-offset4">
+  <div class="layui-row">
+    <div class="layui-col-md5">
+        <fieldset class="layui-elem-field">
+          <legend>验证码发送成功</legend>
+          <div class="layui-field-box">
+
+             <blockquote class="layui-elem-quote layui-quote-nm">
+
+                 <p>
+               <div class="layui-form-item">
+                <label class="layui-form-label">验证码</label>
+
+                <div class="layui-input-inline">
+                  <input type="text" name="key" placeholder="请输入4位验证码"  class="layui-input">
+                  <input type="hidden" name="phone" value="{{ user }}">
+                    {{ msg }}
+                </div>
+              </div>
+                 </p>
+                 <br>
+                 <a  type="submit" class="layui-btn layui-btn-primary layui-col-xs-offset4" id="ok">确认</a>
+                 <a  type="submit" class="layui-btn layui-btn-primary layui-col-xs-offset4" id="dxfs">发送验证码</a>
+
+             </blockquote>
+          </div>
+        </fieldset>
+    </div>
+
+  </div>
+</div>
+</form>
+
+<script>
+    $("#dxfs").click(function () {
+      $.get('{% url "yzmfs" %}',{'upid':{{user.username}}},function(data){
+          alert(1)
+            },'json')
+    return false;
+    })
+</script>
+{% endblock %}

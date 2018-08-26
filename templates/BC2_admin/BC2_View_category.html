@@ -11,47 +11,62 @@
 <fieldset class="layui-elem-field layui-col-xs-offset3" style="width: 500px;">
   <legend>商品类别查看</legend>
   <div class="layui-field-box">
+    <table class="layui-table">
+      <thead>
+        <tr>
+          <th>顶级类别</th>
+          <th>子级类别</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        {% for i in contacts.object_list %}
+            <td >{{ i.uid.category_father }}</td>
+            <td  class=" aa" data="{{ i.uid.category_father }}" gory_id="{{ i.id }}" >{{ i.Subgrade_name }}</td>
 
-<table class="layui-table">
-
-
-
-  <thead>
-    <tr>
-
-      <th>顶级类别</th>
-      <th>子级类别</th>
-      <th>操作</th>
-
-    </tr>
-  </thead>
-  <tbody>
-  <tr>
-    {% for i in gory %}
-    <td >{{ i.uid.category_father }}</td>
-    <td  class=" aa" data="{{ i.uid.category_father }}" gory_id="{{ i.id }}" >{{ i.Subgrade_name }}</td>
-
-    <td>
-      <div class="layui-input-inline" style="color: white; padding-left: 50px;">
-      <a class="layui-btn layui-btn-danger layui-btn-small del" lay-event="{{ i.id }}" title="删除">删除<i class="layui-icon">&#xe640;</i></a>
-      </div>
-    </td>
-
-     </tr>
-    {% endfor %}
-    <tr>
-
-    </tr>
-  </tbody>
-</table>
+            <td>
+              <div class="layui-input-inline" style="color: white; padding-left: 50px;">
+              <a class="layui-btn layui-btn-danger layui-btn-small del" lay-event="{{ i.id }}" title="删除">删除<i class="layui-icon">&#xe640;</i></a>
+              </div>
+            </td>
+      </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
   </div>
 </fieldset>
+
+<div class="layui-col-xs-offset3">
+                {% if contacts.has_previous %}
+                    <a class="layui-btn layui-btn-primary" href="?page=1&city={{ request.GET.city}}&title={{ request.GET.title }}">首页</a>
+                    <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">上一页</a>
+                    {% endif %}
+                    {% for i in page_number %}
+                        {%  if i == contacts.number %}
+                          <a class="layui-btn layui-btn-primary layui-bg-orange "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
+                        {% else %}
+                          <a class="layui-btn layui-btn-primary "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
+                        {% endif %}
+                        {% endfor %}
+                {% if contacts.has_next %}
+                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">下一页</a>
+                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&city={{ request.GET.city}}&title={{ request.GET.title }}">尾页 &raquo;</a>
+                    {% endif %}
+<p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
+</div>
+
 {#<input type="text" class="" value="">#}
 
 <script>
 
+layui.use('form', function(){
+  var form = layui.form;
+  form.render(); //更新全部
 
+  //各种基于事件的操作，下面会有进一步介绍
+});
 
 $('.aa').dblclick(function () {
 
