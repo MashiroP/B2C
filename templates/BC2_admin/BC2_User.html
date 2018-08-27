@@ -57,7 +57,6 @@
       <th>ID</th>
       <th>用户头像</th>
       <th>姓名</th>
-      <th>账号</th>
       <th>邮箱</th>
       <th>电话号码</th>
       <th>性别</th>
@@ -72,9 +71,8 @@
       <td>{{ i.id }}</td>
       <td> <img src=".{{ i.profile.headimage }}" class="layui-nav-img"></td>
       <td>{{ i.profile.user }}</td>
-      <td>{{ i.profile.name }}</td>
       <td>{{ i.email }}</td>
-      <td>{{ i.profile.Phone }}</td>
+      <td>{{ i.username }}</td>
       <td>{% if i.profile.sex == '1' %} 男 {% else %}女 {% endif %}</td>
       <td>{{ i.date_joined }}</td>
         <td>{% if i.is_active %}<samp class="layui-bg-green">活跃</samp>{% else %}<samp class="layui-bg-red">禁用</samp>{% endif %}</td>
@@ -150,7 +148,7 @@ $('.del').on("click",function(){
               btn: ['确认','取消'] //按钮
             }, function(){
               $.get('{% url "dle_user" %}',{'upid':uid},function(data){
-                     if (data.erro==1){
+                     if (data=1){
                            layui.use('layer', function(){
                            var layer = layui.layer;
                            layer.open({

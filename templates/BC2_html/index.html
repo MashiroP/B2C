@@ -1,5 +1,6 @@
  {% load static staticfiles %}
 {% block head %}
+
 <!DOCTYPE html>
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -55,7 +56,7 @@
             </div>
         </div>
     </div>
-{% block body %}
+
     <header>
         <div class="container_12">
             <div class="grid_3">
@@ -119,32 +120,18 @@
                 </div>
                 <nav class="primary">
                     <ul>
-                        <li class="curent"><a href="index.html">首页</a></li>
+                        <li class="curent"><a href="/">首页</a></li>
+                        {% for i in category %}
                          <li class="parent">
-                            <a href="catalog_grid.html">材质</a>
+                            <a href="{% url 'catalog_list' %}?cat_fid={{ i.id }}">{{ i.category_father }}</a>
                             <ul class="sub">
-                                <li><a href="catalog_grid.html">铂金</a></li>
-                                <li><a href="catalog_grid.html">银</a></li>
-                                <li><a href="catalog_grid.html">玫瑰金</a></li>
-                                <li><a href="catalog_grid.html">黄金</a></li>
-                                <li><a href="catalog_grid.html">精钢</a></li>
+                                    {% for c in i.category_subcategory_set.all %}
+                                   <li><a href="{% url 'lists' %}?cat_Sid={{ c.id }}"> {{ c.Subgrade_name }}</a></li>
+                                    {% endfor %}
                             </ul>
                         </li>
-                        <li class="parent">
-                            <a href="catalog_grid.html">宝石</a>
-                            <ul class="sub">
-                                <li><a href="catalog_grid.html">陶瓷</a></li>
-                                <li><a href="catalog_grid.html">彩色宝石</a></li>
-                                <li><a href="catalog_grid.html">钻石</a></li>
-                                <li><a href="catalog_grid.html">祖母绿</a></li>
-                                <li><a href="catalog_grid.html">彩色宝石</a></li>
-                                <li><a href="catalog_grid.html">不透明宝石</a></li>
-                                <li><a href="catalog_grid.html">缟玛瑙</a></li>
-                                <li><a href="catalog_grid.html">珍珠层</a></li>
-                                <li><a href="catalog_grid.html">钻石</a></li>
-                                <li><a href="catalog_grid.html">翠玉</a></li>
-                            </ul>
-                        </li>
+                        {% endfor %}
+
                         <li class="parent"><a href="#">查看所有</a>
                         </li>
                     </ul>
@@ -152,7 +139,7 @@
             </div><!-- .grid_9 -->
         </div>
     </header>
-
+{% block body %}
     <div id="slider_body">
         <ul id="slider">
             <li>

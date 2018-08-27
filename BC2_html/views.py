@@ -1,5 +1,4 @@
 import os
-
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
@@ -9,14 +8,15 @@ from BC2_html.form import Commodity_editor
 from BC2_admin.models import commodity,category,category_Subcategory,profile
 import datetime
 import random
+from BC2_admin.extend.page import test as te
 
+from BC2_html.extend.damo import a
 
 
 def BC2_index(request):
-    context={}
+    context=a()
     context['goods']=commodity.objects.all()[0:9]
     return render(request,'BC2_html/index.html',context)
-
 
 def login(request):
     data = {}
@@ -38,18 +38,13 @@ def login(request):
     return render(request, 'BC2_html/login.html')
 
 
-
-
-
-
-
 def BC2_User(request):
     data={}
     if request.POST:
         email=request.POST.get('email')
         password = request.POST.get('password')
         if len(email) == 11 and str(email).isdigit():
-            user_data = User.objects.create_user(username=email, password=password, is_active=True, email=email)
+            user_data = User.objects.create_user(username=email, password=password, is_active=True,)
             auth.login(request, user_data)
             data['ERRO'] = 2
             return JsonResponse(data)
@@ -59,7 +54,7 @@ def BC2_User(request):
     else:
         return  render(request,'BC2_html/zc.html')
     
-    
+#     注销登录
 def userLogout(request):
     auth.logout(request)
     return redirect('/')
@@ -67,12 +62,6 @@ def userLogout(request):
 
 
 
-def test(request):
-    context={}
-    context['User']=User.objects.all()
-    context['category'] = category.objects.all()
-
-    return render(request, 'test.html',context)
 
 
 def BC2_admin_index(request):
@@ -85,16 +74,7 @@ def BC2_admin_index(request):
 
 
 def create(request):
-    
-    
-    
-    
-    
-    
     return render(request,'BC2_html/create.html')
-
-
-    
 
 def up_User(request):
     use=User.objects.get(id=request.GET.get('id'))
@@ -142,7 +122,7 @@ def dxyz(request):
 def dx(request):
     key = request.POST.get('key')
     phone = request.POST.get('phone')
-    print(request.session.get('key', default=None),type(request.session.get('key', default=None)))
+
     if int(key) ==request.session.get('key', default=None):
         use = User.objects.get(username=phone)
         use=profile.objects.get(id=use.profile.id)
@@ -161,6 +141,39 @@ def yzmfs(request):
     request.session ['key'] = yzm
     request.session.set_expiry(600)
     content = '你的验证码是%s,有效时间为10分钟' % (yzm)
-    print(content)
+
     res = dxyzm(content=content, phone=phone)
     return  JsonResponse({ 'ERRO':1})
+
+def catalog_list(request):
+    Uid=request.GET.get('cat_fid',1)
+    cont=category.objects.get(id=Uid)
+    paginator =cont.category_subcategory_set.filter().order_by('-id')
+    contacts1 = te(paginator, request.GET.get('page', 1))
+    contacts1 ['category'] = category.objects.all()
+    for i in contacts1 ['category']:
+        contacts1 ['category_Subcategory'] = category_Subcategory.objects.filter(uid=i.id)
+   
+    return render(request, 'BC2_html/catalog_list.html',contacts1)
+
+
+def catalog_lists (request):
+    cat_Sid = request.GET.get('cat_Sid', None)
+    print(cat_Sid)
+    if cat_Sid:
+        cont = category_Subcategory.objects.get(id=cat_Sid)
+        paginator=cont.commodity_set.all()
+        print(paginator)
+    contacts1 = te(paginator, request.GET.get('page', 1))
+    contacts1 ['category'] = category.objects.all( )
+    for i in contacts1 ['category']:
+        contacts1 ['category_Subcategory'] = category_Subcategory.objects.filter(uid=i.id)
+    return render(request, 'BC2_html/lists.html', contacts1)
+
+
+def commod(request,Uid):
+    context = a()
+    context['commo']=commodity.objects.get(id=Uid)
+
+    
+    return render(request, 'BC2_html/product_page.html',context)

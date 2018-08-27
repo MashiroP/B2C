@@ -7,62 +7,37 @@ import os
 from django.contrib.auth.models import User
 from BC2_admin.models import profile, category, category_Subcategory, commodity
 from BC2_html.form import Commodity_editor
+from .extend.page import test
 
 
-def test(USer_data,page=1):
-    paginator = Paginator(USer_data, 10)
-    
-    """
-    获取 用户数据 然后使用 Paginator分页器 每页10条数据
-    
-    paginator.page(page) 获取总共的数据
-    
-    page_number = list(range(max(number - 2, 5), number)) + list(range(number, min(number + 2, paginator.num_pages) + 1))
-     获取获取页码的 前两页和后两页  使用max 和 min 在用list 变成列表 在列表拼接 传过前台
-     
-    """
-    contacts = paginator.page(page)
-    number = contacts.number
-    page_number = list(range(max(number - 2, 5), number)) + list(
-        range(number, min(number + 2, paginator.num_pages) + 1))
-    contacts1 = { }
-    contacts1 ['page_number'] = page_number
-    contacts1 ['contacts'] = contacts
-    return contacts1
+
+def Backstage(request: object):
+    return render(request, 'test.html')
 
 
 def BC2_User_modify(request):
-    
     uid = request.GET.get('uid')
     # 用户数据修改
     return render(request,'BC2_admin/BC2_User_modify.html',{'user':User.objects.get(id=uid)})
 
 def User_is_active(request):
-    data={}
-    data['1']=1
     user=User.objects.get(id=request.GET.get('User_Id'))
-
     if user.is_active:
         user.is_active=False
     else:
         user.is_active=True
     user.save()
-
-    return JsonResponse(data)
+    return JsonResponse({'bcak':1})
 
 def BC2_User_detailed(request):
-
     return render(request,'BC2_admin/BC2_User_detailed.html',{'user':User.objects.get(id=request.GET.get('uid'))})
 
 def dle_user(request):
-    # 用户数据删除
     data = {}
     uid=request.GET.get('upid')
-    print(uid)
     User.objects.get(id=uid).delete()
     data['erro']=1
-    print(1)
-    return JsonResponse(data)
+    return JsonResponse({'bcak':1})
 
 
 def UP_user_data(request):
@@ -254,16 +229,9 @@ def commodity_state(request):
     context['comm']=commodity.objects.get(id=upid)
     Writeblog=Commodity_editor()
     context['from'] = Writeblog
-    
-
-    # data['Commodity_name']
-    # data['describe']
-    # data['Price']
-    # data['Stock']
-    # data['Sales_volumes']
-    # data['Commodity_img']
-    # data['state']
+    context['cate']=category_Subcategory.objects.all()
     return render(request,'BC2_admin/commodity_state.html',context)
+
 
 def commodity_seve(request):
     if request.POST:
@@ -283,6 +251,7 @@ def commodity_seve(request):
         comm.state = data['state']
         comm.Stock=data['Stock']
         comm.describe=data['describe']
+        comm.uid=category_Subcategory.objects.get(id=data['Commodity_category'])
         comm.save()
     return redirect('/BC2_admin/BC2_admin_commodity')
 

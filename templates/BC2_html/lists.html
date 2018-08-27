@@ -1,0 +1,91 @@
+{% extends 'BC2_html/index.html' %}
+{% load static staticfiles %}
+{% block title %}
+    商品列表
+{% endblock %}
+
+{% block body %}
+
+
+
+    <section id="main">
+        <div class="container_12">
+            <div id="content" class="grid_9">
+                <h1 class="page_title"> 商品列表</h1>
+
+
+                <div class="clear"></div>
+
+                <div class="products_list catalog">
+                    <article>
+			{% for i in contacts.object_list %}
+                <div class="grid_3">
+			    <img class="sale" src="{% static 'html/img/new.png'%}" alt="Sale">
+			    <div class="prev">
+				<a href="product_page.html"><img src=".{{ i.Commodity_img }}" alt="Product 2" title=""></a>
+			    </div><!-- .prev -->
+			</div><!-- .grid_3 -->
+
+			<div class="grid_6">
+			    <div class="entry_content">
+				<a href="product_page.html"><h3 class="title">{{ i.Commodity_name }}</h3></a>
+                    <div class="availability_sku">
+                        <div class="availability">
+                        库存 <span>{{ i.Stock }}</span>
+                        </div>
+                        <div class="sku">
+                        浏览次数: <span>{{ i.Clicks }}</span>
+				        </div>
+                        <div class="sku">
+                        主要材质: <span>{{ i.uid.Subgrade_name }}</span>
+				        </div>
+				    </div>
+                            <!-- .商品描述 -->
+                </div>
+                            <div class="price">{{ i.Price }}</div>{#                                <div class="price_old">$1,725.00</div>#}
+                            <div class="cart">
+                                <a href="#" class="bay"><img src="{% static 'html/img/bg_cart.png' %}" alt="Buy" title="">加入购物车</a>
+                                <a href="#" class="like"><img src="{% static 'html/img/like.png' %}" alt="" title="">收藏</a>
+                            </div><!-- .cart -->
+			</div><!-- .grid_6 -->
+			<div class="clear"></div>
+
+			{% endfor %}
+		    </article>
+                    <div class="clear"></div>
+                </div><!-- .products_list -->
+                <div class="clear"></div>
+<div class="pagination">
+<ul>
+                {% if contacts.has_previous %}
+                    <li><a class="layui-btn layui-btn-primary" href="?page=1&city={{ request.GET.city}}&title={{ request.GET.title }}">首页</a></li>
+
+                   <li><a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}"><<</a></li>
+                    {% endif %}
+                    {% for i in page_number %}
+                        {%  if i == contacts.number %}
+                          <li class="curent"> <a class="layui-btn layui-btn-primary layui-bg-orange "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a></li>
+                        {% else %}
+                            <li><a class="layui-btn layui-btn-primary "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                {% if contacts.has_next %}
+                    <li><a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}"> >></a></li>
+                    <li> <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&city={{ request.GET.city}}&title={{ request.GET.title }}">尾页</a></li>
+                    {% endif %}
+</ul>
+<p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
+</div>
+
+
+                <div class="clear"></div>
+            </div><!-- #content -->
+
+            <div id="sidebar" class="grid_3">
+                <aside id="categories_nav">
+            <div class="clear"></div>
+        </div><!-- .container_12 -->
+    </section><!-- #main -->
+    <div class="clear"></div>
+
+{% endblock %}

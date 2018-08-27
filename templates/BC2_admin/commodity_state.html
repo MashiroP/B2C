@@ -29,7 +29,17 @@
     <label class="layui-form-label">主要材质</label>
     <div class="layui-input-block">
       <select name="Commodity_category" lay-filter="aihao" >
-         <option value="{{ comm.uid }}">{{ comm.uid.Subgrade_name }}</option>
+
+          {% for i in cate %}
+        {% if i.id == comm.uid %}
+            <option value="{{ comm.uid }}">{{ comm.uid.Subgrade_name }}</option>
+        {% else %}
+            <option value="{{ i.id }}">{{ i.Subgrade_name }}</option>
+
+        {% endif %}
+
+        {% endfor %}
+
       </select>
     </div>
   </div>

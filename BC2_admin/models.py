@@ -13,7 +13,7 @@ class profile(models.Model):
     active=models.BooleanField(default=False)
     headimage = models.ImageField(upload_to='./static/media/goods/', default='./static/media/img/1.jpg')
 
-
+from ckeditor_uploader.fields import RichTextUploadingFormField
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
