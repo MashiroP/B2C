@@ -5,21 +5,6 @@
 {% endblock %}
 {% block body %}
 
-		<style type="text/css">
-			img{
-				overflow: hidden;
-
-			}
-			 img{
-				cursor: pointer;
-				transition: all 0.6s;
-			}
-			 img:hover{
-                background-size: 200px;
-				transform: scale(4);
-			}
-            </style>
-
 <form class="layui-form layui-col-xs-offset3" action="{% url 'comm_list' %}" method="get">
 <input type="hidden" value="{{ contacts.number }}" name="page">
   <div class="layui-form-item">
@@ -79,7 +64,6 @@
   {% endfor %}
   </tbody>
 </table>
-
 <div class="layui-col-xs-offset3">
                 {% if contacts.has_previous %}
                     <a class="layui-btn layui-btn-primary" href="?page=1&city={{ request.GET.city}}&title={{ request.GET.title }}">首页</a>
@@ -100,36 +84,6 @@
 </div>
 <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
 <script>
-
-
-
-{#$('.del').on("click",function() {#}
-{##}
-{#    var a=$(this).parents("tr").find('samp')#}
-{#    var data=a.attr('data')#}
-{#    if (data == '1'){#}
-{#        a.text('下架')#}
-{#        $(this).text('在售')#}
-{#        var data=a.attr('data','2')#}
-{#    }else {#}
-{##}
-{#        a.text('在售')#}
-{#        $(this).text('下架')#}
-{#        var data=a.attr('data','1')#}
-{##}
-{##}
-{##}
-{#    }#}
-{##}
-{##}
-{#      $.get('{% url "commodity_state" %}',{'upid':data},function(data){#}
-{##}
-{##}
-{#          #}
-{#         })#}
-{#        });#}
-
-
 layui.use('form', function(){
   var form = layui.form;
   form.render(); //更新全部
@@ -139,9 +93,5 @@ layui.use('form', function(){
   form.on('submit(formDemo)', function(data){
         });
     });
-
-
 </script>
-
-
 {% endblock %}

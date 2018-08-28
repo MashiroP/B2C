@@ -5,61 +5,62 @@
 {% endblock %}
 
 {% block body %}
+ <style type="text/css">
+
+
+.minus{width: 30px; height: 30px; text-align: center;border: solid 1px #eaeaea; background: #f5f5f5; color: #9e9e9e;}
+.numbox{border-top: solid 1px #eaeaea; border-bottom: solid 1px #eaeaea; height: 28px; width:60px; color: #333333; margin-left:-8px; text-align: center; background: transparent;}
+
+ </style>
+
+
+    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+
+		<script type="text/javascript">
+	function opera(x, y) {
+		var rs = new Number(document.getElementById(x).value);
+
+		if (y) {
+			document.getElementById(x).value = rs + 1;
+		} else if( rs >0) {
+			document.getElementById(x).value = rs - 1;
+		}
+	}
+</script>
     <div class="breadcrumbs">
         <div class="container_12">
             <div class="grid_12">
                  <a href="index.html">Home</a><span></span><a href="#">Category</a><span></span><span class="current">This page</span>
-            </div><!-- .grid_12 -->
-        </div><!-- .container_12 -->
-    </div><!-- .breadcrumbs -->
-
+            </div>
+        </div>
+    </div>
     <section id="main">
         <div class="container_12">
             <div id="content" class="grid_12">
                 <header>
                     <h1 class="page_title">{{ commo.Commodity_name }}</h1>
                 </header>
-
                 <article class="product_page">
                     <div class="grid_5 img_slid" id="products">
-			<img class="sale" src="{% static 'html/img/sale.png' %}" alt="Sale">
-			<div class="preview slides_container">
+			    <img class="sale" src="{% static 'html/img/sale.png' %}" alt="Sale">
+			    <div class="preview slides_container">
 			    <div class="prev_bg">
-				<a href=".{{ commo.Commodity_img }}" class="jqzoom" rel='gal1' title="">
-				    <img src=".{{ commo.Commodity_img }}" alt="Product 1" title="">
-				</a>
-			    </div>
-			</div><!-- .preview -->
-
-
-
-			<div id="pagination"></div>
-		    </div><!-- .grid_5 -->
-
-                    <div class="grid_7">
+				    <a href=".{{ commo.Commodity_img }}" class="jqzoom" rel='gal1' title="">
+				        <img src=".{{ commo.Commodity_img }}" alt="Product 1" title="">
+				            </a>
+			            </div>
+			        </div>
+		        </div>
+            <div class="grid_7">
 			<div class="entry_content">
-                            <div class="soc">
+                <div class="soc">
 				<img src="{% static "html/img/soc.png" %}" alt="Soc">
-			    </div><!-- .soc -->
-
+			    </div>
 			    <div class="review">
 				<a class="plus" href="#"></a>
-				<a class="plus" href="#"></a>
-				<a class="plus" href="#"></a>
-				<a href="#"></a>
-				<a href="#"></a>
-				<span><strong>3</strong> REVIEW(S)</span>
-                                <span class="separator">|</span>
-			        <a class="add_review" href="#">ADD YOUR REVIEW</a>
 			    </div>
-
-
-                            <div class="ava_price">
-                                <div class="price">
-                                    <div class="price_old">$1,725.00</div>
-                                    $1,550.00
-				</div><!-- .price -->
-
+                <div class="ava_price">
+                <div class="price">{{ commo.Price }}</div>
 				<div class="availability_sku">
 				    <div class="availability">
 					Availability: <span>In stock</span>
@@ -68,23 +69,26 @@
 					SKU: <span>Candles OV</span>
 				    </div>
 				</div>
-                                <div class="clear"></div>
-			    </div>
+                <div class="clear"></div>
+			</div>
+                <div class="parameter_selection">
 
-                            <div class="parameter_selection">
-
-			    </div>
-
+				<div class="mui-numbox">
+                    购买数量:
+					<button  class="minus" type="button" onclick="opera('val', false);">-</button>
+					<input class="numbox" type="number" id="val" value="1"/>
+					<button class="minus plus" type="button" onclick="opera('val', true);">+</button>
+					枚
+				</div>
+                    </div>
 			    <div class="cart">
-                                <a href="#" class="bay"><img src="{% static 'html/img/bg_cart.png' %}" alt="Buy" title="">Add to Cart</a>
-                                <a href="#" class="like"><img src="{% static 'html/img/like.png' %}" alt="" title=""> Add to Compare</a>
-                                <a href="#" class="obn"><img src="{% static 'html/img/obl.png' %}" alt="" title="">Add to Compare</a>
-                            </div>
+                    <a href="{% url "addcart" %}" class="bay"><img src="{% static 'html/img/bg_cart.png' %}" alt="Buy" title="" gos-id="{{ commo.id }}" id="bay">添加到购物车</a>
+                    <a href="#" class="like"><img src="{% static 'html/img/like.png' %}" alt="" title=""> 添加到我的收藏</a>
+                </div>
 			</div>
 		    </div>
 		    <div class="clear"></div>
-
-                    <div class="grid_12" >
+            <div class="grid_12" >
 			<div id="wrapper_tab" class="tab1">
 			    <a href="#" class="tab1 tab_link">商品描述</a>
                 <div class="tab1 tab_body">
@@ -92,18 +96,32 @@
 				 </div>
                     <div class="clear"></div>
 			    </div>
-
 			    <div class="clear">
                     <p>{{ commo.describe }}</p>
-                </div>
-
-			</div>
-		    </div>
-		</article>
-                <div class="related grid_12"></div>
-                </div>
+                        </div>
+			        </div>
+		        </article>
             </div>
+        </div>
     </section>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
 
-    <div class="clear"></div>
+$('.bay').click(function () {
+
+    var gos_id=$('#bay').attr('gos-id')
+    var num=$('#val').val()
+   $.get('{% url "addcart" %}',{'gid':gos_id,'num':num},function(data){
+            layer.msg( data['msg']);
+
+        },'json')
+
+
+
+
+return false
+})
+</script>
+
+
 {% endblock %}

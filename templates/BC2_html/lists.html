@@ -22,7 +22,7 @@
                 <div class="grid_3">
 			    <img class="sale" src="{% static 'html/img/new.png'%}" alt="Sale">
 			    <div class="prev">
-				<a href="product_page.html"><img src=".{{ i.Commodity_img }}" alt="Product 2" title=""></a>
+				<a href="{% url 'commod' i.id %}"><img src=".{{ i.Commodity_img }}" alt="Product 2" title=""></a>
 			    </div><!-- .prev -->
 			</div><!-- .grid_3 -->
 
@@ -82,10 +82,12 @@
             </div><!-- #content -->
 
             <div id="sidebar" class="grid_3">
-                <aside id="categories_nav">
-            <div class="clear"></div>
-        </div><!-- .container_12 -->
-    </section><!-- #main -->
-    <div class="clear"></div>
 
+            <div class="clear"></div>
+       <!-- .container_12 -->
+
+    <div class="clear"></div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

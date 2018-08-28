@@ -10,6 +10,19 @@
  {% block css %}
       <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"  media="all">
 {% endblock %}
+		<style type="text/css">
+			img{
+				overflow: hidden;
+			}
+			 img{
+				cursor: pointer;
+				transition: all 0.6s;
+			}
+			 img:hover{
+                background-size: 200px;
+				transform: scale(1.5);
+			}
+            </style>
 
 </head>
 

@@ -1,29 +1,12 @@
 {% extends 'BC2_html/index.html' %}
 {% load static staticfiles %}
 {% block title %}
-    登录
+    手机验证
 {% endblock %}
 
 {% block body %}
-    <style>
-            img{
-        overflow: hidden;
-
-    }
-     img{
-        cursor: pointer;
-        transition: all 0.6s;
-    }
-     img:hover{
-
-        transform: scale(2);
-    }
-
-
-    </style>
-    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"  media="all">
-    <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
-    <script src="{% static 'layui/layui.all.js' %}" charset="utf-8"></script>
+<link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"  media="all">
+<script src="{% static 'layui/layui.all.js' %}" charset="utf-8"></script>
 
 <form action="{% url 'dx' %}" method="post">
 {% csrf_token %}
@@ -49,7 +32,7 @@
               </div>
                  </p>
                  <br>
-                 <a  type="submit" class="layui-btn layui-btn-primary layui-col-xs-offset4" id="ok">确认</a>
+                 <button  type="submit" class="layui-btn layui-btn-primary layui-col-xs-offset4" id="ok">确认</button>
                  <a  type="submit" class="layui-btn layui-btn-primary layui-col-xs-offset4" id="dxfs">发送验证码</a>
 
              </blockquote>

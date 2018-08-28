@@ -38,7 +38,7 @@ def dle_user(request):
     User.objects.get(id=uid).delete()
     data['erro']=1
     return JsonResponse({'bcak':1})
-
+from .extend.upfile import file
 
 def UP_user_data(request):
     # 用户数据修改上传
@@ -46,44 +46,37 @@ def UP_user_data(request):
         user=User.objects.get(id=request.POST.get('user_id'))
         user.username=request.POST.get('username')
         user.email=request.POST.get('email')
-        user.profile.sex=request.POST.get('sex')
-        user.is_active= request.POST.get('state')
-
-        province=request.POST.get('P1')# 省
-        city=request.POST.get('C1')# 市
-        area=request.POST.get('A1')#  区
-        address=request.POST.get('address')# 详细地址
-        user.profile.Phone = request.POST.get('Phone')
-        
+        user.is_active = request.POST.get('state')
+        province = request.POST.get('P1')  # 省
+        city = request.POST.get('C1')  # 市
+        area = request.POST.get('A1')  # 区
+        address = request.POST.get('address')  # 详细地址
+        use_s=profile.objects.get(name_id=user)
+        use_s.sex=request.POST.get('sex')
+        use_s.Phone = request.POST.get('Phone')
+        myfile = request.FILES.get("file", None)
         if province==city:
-            user.profile.address = city+area+address
-            user.profile.save( )
+            use_s.address = city+area+address
         #     拼接详细地址
         else:
-            user.profile.address =province+ city + area + address
-            user.profile.save()
-        img = user.profile.headimage
-        try:
-            # 判断用户的头像是否是默认头像
-            if str(img)== './static/media/img/1.jpg':
-                pass
-            else:
-                os.remove(str(img))
-                myfile = request.FILES.get("file", None)
-                if myfile==None:
-                    pass
-                else:
-                    name = str(datetime.datetime.now( )) + '_' + str(request.FILES.get('file'))
-                    img = os.path.join('./static/media/img/' + name)
-                    destination = open(img, 'wb+')
-                    for i in myfile.chunks( ):
-                        destination.write(i)
-                    destination.close()
-                
-        except:
-            user.save()
-            user.profile.save()
-        return redirect("BC2_admin_User")
+            use_s.address =province+ city + area + address
+        img = use_s.headimage
+        if os.path.exists(str(img)) and myfile:
+            os.remove(str(img))
+        else:
+            pass
+       
+        if myfile:
+            name = str(datetime.datetime.now( )) + '_' + str(request.FILES.get('file'))
+            img = os.path.join('./static/media/img/' + name)
+            file(img, myfile)
+            use_s.headimage = img
+        user.save()
+        use_s.save()
+        if user.is_superuser:
+            return  redirect('BC2_admin_User')
+        else:
+            return redirect('create')
 
 def BC2_admin_User(request):
     paginator=User.objects.all().order_by("id")
@@ -176,8 +169,14 @@ def BC2_View_category(request):
     if request.is_ajax():
         try:
             if request.GET.get('del'):
-                category_Subcategory.objects.get(id=request.GET.get('upid')).delete()
-                return JsonResponse({ "msg": '2' })
+                
+                a=category_Subcategory.objects.get(id=request.GET.get('upid'))
+                print(bool(a.commodity_set.all()))
+                if bool(a.commodity_set.all()):
+                    return JsonResponse({ "msg": '1' })
+                else:
+                    category_Subcategory.objects.get(id=request.GET.get('upid')).delete()
+                    return JsonResponse({ "msg": '2' })
         except:
             return JsonResponse({ "msg": '3' })
         up_category=category_Subcategory.objects.get(id=request.GET.get('upid'))
@@ -193,10 +192,7 @@ def upload_data(request):
     myfile = request.FILES.get("file", None)
     name=str(datetime.datetime.now())+'_'+str(request.FILES.get('file'))
     img=os.path.join('./static/media/goods/'+name)
-    destination = open(img, 'wb+')
-    for i in myfile.chunks():
-        destination.write(i)
-    destination.close()
+    file(img, myfile)
     data=request.POST.dict()
     data.pop('csrfmiddlewaretoken')
     data['Commodity_img']=img

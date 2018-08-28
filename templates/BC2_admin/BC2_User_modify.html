@@ -1,31 +1,18 @@
 {% extends 'admin_head.html' %}
 {% load static staticfiles %}
 {% block title %}
-商品列表
+详情资料
 {% endblock %}
-
-
-
 <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"  media="all">
-
 {% block css %}
       <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"  media="all">
 {% endblock %}
-
-
 {% block body %}
-
-
 <h1 class="layui-col-xs-offset4">用户详情资料 </h1>
     <hr>
     <br>
 <form class="layui-form layui-col-xs-offset2" action='{% url 'UP_user_data' %}' method="post" id="fo"  enctype="multipart/form-data">
 {% csrf_token %}
-
-
-
-
-
 <div class="layui-form-item layui-col-" style="width: 850px;">
     <label class="layui-form-label">姓　　名</label>
     <div class="layui-input-block">
@@ -33,9 +20,6 @@
     </div>
 </div>
 <input type="hidden" name="user_id" value="{{user.id }}">
-
-
-
      <div class="layui-form-item" style="width: 850px;">
             <label class="layui-form-label">选择地区</label>
             <div class="layui-input-inline">
@@ -61,23 +45,18 @@
     <label class="layui-form-label pca-label-city"></label>
     <label class="layui-form-label pca-label-area"></label>
    </div>
-
-
-  <div class="layui-form-item" style="width: 850px;">
-    <label class="layui-form-label">详细地址</label>
-    <div class="layui-input-block">
-      <input type="text" name="address" placeholder="请输入收货详细地址" autocomplete="off" class="layui-input" required="required" value="{{ user.profile.address }}">
-    </div>
-  </div>
-
-
+<div class="layui-form-item" style="width: 850px;">
+<label class="layui-form-label">详细地址</label>
+<div class="layui-input-block">
+  <input type="text" name="address" placeholder="请输入收货详细地址" autocomplete="off" class="layui-input" required="required" value="{{ user.profile.address }}">
+</div>
+</div>
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">邮　　箱</label>
     <div class="layui-input-block">
       <input type="text" name="email" placeholder="邮箱" autocomplete="off" class="layui-input" value="{{ user.email }}" required="required">
     </div>
 </div>
-
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">性　　别</label>
     <div class="layui-input-block">
@@ -89,29 +68,24 @@
        {% endif %}
     </div>
 </div>
-
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">用户状态</label>
     <div class="layui-input-block">
-
        {% if user.is_active %}
         <input type="radio" name="state" value="1" title="活动"  required="required" checked>
         <input type="radio" name="state" value="0" title="禁用" >
        {% else %}
         <input type="radio" name="state" value="1" title="活动" >
         <input type="radio" name="state" value="0" title="禁用" checked>
-
        {% endif %}
     </div>
 </div>
-
 <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">联系电话</label>
     <div class="layui-input-block">
       <input type="text" name="Phone" placeholder="联系电话" autocomplete="off" class="layui-input" required="required" value="{{ user.username }}">
     </div>
 </div>
-
   <div class="layui-form-item" style="width: 850px;">
     <label class="layui-form-label">上传头像</label>
     <div class="layui-input-block">
@@ -131,11 +105,8 @@
     </div>
   </div>
   </div>
-
 </form>
-
 <script>
-
 function getFileName(path) {
     var pos1 = path.lastIndexOf('/');
     var pos2 = path.lastIndexOf('\\');
@@ -147,7 +118,6 @@ function getFileName(path) {
         return path.substring(pos + 1);
     }
 }
-
 $(document).ready(function () {
     $('#file').change(function () {
         var scr=$(this).attr("src");

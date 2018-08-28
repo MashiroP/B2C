@@ -15,10 +15,11 @@ from BC2_html.extend.damo import a
 
 def BC2_index(request):
     context=a()
-    context['goods']=commodity.objects.all()[0:9]
+    context['goods']=commodity.objects.all()[0:4]
     return render(request,'BC2_html/index.html',context)
 
 def login(request):
+    context = a( )
     data = {}
     if request.POST:
         email = request.POST.get('email')
@@ -35,16 +36,19 @@ def login(request):
             else:
                 data ['ERRO'] = 1
                 return JsonResponse(data)
-    return render(request, 'BC2_html/login.html')
+    return render(request, 'BC2_html/login.html',context)
 
 
 def BC2_User(request):
     data={}
+
     if request.POST:
         email=request.POST.get('email')
+        name = request.POST.get('name')
         password = request.POST.get('password')
         if len(email) == 11 and str(email).isdigit():
             user_data = User.objects.create_user(username=email, password=password, is_active=True,)
+            profile.objects.create(name_id=user_data.id,user=name)
             auth.login(request, user_data)
             data['ERRO'] = 2
             return JsonResponse(data)
@@ -67,6 +71,7 @@ def userLogout(request):
 def BC2_admin_index(request):
 
     context={}
+    
     context['category']=category_Subcategory.objects.all()
     Writeblog=Commodity_editor()
     context['from'] = Writeblog
@@ -74,12 +79,14 @@ def BC2_admin_index(request):
 
 
 def create(request):
-    return render(request,'BC2_html/create.html')
+    context = a( )
+    return render(request,'BC2_html/create.html',context)
 
 def up_User(request):
+    context = a( )
     use=User.objects.get(id=request.GET.get('id'))
 
-    return render(request, 'BC2_html/blog.html')
+    return render(request, 'BC2_html/blog.html',context)
 
 def dxyzm (content,phone):
     import urllib
@@ -118,8 +125,11 @@ def dxyzm (content,phone):
     return statusStr [the_page]
 
 def dxyz(request):
-    return render(request, 'BC2_html/phone_cick.html')
+    context = a( )
+    return render(request, 'BC2_html/phone_cick.html',context)
 def dx(request):
+    context = a( )
+    context['msg']='验证码错误'
     key = request.POST.get('key')
     phone = request.POST.get('phone')
 
@@ -131,7 +141,7 @@ def dx(request):
 
         return redirect('/')
     else:
-        return render(request, 'BC2_html/phone_cick.html',{'msg':'验证码错误'} )
+        return render(request, 'BC2_html/phone_cick.html',context)
 
 
 
@@ -173,7 +183,50 @@ def catalog_lists (request):
 
 def commod(request,Uid):
     context = a()
-    context['commo']=commodity.objects.get(id=Uid)
-
-    
+    commo=commodity.objects.get(id=Uid)
+    context['commo']=commo
+    commo.Clicks+=1
+    commo.save()
     return render(request, 'BC2_html/product_page.html',context)
+
+
+def addcart(request):
+    gid = request.GET.get('gid')
+    num = int(request.GET.get('num'))
+    print(gid,num)
+    print(1)
+
+    # 在session中获取购物车数据
+    data = request.session.get('cart',{})
+
+    # 判断要加入到购物车的商品,是否已经存在
+    if data.get(gid):
+        # 商品已经存在,修改数量
+        data[gid]['num'] += num
+    else:
+        # 如果不存在,则把商品添加到购物车中
+        # 把要添加的商品加入到购物车数据中
+        data[gid] = {'gid':gid,'num':num}
+
+    # 把配置号的购物车数据,再存入到session
+    request.session['cart'] = data
+
+
+    # 返回json
+    return JsonResponse({'error':0,'msg':'加入购物车成功'})
+
+
+
+
+def cart(request):
+    context = a()
+    data = request.session['cart']
+
+    for k,v in data.items():
+        # ob =
+        data[k]['goods'] = commodity.objects.get(id=k)
+
+    context['data']=data
+   
+    return render(request, 'BC2_html/shopping_cart.html',context)
+

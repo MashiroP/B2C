@@ -7,9 +7,9 @@ class profile(models.Model):
     
     name = models.OneToOneField(User, on_delete=models.CASCADE,verbose_name='姓名')
     user=models.CharField(max_length=20,verbose_name='账号')
-    address = models.CharField(verbose_name='地址', max_length=100, blank=True)
-    Phone = models.CharField(verbose_name='电话号码', max_length=13, blank=True)
-    sex = models.CharField(verbose_name='性别',blank=True, default=0, max_length=2)
+    address = models.CharField(verbose_name='地址', max_length=100,null=True)
+    Phone = models.CharField(verbose_name='电话号码', max_length=13,null=True)
+    sex = models.CharField(verbose_name='性别',blank=True, default=0, max_length=2,null=True)
     active=models.BooleanField(default=False)
     headimage = models.ImageField(upload_to='./static/media/goods/', default='./static/media/img/1.jpg')
 

@@ -30,17 +30,15 @@
                 <div class="grid_3">
 			    <img class="sale" src="{% static 'html/img/new.png'%}" alt="Sale">
 			    <div class="prev">
-				<a href="product_page.html"><img src=".{{ c.Commodity_img }}" alt="Product 2" title=""></a>
+				<a href="{% url 'commod' c.id %}"><img src=".{{ c.Commodity_img }}" alt="Product 2" title=""></a>
 			    </div><!-- .prev -->
 			</div><!-- .grid_3 -->
 
 			<div class="grid_6">
 			    <div class="entry_content">
-				<a href="product_page.html"><h3 class="title">{{ c.Commodity_name }}</h3></a>
+				<a href="{% url 'commod' c.id %}"><h3 style="font-size: 20px" class="title">{{ c.Commodity_name }}</h3>
                     <div class="availability_sku">
-                        <div class="availability">
-                        库存 <span>{{ c.Stock }}</span>
-                        </div>
+
                         <div class="sku">
                         浏览次数: <span>{{ c.Clicks }}</span>
 				        </div>
@@ -48,7 +46,7 @@
                         主要材质: <span>{{ c.uid.Subgrade_name }}</span>
 				        </div>
 				    </div>
-                            <!-- .商品描述 -->
+                    </a>        <!-- .商品描述 -->
                 </div>
                             <div class="price">{{ c.Price }}</div>{#                                <div class="price_old">$1,725.00</div>#}
                             <div class="cart">

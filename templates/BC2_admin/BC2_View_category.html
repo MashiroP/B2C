@@ -3,11 +3,7 @@
 {% block title %}
 商品分类管理
 {% endblock %}
-
 {% block body %}
-
-
-
 <fieldset class="layui-elem-field layui-col-xs-offset3" style="width: 500px;">
   <legend>商品类别查看</legend>
   <div class="layui-field-box">
@@ -34,71 +30,46 @@
         {% endfor %}
       </tbody>
     </table>
-
   </div>
 </fieldset>
-
 <div class="layui-col-xs-offset3">
-                {% if contacts.has_previous %}
-                    <a class="layui-btn layui-btn-primary" href="?page=1&city={{ request.GET.city}}&title={{ request.GET.title }}">首页</a>
-                    <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">上一页</a>
-                    {% endif %}
-                    {% for i in page_number %}
-                        {%  if i == contacts.number %}
-                          <a class="layui-btn layui-btn-primary layui-bg-orange "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
-                        {% else %}
-                          <a class="layui-btn layui-btn-primary "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
-                        {% endif %}
-                        {% endfor %}
-                {% if contacts.has_next %}
-                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">下一页</a>
-                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&city={{ request.GET.city}}&title={{ request.GET.title }}">尾页 &raquo;</a>
-                    {% endif %}
-<p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
-</div>
-
-{#<input type="text" class="" value="">#}
-
+    {% if contacts.has_previous %}
+   <a class="layui-btn layui-btn-primary" href="?page=1&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">首页</a>
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">上一页</a> {% endif %} {% for i in page_number %} {% if i == contacts.number %}
+   <a class="layui-btn layui-btn-primary layui-bg-orange " href="?page={{ i }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">{{ i}}</a> {% else %}
+   <a class="layui-btn layui-btn-primary " href="?page={{ i }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">{{ i}}</a> {% endif %} {% endfor %} {% if contacts.has_next %}
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">下一页</a>
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">尾页 &raquo;</a> {% endif %}
+   <p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
+  </div>
 <script>
 
 layui.use('form', function(){
   var form = layui.form;
   form.render(); //更新全部
-
   //各种基于事件的操作，下面会有进一步介绍
 });
-
 $('.aa').dblclick(function () {
-
     var mi=$(this)
     var da=mi.attr('data')
     var title=mi.attr('gory_id')
-
      layer.prompt({title: '请输入要修改的值', formType: 3}, function(pass, index){
      layer.close(index);
      {#layer.msg( pass );#}
      if (da ==pass){
          layer.msg('输入的值一样,提交失败');
-
-
      }else{
-
-
-
           $.get('{% url "BC2_View_category" %}',{'upid':title,"title":pass},function(data){
 
               if (data.msg =='1'){
                   layer.msg( "修改成功" );
                   mi.text(pass)
-
               }
             },'json')
 
-
      return false
-     }
-
-});
+        }
+    });
 })
 $('.del').click(function () {
     var mi=$(this)
@@ -107,34 +78,17 @@ $('.del').click(function () {
     layer.confirm('确认要删除吗?', {
       btn: ['确认','取消'] //按钮
     }, function(){
-
     $.get('{% url "BC2_View_category" %}',{'upid':uid,'del':'1'},function(data){
               if (data.msg =='2'){
                   layer.msg( "删除成功" );
               mi.parents('tr').remove()
-              }else {
-
+              }else if (data.msg='1'){
                   layer.msg( "删除失败" );
-
               }
             },'json')
-
-
-
-
     });
-
-
-
-
     return false
 })
-
-
-
-
-
-
 </script>
 
 {% endblock %}

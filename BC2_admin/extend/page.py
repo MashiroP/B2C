@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 def test (USer_data, page=1):
+	USer_data.order_by('-id')
 	paginator = Paginator(USer_data, 10)
 	
 	"""

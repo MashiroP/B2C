@@ -3,12 +3,10 @@
 {% block title %}
 用户管理
 {% endblock %}
-
 {% block body %}
     <style>
     img{
         overflow: hidden;
-
     }
      img{
         cursor: pointer;
@@ -18,15 +16,11 @@
 
         transform: scale(2);
     }
-
     .pang{
         margin: 30px;
-
     }
-
-
-    </style>
-    <hr>
+</style>
+<hr>
 <form class="layui-form" action="{% url 'BC2_admin_search' %}">
 <input type="hidden" value="{{ contacts.number }}" name="page">
   <div class="layui-form-item">
@@ -69,7 +63,8 @@
   {% for i in contacts.object_list %}
     <tr>
       <td>{{ i.id }}</td>
-      <td> <img src=".{{ i.profile.headimage }}" class="layui-nav-img"></td>
+      <td> <img src=".{{ i.profile.headimage }}" class="layui-nav-img">
+      </td>
       <td>{{ i.profile.user }}</td>
       <td>{{ i.email }}</td>
       <td>{{ i.username }}</td>
@@ -88,36 +83,17 @@
   </tbody>
 </table>
 
-<div class="layui-col-xs-offset3">
-                {% if contacts.has_previous %}
-                    <a class="layui-btn layui-btn-primary" href="?page=1&city={{ request.GET.city}}&title={{ request.GET.title }}">首页</a>
-                    <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">上一页</a>
-                    {% endif %}
-                    {% for i in page_number %}
-                        {%  if i == contacts.number %}
-                          <a class="layui-btn layui-btn-primary layui-bg-orange "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
-                        {% else %}
-                          <a class="layui-btn layui-btn-primary "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
-                        {% endif %}
-                        {% endfor %}
-                {% if contacts.has_next %}
-                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">下一页</a>
-                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&city={{ request.GET.city}}&title={{ request.GET.title }}">尾页 &raquo;</a>
-                    {% endif %}
-<p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
-</div>
+  <div class="layui-col-xs-offset3">
+    {% if contacts.has_previous %}
+   <a class="layui-btn layui-btn-primary" href="?page=1&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">首页</a>
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">上一页</a> {% endif %} {% for i in page_number %} {% if i == contacts.number %}
+   <a class="layui-btn layui-btn-primary layui-bg-orange " href="?page={{ i }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">{{ i}}</a> {% else %}
+   <a class="layui-btn layui-btn-primary " href="?page={{ i }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">{{ i}}</a> {% endif %} {% endfor %} {% if contacts.has_next %}
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">下一页</a>
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">尾页 &raquo;</a> {% endif %}
+   <p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
+  </div>
 <script>
-{#$('a').on("click",function(){#}
-{#        var a#}
-{#        a=$(this)#}
-{#        uid=a.attr('lay-event')#}
-{#        $.get('{% url "BC2_admin_User" %}',{'uid':uid},function(data){#}
-{##}
-{#    },'json')#}
-{##}
-{#    });#}
-
-
 $('.aaa').on("click",function(){
         var a
         a=$(this)
@@ -125,65 +101,54 @@ $('.aaa').on("click",function(){
         layui.use('layer', function(){
         var layer = layui.layer;
         layer.open({
-              type: 2,
-              title: '用户详情',
-              shadeClose: true,
-              shade: false,
-              maxmin: true, //开启最大化最小化按钮
-              area: ['1000px','520px'],
-              offset: 'auto',
-              scrollbar: false,
-              anim: 2,
-              content: '{% url 'BC2_User_detailed' %}'+'?uid='+uid
-                 });
+          type: 2,
+          title: '用户详情',
+          shadeClose: true,
+          shade: false,
+          maxmin: true, //开启最大化最小化按钮
+          area: ['1000px','520px'],
+          offset: 'auto',
+          scrollbar: false,
+          anim: 2,
+          content: '{% url 'BC2_User_detailed' %}'+'?uid='+uid
+             });
          });
-});
-
+    });
 $('.del').on("click",function(){
-            var a
-            a=$(this)
-            td = $(this)
-            uid=a.attr('lay-event')
-            layer.confirm('确认要删除此用户？', {
-              btn: ['确认','取消'] //按钮
-            }, function(){
-              $.get('{% url "dle_user" %}',{'upid':uid},function(data){
-                     if (data=1){
-                           layui.use('layer', function(){
-                           var layer = layui.layer;
-                           layer.open({
-                           content: '删除成功',
-                        });
-                     });
-                           td.parents('tr').remove()}
-                     else {
-                         layui.use('layer', function(){
-                           var layer = layui.layer;
-                           layer.open({
-                           content: '删除失败',});
-                         });
-                     }},'json')
-
-                }, function(){
-
+        var a
+        a=$(this)
+        td = $(this)
+        uid=a.attr('lay-event')
+        layer.confirm('确认要删除此用户？', {
+          btn: ['确认','取消'] //按钮
+        }, function(){
+          $.get('{% url "dle_user" %}',{'upid':uid},function(data){
+             if (data=1){
+                   layui.use('layer', function(){
+                   var layer = layui.layer;
+                   layer.open({
+                   content: '删除成功',
+                });
+             });
+             td.parents('tr').remove()
+             }
+             else {
+                 layui.use('layer', function(){
+                   var layer = layui.layer;
+                   layer.open({
+                   content: '删除失败',});
+                 });
+             }},'json')
+                },function(){
             });
-            })
-
-
+        })
 layui.use('form', function(){
   var form = layui.form;
   form.render(); //更新全部
   form.render('select'); //刷新select选择框渲染
-
   //监听提交
   form.on('submit(formDemo)', function(data){
         });
     });
-
 </script>
-
-
-
-
-
 {% endblock %}
