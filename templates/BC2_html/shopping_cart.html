@@ -2,147 +2,268 @@
 {% extends 'BC2_html/index.html' %}
 {% load static staticfiles %}
 {% block title %}
-    商品列表
+购物车
 {% endblock %}
 
 {% block body %}
- <style type="text/css">
-.minus{width: 30px; height: 30px; text-align: center;border: solid 1px #eaeaea; background: #f5f5f5; color: #9e9e9e;}
-.numbox{border-top: solid 1px #eaeaea; border-bottom: solid 1px #eaeaea; height: 28px; width:60px; color: #333333; margin-left:-8px; text-align: center; background: transparent;}
 
- </style>
-    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
-    <script src="{% static 'js/jquery.input-counter.min.js' %}"></script>
-    <section id="main">
-        <div class="container_12">
-            <div id="content" class="grid_12">
-                <header>
-                    <h1 class="page_title">购物车</h1>
-                </header>
+    <link rel="stylesheet" href="{% static 'jQueryGwc/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'jQueryGwc/css/carts.css' %}">
+{#<form action='{% url 'ddsc' %}' method='get'>#}
 
-                <article>
-                    <table class="cart_product layui-table" style="text-align: center;">
-                        <tr class="bg" style="text-align: center;">
-                            <th class="images" width="100px">商品图片</th>
-                            <th class="images">商品名称</th>
-                            <th class="price">商品单价</th>
-                            <th class="qty">商品数量</th>
-                            <th class="subtotal">商品总计</th>
-                            <th class="close"> </th>
-                        </tr>
-
-                        {% for v,i in data.items %}
-                        <tr >
-                            <td class="name" ><a href="product_page.html" ><img src=".{{ i.goods.Commodity_img }}" style="width: 100px;margin: auto;"></a></td>
-
-                            <td class="name "  style="width: 50px;"><samp>{{ i.goods.Commodity_name }}</samp></td>
-                            <td class="price">${{ i.goods.Price }}</td>
-                            <td class="qty" width="200px">
-                            <input class="minus min" name="" type="button" value="-" />
-                            <input class="text_box" name="" type="text" value="{{ i.num }}" />
-                            <input class="minus add" name="" type="button" value="+" />
-
-                            </td>
-                            <td class="subtotal">$123.00</td>
-                            <td class="close"><a title="close" class="" href="#">删除</a></td>
-                        </tr>
-                      {% endfor %}
-
-                        <tr>
-                            <td colspan="7" class="cart_but">
-                                <a href="#" class="continue"><img src="img/cont.png" alt="" title=""> Continue Shopping</a>
-                                <a href="#" class="update"><img src="img/update.png" alt="" title=""> Update Shopping Cart</a>
-                            </td>
-                        </tr>
-                    </table>
-                    <div id="cart_forms">
-                        <div class="grid_4">
-                            <br>
-                        </div>
-                        <div class="grid_4">
-                            <br>
-                        </div>
-                        <div class="grid_4">
-                            <div class="bottom_block total">
-                                <table class="subtotal">
-                                    <tr>
-                                        <td>Subtotal</td><td class="price">$1, 500.00</td>
-                                    </tr>
-                                    <tr class="grand_total">
-                                        <td>Grand Total</td><td class="price">$1, 500.00</td>
-                                    </tr>
-                                </table>
-                                <button class="checkout">PROCEED TO CHECKOUT <img src="img/checkout.png" alt="" title=""></button>
-                                <a href="#">Checkout with Multiple Addresses</a>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-		</article>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
+    <section class="cartMain">
+        <div class="cartMain_hd">
+            <ul class="order_lists cartTop">
+                <li class="list_chk">
+                    <!--所有商品全选-->
+                    <input type="checkbox" id="all" class="whole_check">
+                    <label for="all"></label>
+                    全选
+                </li>
+                <li class="list_con">商品信息</li>
+                <li class="list_info">商品参数</li>
+                <li class="list_price">单价</li>
+                <li class="list_amount">数量</li>
+                <li class="list_sum">金额</li>
+                <li class="list_op">操作</li>
+            </ul>
         </div>
+
+        <div class="cartBox">
+            <div class="shop_info">
+                <div class="all_check">
+                    <!--店铺全选-->
+                    <input type="checkbox" id="shop_a" class="shopChoice">
+                    <label for="shop_a" class="shop"></label>
+                </div>
+                <div class="shop_name">
+                    店铺：<a href="javascript:;">233</a>
+                </div>
+            </div>
+
+            <div class="order_content">
+                 {% for v,i in data.items %}
+                <ul class="order_lists">
+                    <li class="list_chk">
+
+
+                        <input type="checkbox" id="checkbox_{{ i.goods.id }}"  value="{{ i.goods.id }}" class="son_check" name="message">
+                        <label for="checkbox_{{ i.goods.id }}"></label>
+
+                    </li>
+                    <li class="list_con">
+                        <div class="list_img"><a href="javascript:;"><img src=".{{ i.goods.Commodity_img }}" alt=""></a></div>
+                        <div class="list_text"><a href="javascript:;">{{ i.goods.Commodity_name }}</a></div>
+                    </li>
+                    <li class="list_info">
+                        <p>规格：默认</p>
+                        <p>尺寸：16*16*3(cm)</p>
+                    </li>
+                    <li class="list_price">
+                        <p class="price">￥{{ i.goods.Price }}</p>
+                    </li>
+                    <li class="list_amount">
+                        <div class="amount_box">
+                            <a href="javascript:;" class="reduce reSty a">-</a>
+                            <input disabled type="text" value="{{ i.num }}" class="sum" style="border-radius: 0px;" gid="{{ i.goods.id }}" name="xx">
+                            <a href="javascript:;" class="plus b">+</a>
+                        </div>
+                    </li>
+                    <li class="list_sum">
+                        <p class="sum_price">￥{%  widthratio i.num  1 i.goods.Price  %}</p>
+                    </li>
+                    <li class="list_op">
+                        <p class="del"><a href="javascript:;" class="delBtn" gid="{{ i.goods.id }}">移除商品</a></p>
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!--底部-->
+        <div class="bar-wrapper">
+            <div class="bar-right">
+                <div class="piece">已选商品<strong class="piece_num">0</strong>件</div>
+                <div class="totalMoney">共计: <strong class="total_text">0.00</strong></div>
+                <div class="calBtn"><a class='tj' >结算</a></div>
+
+
+            </div>
+        </div>
+
     </section>
-    <div class="clear"></div>
+<input type="hidden" name="next" value={{ request.GET }}>
+    <section class="model_bg"></section>
+    <section class="my_model">
+        <p class="title">删除宝贝<span class="closeModel">X</span></p>
+        <p>您确认要删除该宝贝吗？</p>
+        <div class="opBtn"><a href="javascript:;" class="dialog-sure">确定</a><a href="javascript:;" class="dialog-close">关闭</a></div>
+    </section>
+    <script src="{% static 'jQueryGwc/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'jQueryGwc/js/carts.js' %}"></script>
+
 
 
 <script>
-window.onload = function(){
-	var oP = document.getElementsByTagName('p')[0];
-	var	aEm = oP.getElementsByTagName('em');
-	var	aStrong = oP.getElementsByTagName('strong')[0];
-	var oUl = document.getElementById('list');
-	var oLi = oUl.getElementsByTagName('li');
-	var oStrong = oUl.getElementsByTagName('strong');
-	for(var i=0;i<oLi.length;i++){
-        fn1(oLi[i]);
-	}
 
-	function fn1(aLi){
-		var oBtn = aLi.getElementsByTagName('input');
-	    var	oStrong = aLi.getElementsByTagName('strong')[0];
-		var	oEm = aLi.getElementsByTagName('em')[0];
-		var	oSpan = aLi.getElementsByTagName('span')[0];
-		var n1 = Number(oStrong.innerHTML);
-		var n2 = parseFloat(oEm.innerHTML);
-		//合计总价，必然要相加所有的小计
-       function fn2(){
-          var sum1=0;//定义一个临时变量，用来储存所加过的件数
-          var sum2=0;//定义一个临时变量，用来储存所加过的小计
-          var emMax=0;//定义一个临时变量，用来比较单价的大小
-          for(var i=0;i<oLi.length;i++){
-	     var strongs=oLi[i].getElementsByTagName("strong")[0];//获取到所有li的数量
-             var spans=oLi[i].getElementsByTagName("span")[0];//获取到所有li的小计
-             var em=oLi[i].getElementsByTagName("em")[0];//获取到所有li的单价
-	     sum1=sum1+Number(strongs.innerHTML);
-             sum2=sum2+parseFloat(spans.innerHTML);//合计即所有小计相加的结果，因为有小数所以要用parseFloat
-          if(parseFloat(em.innerHTML)>emMax){//最大的那个单价值
-              emMax=parseFloat(em.innerHTML);
-                    }
-                }
-		aEm[0].innerHTML=sum1+'件';
-                aEm[1].innerHTML=sum2+'元';
-                aStrong.innerHTML=emMax+'元';
-            }
-	  fn2();
-	  oBtn[0].onclick = function(){
-			n1--;
-			if(n1<0){
-			   n1 = 0;
-			}
-			oStrong.innerHTML = n1;
-			oSpan.innerHTML = n1*n2+'元';
-			fn2();//调用合计之后的值
-			};
-	 oBtn[1].onclick = function(){
-			n1++;
-			oStrong.innerHTML = n1;
-			oSpan.innerHTML = n1*n2+'元';
-			fn2();
-			};
-	}
+$('.a').click(function () {
+    var $inputVal = $(this).prev('input')
+    var $count = $inputVal.val()
+    var $obj = $(this).parents('.amount_box').find('.sum')
+    var zhi=parseInt($obj.attr('value'))-1
+
+    if (zhi>=1){$obj.attr('value',zhi)}
+
+    var zh=$obj.attr('value')
+    if(zh =='0'){
+
+        alert(1)
+        $obj.attr('value',1)
+        }
+    var gid=$obj.attr('gid')
+        $.get('{% url "cart_del" %}',{'gid':gid,'zhi':zhi},function(data){
+        },'json')
+    })
+
+$('.b').click(function () {
+var $inputVal = $(this).prev('input')
+var $count = $inputVal.val()
+var $obj = $(this).parents('.amount_box').find('input')
+    var zhi=parseInt($obj.attr('value'))+1
+    var gid=$obj.attr('gid')
+
+    $obj.attr('value',zhi)
+var gid=$obj.attr('gid')
+    $.get('{% url "cart_del" %}',{'gid':gid,'zhi':zhi},function(data){
+    },'json')
+})
+
+
+
+
+
+
+var $order_lists = null;
+var $order_content = '';
+$('.delBtn').click(function () {
+    var gid=$(this).attr('gid')
+
+    $order_lists = $(this).parents('.order_lists');
+    $order_content = $order_lists.parents('.order_content');
+    $('.model_bg').fadeIn(300);
+    $('.my_model').fadeIn(300);
+});
+
+//关闭模态框
+$('.closeModel').click(function () {
+    closeM();
+});
+$('.dialog-close').click(function () {
+    closeM();
+});
+function closeM() {
+    $('.model_bg').fadeOut(300);
+    $('.my_model').fadeOut(300);
 }
+//确定按钮，移除商品
+$('.dialog-sure').click(function () {
+    $order_lists.remove();
+    if($order_content.html().trim() == null || $order_content.html().trim().length == 0){
+        $order_content.parents('.cartBox').remove();
+    }
+    closeM();
+    $sonCheckBox = $('.son_check');
+    $.get('{% url "cart_sc" %}',{'gid':gid},function(data){
+    },'json')
+
+
+
+
+        totalMoney();
+
+    })
+
+    //======================================总计==========================================
+
+    function totalMoney() {
+        var total_money = 0;
+        var total_count = 0;
+        var calBtn = $('.calBtn a');
+        $sonCheckBox.each(function () {
+            if ($(this).is(':checked')) {
+                var goods = parseInt($(this).parents('.order_lists').find('.sum_price').html().substring(1));
+                var num =  parseInt($(this).parents('.order_lists').find('.sum').val());
+                total_money += goods;
+                total_count += num;
+            }
+        });
+        $('.total_text').html('￥'+total_money);
+        $('.piece_num').html(total_count);
+
+        // console.log(total_money,total_count);
+
+        if(total_money!=0 && total_count!=0){
+            if(!calBtn.hasClass('btn_sty')){
+                calBtn.addClass('btn_sty');
+            }
+        }else{
+            if(calBtn.hasClass('btn_sty')){
+                calBtn.removeClass('btn_sty');
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+function f() {
+        var ids = {}
+        $("input:checkbox[name='message']:checked").map(function(index,elem) {
+        var $obj = $(elem).parents('.order_lists').find('.sum')
+        var num=$obj.attr('value')
+        var gid=$(elem).val();
+        ids[gid]=num
+        return ids;
+    });
+    return ids;
+}
+
+
+
+
+
+$(".calBtn").click(function() {
+
+
+
+
+    ids=f()
+    console.log(ids)
+res = JSON.stringify( ids );
+    {% if user.id %}
+
+    {% else %}
+
+     location.href="{% url 'login' %}?nextpath="+res+'&url='+"{% url 'ddsc' %}"
+     return false
+
+    {% endif %}
+
+
+    if(!a){
+
+    }
+    var a="{% url 'ddsc' %}"+'?gid='+res
+    $('.tj').attr('href',a)
+
+    if(res == "{}"){return false}
+
+});
+
 </script>
+
 {% endblock %}

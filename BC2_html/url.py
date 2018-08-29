@@ -18,8 +18,12 @@ urlpatterns = [
     url(r'catalog_list',catalog_list,name='catalog_list'),
     url(r'commod/(?P<Uid>[0-9]+)',commod,name='commod'),
     url(r'lists',catalog_lists,name='lists'),
+    
     url(r'look/cart', cart, name='cart'),
     url(r'add/cart',addcart,name='addcart'),
+    url(r'cart_del',cart_del,name='cart_del'),
+    url(r'cart_sc',cart_sc,name='cart_sc'),
+    url(r'ddsc',ddsc,name='ddsc',)
     
 
     

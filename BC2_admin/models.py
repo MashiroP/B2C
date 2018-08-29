@@ -57,6 +57,14 @@ class commodity(models.Model):
 订单详情：订单id，商品id号，名称、单价、数量...
 '''
 
+class Address(models.Model):
+    # 用户 收货人 收货地址 收货电话  备注 是否默认地址
+    uid = models.ForeignKey(User,on_delete=models.CASCADE)
+    aname = models.CharField(max_length=10)
+    ads = models.CharField(max_length=100)
+    aphone = models.CharField(max_length=11)
+    atags = models.CharField(max_length=10,null=True)
+    isstatus = models.BooleanField(default=False)
 
 class Order(models.Model):
     user_id = models.ForeignKey(to=User, to_field="id", on_delete=models.CASCADE)
@@ -67,3 +75,10 @@ class Order(models.Model):
     Amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='订单价格')
     addtime = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
     state = models.CharField(max_length=2, verbose_name='订单状态')
+    
+    
+class cart(models.Model):
+    user_id = models.ForeignKey(to=User, to_field="id", on_delete=models.CASCADE)
+    goos_id=models.ForeignKey(to=commodity, to_field="id", on_delete=models.CASCADE)
+    num=models.IntegerField()
+    

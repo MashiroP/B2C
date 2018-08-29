@@ -1,165 +1,24 @@
-{% extends 'BC2_html/index.html' %}
-{% load static staticfiles %}
-{% block title %}
-    商品列表
-{% endblock %}
 
-{% block body %}
- <style type="text/css">
+$('.a').click(function () {
+var $inputVal = $(this).prev('input')
+var $count = $inputVal.val()
+var $obj = $(this).parents('.amount_box').find('.sum')
+    var zhi=parseInt($obj.attr('value'))-1
+    var gid=$obj.attr('gid')
+    if (zhi>=1){
+    $obj.attr('value',zhi)
+    }
+var zh=$obj.attr('value')
+    if(zh =='0')
+    {
 
-　　　　　　* {
-                margin: 0;
-                padding: 0;
-                border: 0;
-                outline: 0
-            }
-
-            ul,
-            li {
-                list-style: none;
-            }
-
-            a {
-                text-decoration: none;
-            }
-
-            a:hover {
-                cursor: pointer;
-                text-decoration: none;
-            }
-
-            a:link {
-                text-decoration: none;
-            }
-
-            img {
-                vertical-align: middle;
-            }
-
-            .btn-numbox {
-                overflow: hidden;
-                margin-top: 20px;
-            }
-
-            .btn-numbox li {
-                float: left;
-            }
-
-            .btn-numbox li .number,
-            .kucun {
-                display: inline-block;
-                font-size: 12px;
-                color: #808080;
-                vertical-align: sub;
-            }
-
-            .btn-numbox .count {
-                overflow: hidden;
-                margin: 0 16px 0 -20px;
-            }
-
-            .btn-numbox .count .num-jian,
-            .input-num,
-            .num-jia {
-                display: inline-block;
-                width: 28px;
-                height: 28px;
-                line-height: 28px;
-                text-align: center;
-                font-size: 18px;
-                color: #999;
-                cursor: pointer;
-                border: 1px solid #e6e6e6;
-            }
-            .btn-numbox .count .input-num {
-                width: 58px;
-                height: 26px;
-                color: #333;
-                border-left: 0;
-                border-right: 0;
-            }
- </style>
-    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
-    <script src="{% static 'js/jquery.input-counter.min.js' %}"></script>
-    <section id="main">
-        <div class="container_12">
-            <div id="content" class="grid_12">
-                <header>
-                    <h1 class="page_title">购物车</h1>
-                </header>
-
-                <article>
-                    <table class="cart_product">
-                        <tr class="bg">
-                            <th class="images" width="100px">商品图片</th>
-                            <th class="images"></th>
-                            <th class="price">Unit Price</th>
-                            <th class="qty">Qty</th>
-                            <th class="subtotal">Subtotal</th>
-                            <th class="close"> </th>
-                        </tr>
-
-                        {% for v,i in data.items %}
-                        <tr>
-                            <td class="name" ><a href="product_page.html" ><img src=".{{ i.goods.Commodity_img }}" style="width: 100px;margin: auto;"></a></td>
-
-                            <td class="name"  style="width: 50px;"><samp>{{ i.goods.Commodity_name }}</samp></td>
-                            <td class="price">${{ i.goods.Price }}</td>
-                            <td class="qty" width="200px">
+        $obj.attr('value',1)
+    }
+     $.get('{% url "cart_del" %}',{'gid':gid,'zhi':zhi},function(data){
+            alert(data['msg'])
+        },'json')
 
 
-                                <div class="example"><button type="button" class="btn-add">+</button>
-                                  <input type="text" class="input-counter">
-                                <button type="button" class="btn-subtract">-</button></div>
 
-
-                            </td>
-                            <td class="subtotal"></td>
-                            <td class="close"><a title="close" class="close" href="#"></a></td>
-                        </tr>
-                      {% endfor %}
-
-                        <tr>
-                            <td colspan="7" class="cart_but">
-                                <a href="#" class="continue"><img src="img/cont.png" alt="" title=""> Continue Shopping</a>
-                                <a href="#" class="update"><img src="img/update.png" alt="" title=""> Update Shopping Cart</a>
-                            </td>
-                        </tr>
-                    </table>
-                    <div id="cart_forms">
-                        <div class="grid_4">
-                            <br>
-                        </div>
-                        <div class="grid_4">
-                            <br>
-                        </div>
-                        <div class="grid_4">
-                            <div class="bottom_block total">
-                                <table class="subtotal">
-                                    <tr>
-                                        <td>Subtotal</td><td class="price">$1, 500.00</td>
-                                    </tr>
-                                    <tr class="grand_total">
-                                        <td>Grand Total</td><td class="price">$1, 500.00</td>
-                                    </tr>
-                                </table>
-                                <button class="checkout">PROCEED TO CHECKOUT <img src="img/checkout.png" alt="" title=""></button>
-                                <a href="#">Checkout with Multiple Addresses</a>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
-		</article>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </section>
-    <div class="clear"></div>
-
-
-<script>
-$(".example").inputCounter();
-</script>
-{% endblock %}
+console.log(zhi)
+})

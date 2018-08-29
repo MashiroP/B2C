@@ -16,17 +16,16 @@
     <link rel="stylesheet" href="{% static 'html/css/grid.css'%}">
     <link rel="stylesheet" href="{% static 'html/css/style.css'%}">
     <link rel="stylesheet" href="{% static 'html/css/normalize.css'%}">
-
-{#    <script src="{% static 'html/js/jquery.min.js' %}"></script>#}
-    <script>window.jQuery || document.write('')</script>
-    <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
+    <script src="{% static 'jQueryGwc/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'jQueryGwc/js/carts.js' %}"></script>
+{#    <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>#}
     <script src="{% static 'html/js/html5.js' %}"></script>
-    <script src="{% static 'html/js/main.js' %}"></script>
+{#    <script src="{% static 'html/js/main.js' %}"></script>#}
     <script src="{% static 'html/js/radio.js' %}"></script>
     <script src="{% static 'html/js/checkbox.js' %}"></script>
     <script src="{% static 'html/js/selectBox.js' %}"></script>
     <script src="{% static 'html/js/jquery.carouFredSel-5.2.2-packed.js' %}"></script>
-    <script src="{% static 'html/js/jquery.jqzoom-core.js' %}"></script>
+{#    <script src="{% static 'html/js/jquery.jqzoom-core.js' %}"></script>#}
     <script src="{% static 'html/js/jquery.transit.js' %}"></script>
     <script src="{% static 'html/js/jquery.easing.1.2.js' %}"></script>
     <script src="{% static 'html/js/jquery.anythingslider.js' %}"></script>
@@ -80,44 +79,44 @@
                         {% endif %}
 
                     </div>
-                 {% if user.is_authenticated %}
+                 {% if user.is_authenticated %}    {% endif %}
                     <ul id="cart_nav">
                         <li>
                             <a class="cart_li" href="{% url 'cart' %}">
                                 <div class="cart_ico"></div>
                                 购物车
-                                <span>$0.00</span> {#  购物车的结算    #}
+{#                                <span>$0.00</span> {#  购物车的结算    #}
                             </a>
-                            <ul class="cart_cont">
-                                <li class="no_border recently">加入购物车的物品</li>
-                                <li>
-                                    {#                购物车的物品显示         #}
-                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img.png' %}" alt="Product 1" title=""></div></a>
-                                    <div class="cont_cart">
-                                        <h4>Faddywax Fragrance Diffuser Set <br>Gardenia</h4>
-                                        <div class="price">1 x <span>$399.00</span></div>
-                                    </div>
-                                    <a title="close" class="close" href="#"></a>
-                                    <div class="clear"></div>
-                                </li>
+{#                             <ul class="cart_cont">#}
+{#                                <li class="no_border recently">加入购物车的物品</li>#}
+{#                                <li>#}
+{#                                                    购物车的物品显示         #}
+{#                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img.png' %}" alt="Product 1" title=""></div></a>#}
+{#                                    <div class="cont_cart">#}
+{#                                        <h4>Faddywax Fragrance Diffuser Set <br>Gardenia</h4>#}
+{#                                        <div class="price">1 x <span>$399.00</span></div>#}
+{#                                    </div>#}
+{#                                    <a title="close" class="close" href="#"></a>#}
+{#                                    <div class="clear"></div>#}
+{#                                </li>#}
+{#                                <li>#}
+{#                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img2.png' %}" alt="Product 2" title=""></div></a>#}
+{#                                    <div class="cont_cart">#}
+{#                                        <h4>Caldrea Linen and Room Spray</h4>#}
+{#                                        <div class="price">1 x <span>$123.00</span></div>#}
+{#                                    </div>#}
+{#                                    <a title="close" class="close" href="#"></a>#}
+{#                                    <div class="clear"></div>#}
+{#                                </li>;#}
+{#                                <li class="no_border">#}
+{#                                    <a href="shopping_cart.html" class="view_cart">查看购物车</a>#}
+{#                                    <a href="checkout.html" class="checkout">去支付</a>#}
+{#                                </li>#}
+{#                            </ul>#}
 
-                                <li>
-                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img2.png' %}" alt="Product 2" title=""></div></a>
-                                    <div class="cont_cart">
-                                        <h4>Caldrea Linen and Room Spray</h4>
-                                        <div class="price">1 x <span>$123.00</span></div>
-                                    </div>
-                                    <a title="close" class="close" href="#"></a>
-                                    <div class="clear"></div>
-                                </li>;
-                                <li class="no_border">
-                                    <a href="shopping_cart.html" class="view_cart">查看购物车</a>
-                                    <a href="checkout.html" class="checkout">去支付</a>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
-                    {% endif %}
+
                     <form class="search">
                         <input type="submit" class="search_button" value="">
                         <input type="text" name="search" class="search_form" value="" placeholder="搜索">

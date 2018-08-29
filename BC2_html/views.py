@@ -1,11 +1,15 @@
+# -*- coding:utf-8 -*-
+# coding:utf-8
+import json
 import os
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect,render,HttpResponse
 from BC2_html.form import Commodity_editor
 from BC2_admin.models import commodity,category,category_Subcategory,profile
+from BC2_admin.models import cart as Cart_s
 import datetime
 import random
 from BC2_admin.extend.page import test as te
@@ -17,26 +21,38 @@ def BC2_index(request):
     context=a()
     context['goods']=commodity.objects.all()[0:4]
     return render(request,'BC2_html/index.html',context)
+import codecs
 
 def login(request):
+    nextpath = request.GET.get('nextpath', '/')
     context = a( )
     data = {}
+    sj=request.GET.get('nextpath')
+    dictinfo = json.loads(sj)
+    print(dictinfo)
+    
+    nextpath=request.GET.get('url')
+    
     if request.POST:
         email = request.POST.get('email')
         password = request.POST.get('password')
         if len(email) == 11 and str(email).isdigit( ):
             # 获取用户输入的邮箱 和  密码
-            use = auth.authenticate(request, username=email, password=password)
+            use = auth.authenticate(request, username=str(email), password=password)
+            user_S=User.objects.get(username=email)
             # 如果正确就把用户对象传入
             if use != None:
                 # 传入然后对象 使用auth.login 进行登录
+                for i,v in dictinfo.items():
+                 goos=commodity.objects.get(id=i)
+                 Cart_s.objects.create(user_id=user_S,goos_id=goos,num=v)
                 auth.login(request, use)
-                data ['ERRO'] = 2
-                return JsonResponse(data)
+                return HttpResponse('<script>location.href="' + nextpath +'"</script>')
             else:
                 data ['ERRO'] = 1
                 return JsonResponse(data)
-    return render(request, 'BC2_html/login.html',context)
+        return render(request, 'BC2_html/login.html',context)
+    return render(request, 'BC2_html/login.html', context)
 
 
 def BC2_User(request):
@@ -169,11 +185,11 @@ def catalog_list(request):
 
 def catalog_lists (request):
     cat_Sid = request.GET.get('cat_Sid', None)
-    print(cat_Sid)
+
     if cat_Sid:
         cont = category_Subcategory.objects.get(id=cat_Sid)
         paginator=cont.commodity_set.all()
-        print(paginator)
+
     contacts1 = te(paginator, request.GET.get('page', 1))
     contacts1 ['category'] = category.objects.all( )
     for i in contacts1 ['category']:
@@ -193,8 +209,7 @@ def commod(request,Uid):
 def addcart(request):
     gid = request.GET.get('gid')
     num = int(request.GET.get('num'))
-    print(gid,num)
-    print(1)
+ 
 
     # 在session中获取购物车数据
     data = request.session.get('cart',{})
@@ -220,13 +235,45 @@ def addcart(request):
 
 def cart(request):
     context = a()
-    data = request.session['cart']
+    if request.session.get('cart', {}):
+        
+        data = request.session['cart']
+        for k, v in data.items( ):
+            # ob =
+            data [k] ['goods'] = commodity.objects.get(id=k)
 
-    for k,v in data.items():
-        # ob =
-        data[k]['goods'] = commodity.objects.get(id=k)
-
-    context['data']=data
+        context ['data'] = data
+    else:
+        pass
    
     return render(request, 'BC2_html/shopping_cart.html',context)
 
+def cart_del(request):
+    data = request.session ['cart']
+    gid=request.GET.get('gid')
+    zhi=request.GET.get('zhi')
+    data.get(str(gid))['num']=zhi
+    request.session ['cart']=data
+    return JsonResponse({})
+
+def cart_sc(request):
+    return JsonResponse({})
+
+
+from django.contrib.auth.decorators import login_required
+
+
+def ddsc(request):
+    context = a()
+    data=(request.GET.get('gid'))
+    dictinfo = json.loads(data)
+    user=User.objects.get(id=14)
+    b={}
+
+    if request.GET:
+        for i, v in dictinfo.items( ):
+            gods = commodity.objects.get(id=i)
+            b[v]=(gods)
+    context ['gods']=b
+    print(context ['gods'])
+    return render(request, 'BC2_html/ddym.html', context)

@@ -1,0 +1,116 @@
+{% extends 'BC2_html/index.html' %}
+{% load static staticfiles %}
+{% block title %}
+    商品列表
+{% endblock %}
+
+{% block body %}
+<form class="layui-form" action="">
+    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+<fieldset class="layui-elem-field " >
+  <legend>选择收货地址</legend>
+  <div class="layui-field-box">
+
+
+
+<div class="layui-row" >
+  {% for i in user.address_set.all %}
+    <div class="layui-col-md3">
+
+
+            <div class="layui-card">
+              <div class="layui-card-header">备注:{{ i.atags }}</div>
+              <div class="layui-card-body">
+                收货人姓名:{{ i.aname }}<br>
+                收货人电话:{{ i.aphone }}<br>
+                收货人地址:{{ i.ads }}<br>
+              <input type="radio" name="sex" value={{ i.id }} title='收货地址'>
+
+            </div>
+            </div>
+
+    </div>
+ {% endfor %}
+
+</div>
+  </div>
+</fieldset>
+    </form>
+
+
+
+<div class="layui-container layui-col-xs-offset4">
+  <div class="layui-row">
+    <div class="layui-col-md5">
+        <fieldset class="layui-elem-field">
+          <legend>个人资料</legend>
+          <div class="layui-field-box">
+ <div class="layui-row" >
+        <table class="layui-table">
+  <colgroup>
+    <col width="150">
+    <col width="200">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>商品名称</th>
+      <th>商品图片</th>
+      <th>商品数量</th>
+      <th>小计</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for v,i in gods.items %}
+
+    <tr>
+      <td>{{ i.Commodity_name }}</td>
+      <td><img src='{{ i.Commodity_img }}' width=100px></td>
+      <td>{{ v }}</td>
+      <td>￥{%  widthratio v  1 i.Price  %}.00</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+    </div>
+
+          </div>
+        </fieldset>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src={% static 'layui/layui.js' %}></script>
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return false;
+  });
+});
+</script>
+
+{% endblock %}
