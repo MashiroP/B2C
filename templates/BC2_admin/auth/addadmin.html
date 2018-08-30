@@ -1,15 +1,61 @@
 {% extends 'admin_head.html' %}
 {% load static staticfiles %}
-{% block title %} 管理员添加 {% endblock %}
-{% block body %}
+{% block title %}
+详情资料
+{% endblock %}
 
-<form class="layui-form" action="">
+{% block body %}
+<form class="layui-form" action="{% url 'address' %}" method=post>
+<fieldset class="layui-elem-field layui-col-xs-offset3" style='width: 500px;'>
+  <legend>添加收货地址</legend>
+  <div class="layui-field-box">
+
+        {% csrf_token %}
   <div class="layui-form-item">
-    <label class="layui-form-label">输入框</label>
+    <label class="layui-form-label">用户名</label>
     <div class="layui-input-block">
-      <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+      <input type="text" name="username" required  lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input">
     </div>
   </div>
-</form>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-block">
+      <input type="password" name="password" required  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">超级管理员</label>
+    <div class="layui-input-block">
+      <input type="checkbox" name="isstatus" value="True" lay-skin="switch" lay-text="是|否">
+    </div>
+  </div>
+
+   <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+  </div>
+</fieldset>
+
+ </form>
+
+
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+form.render(); //更新全部
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return false;
+  });
+});
+</script>
 
 {% endblock %}
+
+
+

@@ -1,10 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'admin_head.html' %}
+{% load static staticfiles %}
+{% block title %}
+用户管理
+{% endblock %}
+{% block body %}
+    <style>
+    img{
+        overflow: hidden;
+    }
+     img{
+        cursor: pointer;
+        transition: all 0.6s;
+    }
+     img:hover{
+
+        transform: scale(2);
+    }
+    .pang{
+        margin: 30px;
+    }
+</style>
+<hr>
+<form class="layui-form" action="{% url 'BC2_admin_search' %}">
+<input type="hidden" value="{{ contacts.number }}" name="page">
+  <div class="layui-form-item">
+    <div class="layui-input-inline">
+      <select name="city" lay-verify="required">
+        <option value=""></option>
+        <option value="name" {% if  request.GET.city ==  'name'  %} selected="selected" {% endif %} >姓名</option>
+        <option value="email"{% if  request.GET.city ==  'email'  %} selected="selected" {% endif %} >邮箱</option>
+        <option value="Phone"{% if  request.GET.city ==  'Phone'  %} selected="selected" {% endif %} >电话号码</option>
+        <option value="sex"  {% if  request.GET.city ==  'sex'  %} selected="selected" {% endif %} >性别</option>
+        <option value="state"{% if  request.GET.city ==  'state'  %} selected="selected" {% endif %} >状态</option>
+      </select>
+    </div>
+    <div class="layui-input-inline">
+      <input type="text" name="title" required  lay-verify="required" placeholder="搜索" autocomplete="off" class="layui-input" value="{{ request.GET.title }}">
+    </div>
+
+    <div class="layui-input-inline" style="color: white">
+      <button class="layui-btn"  lay-submit lay-filter="formDemo"> <i class="layui-icon" style="color: white">&#xe615;</i></button>
+     </div>
+  </div>
+<div class="layui-form-item">
+</div>
+</form>
+<table class="layui-table lay-size='sm" id="barDemo" >
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>用户头像</th>
+      <th>账户</th>
+      <td>所在组</td>
+      <th>状态</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in contacts.object_list %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td> <img src=".{{ i.profile.headimage }}" class="layui-nav-img"></td>
+      <td>{{ i.username }}</td>
+      <td>12321123211232112321123211232112321</td>
+        <td>{% if i.is_superuser %}<samp class="layui-bg-green">超级管理员</samp>{% else %}<samp class="layui-bg-red">管理员</samp>{% endif %}</td>
+      <td>
+        <div class="layui-btn-group">
+          <a class="layui-btn layui-btn-md aaa" style="background:#b2b2b2;" lay-event="{{ i.id }}" title="查看">查看 <i class="layui-icon">&#xe615;</i></a>
+          <a class="layui-btn layui-btn-md" href="{% url 'BC2_User_modify' %}?uid={{ i.id }}" title="修改">修改 <i class="layui-icon">&#xe642;</i></a>
+          <a class="layui-btn layui-btn-danger layui-btn-md del" lay-event="{{ i.id }}" title="删除">删除<i class="layui-icon">&#xe640;</i></a>
+        </div>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+  <div class="layui-col-xs-offset3">
+    {% if contacts.has_previous %}
+   <a class="layui-btn layui-btn-primary" href="?page=1&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">首页</a>
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">上一页</a> {% endif %} {% for i in page_number %} {% if i == contacts.number %}
+   <a class="layui-btn layui-btn-primary layui-bg-orange " href="?page={{ i }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">{{ i}}</a> {% else %}
+   <a class="layui-btn layui-btn-primary " href="?page={{ i }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">{{ i}}</a> {% endif %} {% endfor %} {% if contacts.has_next %}
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">下一页</a>
+   <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&amp;city={{ request.GET.city}}&amp;title={{ request.GET.title }}">尾页 &raquo;</a> {% endif %}
+   <p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
+  </div>
+<script>
+$('.aaa').on("click",function(){
+        var a
+        a=$(this)
+        uid=a.attr('lay-event')
+        layui.use('layer', function(){
+        var layer = layui.layer;
+        layer.open({
+          type: 2,
+          title: '用户详情',
+          shadeClose: true,
+          shade: false,
+          maxmin: true, //开启最大化最小化按钮
+          area: ['1000px','520px'],
+          offset: 'auto',
+          scrollbar: false,
+          anim: 2,
+          content: '{% url 'BC2_User_detailed' %}'+'?uid='+uid
+             });
+         });
+    });
+$('.del').on("click",function(){
+        var a
+        a=$(this)
+        td = $(this)
+        uid=a.attr('lay-event')
+        layer.confirm('确认要删除此用户？', {
+          btn: ['确认','取消'] //按钮
+        }, function(){
+          $.get('{% url "dle_user" %}',{'upid':uid},function(data){
+             if (data=1){
+                   layui.use('layer', function(){
+                   var layer = layui.layer;
+                   layer.open({
+                   content: '删除成功',
+                });
+             });
+             td.parents('tr').remove()
+             }
+             else {
+                 layui.use('layer', function(){
+                   var layer = layui.layer;
+                   layer.open({
+                   content: '删除失败',});
+                 });
+             }},'json')
+                },function(){
+            });
+        })
+layui.use('form', function(){
+  var form = layui.form;
+  form.render(); //更新全部
+  form.render('select'); //刷新select选择框渲染
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+        });
+    });
+</script>
+{% endblock %}

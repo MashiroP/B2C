@@ -1,10 +1,78 @@
+{% load static staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+        <link rel='stylesheet' href={% static 'layui/css/layui.css' %}>
+        <script src={% static 'layui/layui.js' %}></script>
 </head>
 <body>
-$END$
+<fieldset class="layui-elem-field">
+  <legend>添加收货地址</legend>
+  <div class="layui-field-box">
+    <form class="layui-form" action="{% url 'address' %}" method=post>
+        {% csrf_token %}
+  <div class="layui-form-item">
+    <label class="layui-form-label">收货人姓名</label>
+    <div class="layui-input-block">
+      <input type="text" name="aname" required  lay-verify="required" placeholder="请输入收货人姓名" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+    <input type='hidden'value='{{ user.id }}' name='uid_id'>
+  <div class="layui-form-item">
+    <label class="layui-form-label">联系电话</label>
+    <div class="layui-input-block">
+      <input type="text" name="aphone" required  lay-verify="required" placeholder="联系电话" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">备注</label>
+    <div class="layui-input-block">
+      <input type="text" name="atags" required  lay-verify="required" placeholder="备注" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">收货地址</label>
+    <div class="layui-input-block">
+      <textarea name="ads" required lay-verify="required" placeholder="收货地址" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">是否默认</label>
+    <div class="layui-input-block">
+      <input type="checkbox" name="isstatus" value="True" lay-skin="switch" lay-text="默认|关闭">
+    </div>
+  </div>
+
+   <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+
+
+    </form>
+  </div>
+</fieldset>
+
+
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
+
+  });
+});
+</script>
+
+
 </body>
 </html>

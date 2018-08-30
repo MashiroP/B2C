@@ -5,82 +5,69 @@
 {% endblock %}
 
 {% block body %}
-<form class="layui-form" action="">
+<form class="layui-form" action="{% url  'place_order' %}" method=post>
     <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
 <fieldset class="layui-elem-field " >
   <legend>选择收货地址</legend>
   <div class="layui-field-box">
-
+{% csrf_token %}
 
 
 <div class="layui-row" >
   {% for i in user.address_set.all %}
     <div class="layui-col-md3">
-
-
             <div class="layui-card">
               <div class="layui-card-header">备注:{{ i.atags }}</div>
               <div class="layui-card-body">
                 收货人姓名:{{ i.aname }}<br>
                 收货人电话:{{ i.aphone }}<br>
                 收货人地址:{{ i.ads }}<br>
-              <input type="radio" name="sex" value={{ i.id }} title='收货地址'>
-
+              <input type="radio" name="Address"  title='收货地址' value="{{ i.id }}" {% if i.isstatus %}checked= {% endif %} >
             </div>
             </div>
 
     </div>
  {% endfor %}
-
 </div>
   </div>
+<button type=button class="layui-btn layui-col-xs-offset5" id='adddais'>添加收货地址</button>
 </fieldset>
-    </form>
 
 
 
-<div class="layui-container layui-col-xs-offset4">
+
+<div class="layui-container">
   <div class="layui-row">
-    <div class="layui-col-md5">
+    <div class="layui-col-md12">
         <fieldset class="layui-elem-field">
-          <legend>个人资料</legend>
+          <legend>订单商品</legend>
           <div class="layui-field-box">
- <div class="layui-row" >
-        <table class="layui-table">
-  <colgroup>
-    <col width="150">
-    <col width="200">
-    <col>
-  </colgroup>
-  <thead>
-    <tr>
-      <th>商品名称</th>
-      <th>商品图片</th>
-      <th>商品数量</th>
-      <th>小计</th>
-    </tr>
-  </thead>
-  <tbody>
-{% for v,i in gods.items %}
+            <div class="layui-row" >
+            <table class="layui-table">
+          <thead>
+            <tr>
+              <th>商品名称</th>
+              <th>商品图片</th>
+              <th>商品数量</th>
+              <th>小计</th>
+            </tr>
+          </thead>
+                <tbody>
+                {% for i,v in gods.items%}
+                    <tr>
+                      <td>{{ i.Commodity_name }}</td>
+                      <td><img src='{{ i.Commodity_img }}' width=100px></td>
+                      <td>{{ v }}</td>
+                      <td Price='{%  widthratio v  1 i.Price  %}' class='Price'>￥{%  widthratio v  1 i.Price  %}.00</td>
+                    </tr>
+                 {% endfor %}
+                  </tbody>
+                </table>
+            <h2 class='prc layui-col-xs-offset9'></h2>
+<hr>
+            </div>
 
-    <tr>
-      <td>{{ i.Commodity_name }}</td>
-      <td><img src='{{ i.Commodity_img }}' width=100px></td>
-      <td>{{ v }}</td>
-      <td>￥{%  widthratio v  1 i.Price  %}.00</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-
-
-
-
-
-
-
-
-    </div>
+<button class="layui-btn layui-col-xs-offset5">提交订单</button>
 
           </div>
         </fieldset>
@@ -89,16 +76,7 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
+</form>
     <script src={% static 'layui/layui.js' %}></script>
 <script>
 //Demo
@@ -111,6 +89,44 @@ layui.use('form', function(){
     return false;
   });
 });
+
+function f(){
+    var Price=0;
+$(".Price").each(function(){
+
+    rice=$(this).attr('Price')
+
+    var c=parseInt(rice)
+    Price+=c
+    console.log(Price)
+});
+return  Price
+}
+c=f()
+$('.prc').text('总计:￥'+c+'.00')
+
+
+$('#adddais').click(function () {
+
+    layer.open({
+  type: 2,
+  area: ['500px', '600px'],
+  offset: 't',
+  end:function () {
+      window.location.reload()
+  },
+  content: '{% url 'address'  %}',
+  cancel: function(index, layero){
+      layer.alert('只想简单的提示');
+        window.location.reload()}
+});
+})
+
+
+
 </script>
+
+
+
 
 {% endblock %}

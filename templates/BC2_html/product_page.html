@@ -1,7 +1,7 @@
 {% extends 'BC2_html/index.html' %}
 {% load static staticfiles %}
 {% block title %}
-    商品列表
+    商品详情
 {% endblock %}
 
 {% block body %}
@@ -45,7 +45,7 @@
 			    <img class="sale" src="{% static 'html/img/sale.png' %}" alt="Sale">
 			    <div class="preview slides_container">
 			    <div class="prev_bg">
-				    <a href=".{{ commo.Commodity_img }}" class="jqzoom" rel='gal1' title="">
+				    <a href="sale.png" class="jqzoom" rel='gal1' title="">
 				        <img src=".{{ commo.Commodity_img }}" alt="Product 1" title="">
 				            </a>
 			            </div>
@@ -57,16 +57,16 @@
 				<img src="{% static "html/img/soc.png" %}" alt="Soc">
 			    </div>
 			    <div class="review">
-				<a class="plus" href="#"></a>
+
 			    </div>
                 <div class="ava_price">
                 <div class="price">{{ commo.Price }}</div>
 				<div class="availability_sku">
 				    <div class="availability">
-					Availability: <span>In stock</span>
+					 状态: <span>有货</span>
 				    </div>
 				    <div class="sku">
-					SKU: <span>Candles OV</span>
+					单位: <span> 枚</span>
 				    </div>
 				</div>
                 <div class="clear"></div>

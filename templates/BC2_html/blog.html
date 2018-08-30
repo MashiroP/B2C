@@ -1,38 +1,16 @@
-{% extends 'BC2_html/index.html' %}
+
 {% load static staticfiles %}
-{% block title %}
-    登录
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <link rel='stylesheet' href={% static 'layui/css/layui.css' %}>
+    <script src={% static 'layui/layui.js' %}></script>
+</head>
 
-{% block body %}
+<body>
 
 
-
-
-
-<script>
-    $("#fo").submit(function () {
-         data = {};
-    $.ajaxSetup({
-    data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
-    $.ajax({
-        type: "post",
-        url: "{% url 'BC2_User' %}",
-        dataType: "json",
-        data:$(this).serialize(),
-        success: function(data){
-            if (data.ERRO==1){
-                 $("#span_password").text('密码错误，或者您的邮箱已经别人注册，去点击忘记密码，找回账户');
-            }
-            else if(data.ERRO==2)
-            {window.location.href="{% url 'BC2_index' %}";}
-            else if (data.ERRO==3) {
-                $("#span_password").text('你的账户可能已经被管理员禁用，请联系*****');
-            }
-        },error:function (xhr) {
-        }
-    });
-    return false;
-    })
-</script>
-{% endblock %}
+</body>
+</html>

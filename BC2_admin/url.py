@@ -1,9 +1,12 @@
 from django.conf.urls import url
 
 from .views import *
+from .permission.add_admin import add_admin,admin_list
 
-
+from .permission.admin_group import addgroup
 urlpatterns = [
+    url(r'^login',admin_login,name='admin_login'),
+    url(r'^verifycode',verifycode,name='verifycode'),
     url(r'^Backstage', Backstage, name='Backstage'),#后台
     url(r'^BC2_User_modify',BC2_User_modify,name='BC2_User_modify'),# 用户数据
     url(r'^User_active',User_is_active,name='User_is_active'),# ajax 修改用户状态
@@ -17,5 +20,10 @@ urlpatterns = [
     url(r'^upload_data', upload_data, name='upload_data'),#  商品添加
     url(r'^BC2_admin_commodity', commodity_list, name='comm_list'),# 商品搜索
     url(r'^commodity_state', commodity_state, name='commodity_state'),# 商品修改
-    url(r'^commodity_seve',commodity_seve,name='commodity_seve')# 商品修改保存
+    url(r'^commodity_seve',commodity_seve,name='commodity_seve'),# 商品修改保存
+	
+	# 权限系统
+	url(r'^add/admin',add_admin, name='add_admin'),
+    url(r'^admin_list',admin_list,name='admin_list'),
+    url(r'addgroup',addgroup,name='addgroup')
 ]

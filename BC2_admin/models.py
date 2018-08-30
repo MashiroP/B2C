@@ -47,17 +47,8 @@ class commodity(models.Model):
     Clicks = models.IntegerField(verbose_name='点击量', default=0)
     addtime = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
     
-    def __str__ (self):
-        return self.Commodity_name
-
-
-'''
-商品：名称、类别id、厂家、图片、详情、单价、库存，销售量、点击量、添加时间、状态（新发布、在售、下架）
-订单：id、 会员id、收货人、地址、电话、邮编、订单金额、添加时间、订单状态..
-订单详情：订单id，商品id号，名称、单价、数量...
-'''
-
 class Address(models.Model):
+    
     # 用户 收货人 收货地址 收货电话  备注 是否默认地址
     uid = models.ForeignKey(User,on_delete=models.CASCADE)
     aname = models.CharField(max_length=10)
@@ -71,14 +62,18 @@ class Order(models.Model):
     Consignee = models.CharField(max_length=10, verbose_name='收货人')
     Receiving_address = models.CharField(max_length=100, verbose_name='收货地址')
     phone = models.CharField(max_length=11, verbose_name='电话')
-    zip_code = models.CharField(max_length=6, verbose_name='邮编')
     Amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='订单价格')
     addtime = models.DateTimeField(auto_now_add=True, verbose_name='添加时间')
     state = models.CharField(max_length=2, verbose_name='订单状态')
     
     
 class cart(models.Model):
-    user_id = models.ForeignKey(to=User, to_field="id", on_delete=models.CASCADE)
-    goos_id=models.ForeignKey(to=commodity, to_field="id", on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    goos_id=models.ForeignKey(commodity, to_field="id", on_delete=models.CASCADE)
     num=models.IntegerField()
     
+class OrderInfo(models.Model):
+    orderid =  models.ForeignKey(to="Order", to_field="id")
+    gid = models.ForeignKey(to="commodity", to_field="id")
+    num  = models.IntegerField()
+    price = models.FloatField()

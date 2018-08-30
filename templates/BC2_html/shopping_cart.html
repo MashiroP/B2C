@@ -226,7 +226,7 @@ function f() {
         var $obj = $(elem).parents('.order_lists').find('.sum')
         var num=$obj.attr('value')
         var gid=$(elem).val();
-        ids[gid]=num
+        ids[gid]=[gid,num]
         return ids;
     });
     return ids;
@@ -237,13 +237,9 @@ function f() {
 
 
 $(".calBtn").click(function() {
-
-
-
-
     ids=f()
     console.log(ids)
-res = JSON.stringify( ids );
+res = JSON.stringify(ids);
     {% if user.id %}
 
     {% else %}

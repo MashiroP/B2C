@@ -324,8 +324,7 @@
         function Loader() {
             var $obj = this;
             this.append = function () {
-                this.node = $('<div/>').addClass('zoomPreload').css('visibility', 'hidden').html(settings.preloadText);
-                $('.zoomPad', el).append(this.node);
+
             };
             this.show = function () {
                 this.node.top = (smallimage.oh - this.node.height()) / 2;
@@ -650,14 +649,11 @@
                 scale.x = ($obj.w / smallimage.w);
                 scale.y = ($obj.h / smallimage.h);
                 el.scale = scale;
-                document.body.removeChild(this.node);
-                $('.zoomWrapperImage', el).empty().append(this.node);
+
                 //setting lens dimensions;
                 lens.setdimensions();
             };
             this.node.onerror = function () {
-                alert('Problems while loading the big image.');
-                throw 'Problems while loading the big image.';
             };
             this.node.onload = function () {
                 //fetching data

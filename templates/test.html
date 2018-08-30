@@ -51,6 +51,13 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  >
+        <li class="layui-nav-item ">
+          <a class="" href="javascript:;">用户管理</a>
+          <dl class="layui-nav-child">
+          <dd><a href="{% url 'BC2_admin_User' %}" target="iframe_a"> 用户列表</a></dd>
+          <dd><a href="{% url 'BC2_admin_User' %}" target="iframe_a">添加用户</a></dd>
+          </dl>
+        </li>
         <li class="layui-nav-item ">  <!--layui-nav-itemed -->
           <a class="" href="javascript:;">商品分类管理</a>
           <dl class="layui-nav-child">
@@ -66,8 +73,23 @@
             <dd><a href="">超链接</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href="">云市场</a></li>
-        <li class="layui-nav-item"><a href="">发布商品</a></li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">组管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{% url 'BC2_admin_index' %}" target="iframe_a">查看组</a></dd>
+            <dd><a href="{% url 'addgroup' %}" target="iframe_a">添加组</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">权限管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{% url 'add_admin' %}" target="iframe_a">管理员添加</a></dd>
+            <dd><a href="{% url 'admin_list' %}" target="iframe_a">管理员查看</a></dd>
+            <dd><a href="{% url 'BC2_admin_index' %}" target="iframe_a">权限管理</a></dd>
+            <dd><a href="{% url 'comm_list' %}" target="iframe_a">组权限添加</a></dd>
+          </dl>
+        </li>
+
       </ul>
     </div>
   </div>

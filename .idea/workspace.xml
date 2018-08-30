@@ -2,26 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf4f6109-b64c-4de3-8529-ef352127dfb7" name="默认" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/BC2_html/ddym.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BC2_admin/permission/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BC2_admin/permission/add_admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BC2_admin/permission/admin_group.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/BC2_admin/auth/addadmin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/BC2_admin/auth/admin_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/BC2_admin/auth/group.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/BC2_html/Personal_Center.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/BC2_html/addaddress.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BC2/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BC2/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BC2_admin/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/BC2_admin/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BC2_admin/url.py" beforeDir="false" afterPath="$PROJECT_DIR$/BC2_admin/url.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BC2_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/BC2_admin/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BC2_html/url.py" beforeDir="false" afterPath="$PROJECT_DIR$/BC2_html/url.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BC2_html/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/BC2_html/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/gwc/ShoppingCart.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/gwc/ShoppingCart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/gwc/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/gwc/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/gwc/layui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/gwc/vue.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/BC2_html/111.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/111.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/BC2_html/checkout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/BC2_html/compare.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/BC2_html/contact_us.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/html/js/jquery.jqzoom-core.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/html/js/jquery.jqzoom-core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/vue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/BC2_html/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/blog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/BC2_html/blog_post.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/BC2_html/catalog_grid.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/BC2_html/catalog_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/catalog_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/BC2_html/ddym.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/ddym.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/BC2_html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/BC2_html/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/BC2_html/product_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/product_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/BC2_html/shopping_cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/BC2_html/shopping_cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/BC2_html/typography_page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -56,87 +61,85 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file leaf-file-name="url.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BC2_html/url.py">
+        <entry file="file://$PROJECT_DIR$/BC2_admin/url.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="15" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="15" />
+            <state relative-caret-position="468">
+              <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
               <folding>
-                <element signature="e#1#33#0" expanded="true" />
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin_group.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BC2_admin/permission/admin_group.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="group.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/BC2_admin/auth/group.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="commodity_state.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/BC2_admin/commodity_state.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="BC2_category.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_category.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="113">
+              <caret line="10" selection-start-line="10" selection-end-line="16" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addadmin.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/BC2_admin/auth/addadmin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+              <folding>
+                <element signature="n#style#0;n#fieldset#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="79" column="41" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BC2_html/views.py">
+        <entry file="file://$PROJECT_DIR$/BC2_admin/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="270" column="8" lean-forward="true" selection-start-line="270" selection-start-column="8" selection-end-line="270" selection-end-column="8" />
+            <state relative-caret-position="396">
+              <caret line="90" column="64" lean-forward="true" selection-start-line="90" selection-start-column="2" selection-end-line="90" selection-end-column="64" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1358#1990#0" />
-                <element signature="e#2036#2081#0" />
-                <element signature="e#2127#2326#0" />
-                <element signature="e#2354#2426#0" />
-                <element signature="e#2454#2577#0" />
-                <element signature="e#2610#3489#0" />
-                <element signature="e#3514#3591#0" />
-                <element signature="e#3613#4032#0" />
-                <element signature="e#4060#4328#0" />
-                <element signature="e#4361#4810#0" />
-                <element signature="e#4846#5351#0" />
-                <element signature="e#5383#5565#0" />
-                <element signature="e#5594#6101#0" />
-                <element signature="e#6402#6591#0" />
+                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#9465#10888#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BC2_admin/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="79" column="10" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/BC2_html/create.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="56" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/BC2_html/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-216">
-              <caret line="21" column="93" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ddym.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/BC2_html/ddym.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shopping_cart.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/BC2_html/shopping_cart.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="72" column="87" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -146,18 +149,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
     <option name="SCHEME" value="Project" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MEDIA_ROOT</find>
-      <find>MEDIA_URL</find>
-      <find>Commodity_category</find>
-      <find>schema_fields</find>
       <find />
       <find>ChineseAnalyzer</find>
       <find>hq1</find>
@@ -165,7 +164,6 @@
       <find>goods</find>
       <find>contact_list</find>
       <find>b</find>
-      <find>login</find>
       <find>ADMIN_PASSWORD</find>
       <find>User</find>
       <find>Subcategory</find>
@@ -183,7 +181,12 @@
       <find>sum</find>
       <find>$sonCheckBox</find>
       <find>amount_box</find>
+      <find>zoomPreload</find>
       <find>print</find>
+      <find>blog</find>
+      <find>login</find>
+      <find>zzz</find>
+      <find>address</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,18 +198,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/BC2_admin/test.html" />
-        <option value="$PROJECT_DIR$/BC2_admin/email_Backend.py" />
-        <option value="$PROJECT_DIR$/user/backends.py" />
-        <option value="$PROJECT_DIR$/user/models.py" />
-        <option value="$PROJECT_DIR$/BC2_admin/extend/User_extension.py" />
-        <option value="$PROJECT_DIR$/BC2_html/models.py" />
-        <option value="$PROJECT_DIR$/BC2_html/admin.py" />
-        <option value="$PROJECT_DIR$/templates/BC2_admin/BC2_View category.html" />
-        <option value="$PROJECT_DIR$/static/layui-v1.0.4/layui/css/layui.css" />
-        <option value="$PROJECT_DIR$/BC2_html/form.py" />
-        <option value="$PROJECT_DIR$/templates/BC2_admin/index.html" />
-        <option value="$PROJECT_DIR$/templates/BC2_html/blog.html" />
         <option value="$PROJECT_DIR$/BC2/urls.py" />
         <option value="$PROJECT_DIR$/dysms/demo_sms_send.py" />
         <option value="$PROJECT_DIR$/dysms/demo_sms_api.py" />
@@ -216,9 +207,7 @@
         <option value="$PROJECT_DIR$/BC2_admin/templatetags/__init__.py" />
         <option value="$PROJECT_DIR$/BC2_admin/templatetags/tags.py" />
         <option value="$PROJECT_DIR$/BC2_html/extend/damo.py" />
-        <option value="$PROJECT_DIR$/BC2_admin/url.py" />
         <option value="$PROJECT_DIR$/BC2_admin/extend/page.py" />
-        <option value="$PROJECT_DIR$/templates/BC2_html/catalog_list.html" />
         <option value="$PROJECT_DIR$/templates/BC2_admin/BC2_category.html" />
         <option value="$PROJECT_DIR$/templates/BC2_admin/commodity.html" />
         <option value="$PROJECT_DIR$/templates/BC2_admin/BC2_User_detailed.html" />
@@ -227,25 +216,39 @@
         <option value="$PROJECT_DIR$/templates/BC2_admin/BC2_User_modify.html" />
         <option value="$PROJECT_DIR$/BC2_admin/extend/upfile.py" />
         <option value="$PROJECT_DIR$/templates/BC2_admin/BC2_View_category.html" />
-        <option value="$PROJECT_DIR$/BC2_admin/views.py" />
         <option value="$PROJECT_DIR$/templates/admin_head.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/zc.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/phone_cick.html" />
-        <option value="$PROJECT_DIR$/templates/test.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/create.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/lists.html" />
         <option value="$PROJECT_DIR$/static/html/css/normalize.css" />
-        <option value="$PROJECT_DIR$/templates/BC2_html/product_page.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/111.html" />
-        <option value="$PROJECT_DIR$/BC2_html/url.py" />
         <option value="$PROJECT_DIR$/static/jQueryGwc/js/carts.js" />
         <option value="$PROJECT_DIR$/BC2/settings.py" />
-        <option value="$PROJECT_DIR$/BC2_admin/models.py" />
-        <option value="$PROJECT_DIR$/templates/BC2_html/index.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/login.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/shopping_cart.html" />
-        <option value="$PROJECT_DIR$/BC2_html/views.py" />
+        <option value="$PROJECT_DIR$/templates/BC2_html/catalog_list.html" />
+        <option value="$PROJECT_DIR$/static/html/js/jquery.jqzoom-core.js" />
+        <option value="$PROJECT_DIR$/templates/BC2_html/product_page.html" />
+        <option value="$PROJECT_DIR$/templates/BC2_html/blog.html" />
+        <option value="$PROJECT_DIR$/templates/BC2_html/addaddress.html" />
         <option value="$PROJECT_DIR$/templates/BC2_html/ddym.html" />
+        <option value="$PROJECT_DIR$/BC2_admin/models.py" />
+        <option value="$PROJECT_DIR$/templates/BC2_html/index.html" />
+        <option value="$PROJECT_DIR$/templates/BC2_html/Personal_Center.html" />
+        <option value="$PROJECT_DIR$/static/login/css/style.css" />
+        <option value="$PROJECT_DIR$/templates/BC2_admin/login.html" />
+        <option value="$PROJECT_DIR$/BC2_html/views.py" />
+        <option value="$PROJECT_DIR$/BC2_html/url.py" />
+        <option value="$PROJECT_DIR$/BC2_admin/views.py" />
+        <option value="$PROJECT_DIR$/templates/BC2_admin/auth/addadmin.html" />
+        <option value="$PROJECT_DIR$/BC2_admin/permission/add_admin.py" />
+        <option value="$PROJECT_DIR$/templates/BC2_admin/auth/admin_list.html" />
+        <option value="$PROJECT_DIR$/BC2_admin/permission/group.html" />
+        <option value="$PROJECT_DIR$/templates/test.html" />
+        <option value="$PROJECT_DIR$/BC2_admin/url.py" />
+        <option value="$PROJECT_DIR$/BC2_admin/permission/admin_group.py" />
+        <option value="$PROJECT_DIR$/templates/BC2_admin/auth/group.html" />
       </list>
     </option>
   </component>
@@ -259,8 +262,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="width" value="1920" />
-    <option name="height" value="1026" />
+    <option name="x" value="12" />
+    <option name="y" value="52" />
+    <option name="width" value="1849" />
+    <option name="height" value="885" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -288,30 +293,38 @@
             <path>
               <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
               <item name="BC2" type="462c0819:PsiDirectoryNode" />
-              <item name="BC2_html" type="462c0819:PsiDirectoryNode" />
+              <item name="BC2_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="extend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
               <item name="BC2" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="BC2_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
               <item name="BC2" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="jQueryGwc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BC2" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="jQueryGwc" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="BC2_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
               <item name="BC2" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BC2" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="BC2_admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BC2" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="BC2_admin" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BC2" type="b2602c69:ProjectViewProjectNode" />
@@ -346,21 +359,22 @@
     <property name="last_opened_file_path" value="/media/zhenbai/GT3/ht" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/BC2_html" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$USER_HOME$/anaconda3/lib/python3.6" />
-      <recent name="$PROJECT_DIR$/BC2_admin/extend" />
-      <recent name="$PROJECT_DIR$/BC2_admin" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/BC2_admin/auth" />
       <recent name="$PROJECT_DIR$/BC2_html" />
       <recent name="$PROJECT_DIR$/BC2_admin" />
       <recent name="$PROJECT_DIR$/templates/BC2_html" />
       <recent name="$PROJECT_DIR$/templates/BC2_admin" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/BC2_admin/permission" />
+      <recent name="$PROJECT_DIR$/BC2_html" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$USER_HOME$/anaconda3/lib/python3.6" />
+      <recent name="$PROJECT_DIR$/BC2_admin/extend" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -530,21 +544,19 @@
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946004" weight="0.3297619" />
       <window_info anchor="bottom" id="调试" order="7" sideWeight="0.49946004" weight="0.5644391" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.22084233" side_tool="true" weight="0.31145585" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.22138229" side_tool="true" visible="true" weight="0.08711217" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49946004" weight="0.33651552" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49838012" weight="0.4582339" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.77915764" visible="true" weight="0.3436754" />
-      <window_info anchor="right" id="Coverage" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.77861774" visible="true" weight="0.08711217" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.80939525" weight="0.20763724" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.700157" visible="true" weight="0.28293738" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.700157" visible="true" weight="0.28779697" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32991362" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3293556" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" sideWeight="0.299843" side_tool="true" weight="0.19438446" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" sideWeight="0.49946004" weight="0.4713604" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="8" sideWeight="0.49946004" weight="0.4713604" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -552,32 +564,34 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3293556" />
+      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.700157" visible="true" weight="0.28293738" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.77915764" visible="true" weight="0.31145585" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="SciView" order="4" />
       <window_info id="Structure" order="1" sideWeight="0.299843" side_tool="true" weight="0.19438446" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49946004" weight="0.3297619" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="right" id="Database" order="5" weight="0.32991362" />
-      <window_info anchor="right" id="Coverage" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.22084233" side_tool="true" weight="0.31145585" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="0" sideWeight="0.49946004" weight="0.4713604" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49946004" weight="0.33651552" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="调试" order="12" sideWeight="0.49946004" weight="0.5644391" />
-      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.77915764" visible="true" weight="0.31145585" />
       <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.80939525" weight="0.13603818" />
       <window_info anchor="bottom" id="Python Console" order="14" sideWeight="0.49838012" weight="0.4582339" />
+      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
+      <window_info anchor="right" id="Coverage" order="0" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.22084233" side_tool="true" weight="0.31145585" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="0" sideWeight="0.49946004" weight="0.4713604" />
+      <window_info anchor="bottom" id="调试" order="12" sideWeight="0.49946004" weight="0.5644391" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32991362" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.700157" visible="true" weight="0.28293738" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,7 +623,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/BC2_html/views.py</url>
-          <line>107</line>
+          <line>113</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
@@ -636,233 +650,11 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/commodity.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/commodity_state.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-297">
-          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/media/img/2018-08-28 14:46:35.405188_1 (68).jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BC2_admin/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/media/img/2018-08-28 14:58:00.507725_1 (86).jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/media/img/1.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BC2_admin/extend/upfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_category.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-553">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin_head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BC2_admin/url.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BC2_admin/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="178" column="51" selection-start-line="178" selection-start-column="51" selection-end-line="178" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/catalog_grid.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/blog_post.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/blog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/favicon.ico">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/zc.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="49" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/phone_cick.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_User_modify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="92" column="18" lean-forward="true" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_User.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="135" selection-start-line="135" selection-end-line="139" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_View_category.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="82" column="38" lean-forward="true" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/django/db/models/manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="174" selection-start-line="174" selection-end-line="174" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/catalog_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="32" column="48" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/gwc/num-alignment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1440">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/product_page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="6" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/html/css/normalize.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-131">
-          <caret line="474" selection-start-line="474" selection-end-line="474" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/404.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="40" lean-forward="true" selection-end-line="283" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/contact_us.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/compare.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/lists.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
-          <caret selection-end-line="6" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/compare.html" />
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/re.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="230" column="4" selection-start-line="230" selection-start-column="4" selection-end-line="230" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/jQueryGwc/js/carts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="138" column="32" lean-forward="true" selection-start-line="138" selection-start-column="32" selection-end-line="138" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/111.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="16" selection-start-line="16" selection-end-line="18" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -901,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="348" column="57" selection-start-line="348" selection-start-column="57" selection-end-line="348" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BC2/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -915,85 +700,315 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BC2_html/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/shopping_cart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1726">
+          <caret line="194" column="35" selection-start-line="194" selection-start-column="27" selection-end-line="194" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/jQueryGwc/js/carts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3564">
+          <caret line="132" column="29" selection-start-line="132" selection-start-column="20" selection-end-line="132" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/catalog_grid.html" />
+    <entry file="file://$PROJECT_DIR$/static/html/js/jquery.jqzoom-core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="326" lean-forward="true" selection-start-line="326" selection-end-line="326" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/catalog_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="37" column="140" selection-start-line="37" selection-start-column="140" selection-end-line="37" selection-end-column="140" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/product_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/blog_post.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/phone_cick.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-135">
+          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="21" column="93" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/favicon.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/lists.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="6" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/blog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/django/db/models/manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="174" selection-start-line="174" selection-end-line="174" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BC2_admin/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="71" column="39" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/django/shortcuts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="33" column="22" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="26" lean-forward="true" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/111.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="16" selection-start-line="16" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/create.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="6" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="41" column="35" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/ddym.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/Personal_Center.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BC2/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BC2_html/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
+          <folding>
+            <element signature="e#38#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/PIL/ImageFont.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="282" column="49" lean-forward="true" selection-start-line="282" selection-start-column="43" selection-end-line="282" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="37" column="59" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="59" />
+          <folding>
+            <element signature="n#style#0;n#input#2;n#form#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#form#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/login/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BC2_admin/permission/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_html/addaddress.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="56" column="11" lean-forward="true" selection-start-line="10" selection-end-line="56" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BC2_html/url.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="15" />
+        <state relative-caret-position="675">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="e#1#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BC2_html/models.py">
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_User.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        <state relative-caret-position="677">
+          <caret line="135" selection-end-line="153" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_User_modify.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1691">
+          <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/auth/admin_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_View_category.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-406" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BC2_admin/permission/add_admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="30" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BC2_admin/models.py">
+    <entry file="file://$PROJECT_DIR$/templates/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="79" column="10" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="10" />
+        <state relative-caret-position="383">
+          <caret line="79" column="41" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BC2_admin/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="90" column="64" lean-forward="true" selection-start-line="90" selection-start-column="2" selection-end-line="90" selection-end-column="64" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#9465#10888#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/login.html">
+    <entry file="file://$PROJECT_DIR$/BC2_admin/url.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-216">
-          <caret line="21" column="93" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BC2_html/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="270" column="8" lean-forward="true" selection-start-line="270" selection-start-column="8" selection-end-line="270" selection-end-column="8" />
+        <state relative-caret-position="468">
+          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1358#1990#0" />
-            <element signature="e#2036#2081#0" />
-            <element signature="e#2127#2326#0" />
-            <element signature="e#2354#2426#0" />
-            <element signature="e#2454#2577#0" />
-            <element signature="e#2610#3489#0" />
-            <element signature="e#3514#3591#0" />
-            <element signature="e#3613#4032#0" />
-            <element signature="e#4060#4328#0" />
-            <element signature="e#4361#4810#0" />
-            <element signature="e#4846#5351#0" />
-            <element signature="e#5383#5565#0" />
-            <element signature="e#5594#6101#0" />
-            <element signature="e#6402#6591#0" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/shopping_cart.html">
+    <entry file="file://$PROJECT_DIR$/BC2_admin/permission/admin_group.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="72" column="87" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="87" />
+        <state relative-caret-position="216">
+          <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/create.html">
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/auth/addadmin.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="56" selection-end-column="6" />
+        <state relative-caret-position="204">
+          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+          <folding>
+            <element signature="n#style#0;n#fieldset#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/BC2_html/ddym.html">
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/commodity_state.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/BC2_category.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+        <state relative-caret-position="113">
+          <caret line="10" selection-start-line="10" selection-end-line="16" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/BC2_admin/auth/group.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

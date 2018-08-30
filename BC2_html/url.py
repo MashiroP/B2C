@@ -1,6 +1,7 @@
 
 from django.conf.urls import url
 from django.contrib import admin
+
 from .views import *
 
 urlpatterns = [
@@ -23,8 +24,16 @@ urlpatterns = [
     url(r'add/cart',addcart,name='addcart'),
     url(r'cart_del',cart_del,name='cart_del'),
     url(r'cart_sc',cart_sc,name='cart_sc'),
-    url(r'ddsc',ddsc,name='ddsc',)
+    url(r'ddsc',ddsc,name='ddsc',),
     
+    url(r'address',address,name='address'),
+    
+    url(r'place_order',place_order,name='place_order'),
+    url(r'test',test,name='test'),
+    url(r'Personal_Center',Personal_Center,name='Personal_Center')
+    
+    
+
 
     
     

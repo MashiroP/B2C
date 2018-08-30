@@ -10,57 +10,52 @@
     <title>{% block title  %}{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-
     <link rel="shortcut icon" href="favicon.ico">
-
     <link rel="stylesheet" href="{% static 'html/css/grid.css'%}">
     <link rel="stylesheet" href="{% static 'html/css/style.css'%}">
     <link rel="stylesheet" href="{% static 'html/css/normalize.css'%}">
     <script src="{% static 'jQueryGwc/js/jquery-1.11.0.min.js' %}"></script>
     <script src="{% static 'jQueryGwc/js/carts.js' %}"></script>
-{#    <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>#}
+    <script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
     <script src="{% static 'html/js/html5.js' %}"></script>
-{#    <script src="{% static 'html/js/main.js' %}"></script>#}
-    <script src="{% static 'html/js/radio.js' %}"></script>
+    <script src="{% static 'html/js/main.js' %}"></script>
+    <script src="{% static 'html/js/radio.js' %}"></script >
     <script src="{% static 'html/js/checkbox.js' %}"></script>
     <script src="{% static 'html/js/selectBox.js' %}"></script>
     <script src="{% static 'html/js/jquery.carouFredSel-5.2.2-packed.js' %}"></script>
-{#    <script src="{% static 'html/js/jquery.jqzoom-core.js' %}"></script>#}
+    <script src="{% static 'html/js/jquery.jqzoom-core.js' %}"></script>
     <script src="{% static 'html/js/jquery.transit.js' %}"></script>
     <script src="{% static 'html/js/jquery.easing.1.2.js' %}"></script>
     <script src="{% static 'html/js/jquery.anythingslider.js' %}"></script>
     <script src="{% static 'html/js/jquery.anythingslider.fx.js' %}"></script>
-    <script src="{% static 'layui/layui.all.js' %}"></script>
+    <script src="{% static 'layui/layui.js' %}"></script>
+<link rel="stylesheet" href={% static 'layui/css/layui.css' %}>
 </head>
 {% endblock %}
 <body>
-
-    <div id="top">
-        <div class="container_12">
-            <div class="grid_12">
-                <nav>
-                    <ul>
-                        {% if user.is_authenticated %}
-                        <li class=""><a href="#">用户：{{ user }}</a></li>
-                        <li class="current"><a href="#">我的账户</a></li>
-                        {% if user.is_superuser %}
-                            <li><a href="{% url 'Backstage'  %}">后台管理</a></li>
-                        {% endif %}
-                        <li><a href="#">我的收藏</a></li>
-
-                        <li><a href="{% url 'create' %}">个人资料</a></li>
-                        <li><a href="{% url 'logut' %}">退出登录</a></li>
-                        {% else%}
-                        <li><a href="{% url 'login' %}">登录</a></li>
-                        <li><a href="{% url 'BC2_User' %}">注册 </a></li>
-
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo "><a href="/" style='color: white'>在线商城</a></div>
+       {% if user.is_authenticated %}
+        <ul class="layui-nav layui-layout-right">
+          <li class="layui-nav-item">
+            <a href="{% url 'create' %}">个人中心</a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:;"><img src="{{ user.profile.headimage }}" class="layui-nav-img">张文杰<span class="layui-nav-more"></span></a>
+            <dl class="layui-nav-child">
+              <dd><a href="">基本资料</a></dd>
+              <dd><a href="{% url 'Backstage'  %}">后台管理</a></dd>
+            </dl></li>
+          <li class="layui-nav-item"><a href="{% url 'logut' %}">退出登录</a></li>
+         </ul>
+        {% else%}
+         <li class="layui-nav-item"><a href="{% url 'login' %}">登录</a></li>
+         <li class="layui-nav-item"><a href="{% url 'BC2_User' %}">注册 </a></li>
+        {% endif %}
+  </div>
+</div>
+{% block header %}
     <header>
         <div class="container_12">
             <div class="grid_3">
@@ -85,38 +80,8 @@
                             <a class="cart_li" href="{% url 'cart' %}">
                                 <div class="cart_ico"></div>
                                 购物车
-{#                                <span>$0.00</span> {#  购物车的结算    #}
-                            </a>
-{#                             <ul class="cart_cont">#}
-{#                                <li class="no_border recently">加入购物车的物品</li>#}
-{#                                <li>#}
-{#                                                    购物车的物品显示         #}
-{#                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img.png' %}" alt="Product 1" title=""></div></a>#}
-{#                                    <div class="cont_cart">#}
-{#                                        <h4>Faddywax Fragrance Diffuser Set <br>Gardenia</h4>#}
-{#                                        <div class="price">1 x <span>$399.00</span></div>#}
-{#                                    </div>#}
-{#                                    <a title="close" class="close" href="#"></a>#}
-{#                                    <div class="clear"></div>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a href="product_page.html" class="prev_cart"><div class="cart_vert"><img src="{% static 'html/img/content/cart_img2.png' %}" alt="Product 2" title=""></div></a>#}
-{#                                    <div class="cont_cart">#}
-{#                                        <h4>Caldrea Linen and Room Spray</h4>#}
-{#                                        <div class="price">1 x <span>$123.00</span></div>#}
-{#                                    </div>#}
-{#                                    <a title="close" class="close" href="#"></a>#}
-{#                                    <div class="clear"></div>#}
-{#                                </li>;#}
-{#                                <li class="no_border">#}
-{#                                    <a href="shopping_cart.html" class="view_cart">查看购物车</a>#}
-{#                                    <a href="checkout.html" class="checkout">去支付</a>#}
-{#                                </li>#}
-{#                            </ul>#}
-
-                        </li>
+                            </a></li>
                     </ul>
-
                     <form class="search">
                         <input type="submit" class="search_button" value="">
                         <input type="text" name="search" class="search_form" value="" placeholder="搜索">
@@ -143,6 +108,7 @@
             </div><!-- .grid_9 -->
         </div>
     </header>
+{% endblock %}
 {% block body %}
     <div id="slider_body">
         <ul id="slider">
@@ -269,6 +235,7 @@
         </div><!-- .container_12 -->
     </section><!-- #main.home -->
 {% endblock %}
+{% block  footer %}
     <footer>
         <div class="footer_navigation">
             <div class="container_12">
@@ -354,7 +321,16 @@
             </div><!-- .container_12 -->
         </div><!-- .footer_info -->
     </footer>
+{% endblock %}
+<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
 
+  //…
+});
+
+</script>
 </body>
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 </html>

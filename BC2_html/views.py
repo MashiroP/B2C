@@ -7,8 +7,10 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect,render,HttpResponse
+from django.urls import reverse
+
 from BC2_html.form import Commodity_editor
-from BC2_admin.models import commodity,category,category_Subcategory,profile
+from BC2_admin.models import commodity, category, category_Subcategory, profile, Address, Order, OrderInfo
 from BC2_admin.models import cart as Cart_s
 import datetime
 import random
@@ -27,10 +29,9 @@ def login(request):
     nextpath = request.GET.get('nextpath', '/')
     context = a( )
     data = {}
-    sj=request.GET.get('nextpath')
-    dictinfo = json.loads(sj)
-    print(dictinfo)
-    
+    sj=request.GET.get('nextpath',None)
+    if sj:
+        dictinfo = json.loads(sj)
     nextpath=request.GET.get('url')
     
     if request.POST:
@@ -42,12 +43,18 @@ def login(request):
             user_S=User.objects.get(username=email)
             # 如果正确就把用户对象传入
             if use != None:
+                request.session ['user_id'] = user_S.id
                 # 传入然后对象 使用auth.login 进行登录
-                for i,v in dictinfo.items():
-                 goos=commodity.objects.get(id=i)
-                 Cart_s.objects.create(user_id=user_S,goos_id=goos,num=v)
-                auth.login(request, use)
-                return HttpResponse('<script>location.href="' + nextpath +'"</script>')
+                if sj:
+                    for i, v in dictinfo.items( ):
+                        goos = commodity.objects.get(id=i)
+                        Cart_s.objects.create(user_id=user_S, goos_id=goos, num=v)
+                    auth.login(request, use)
+                    return HttpResponse('<script>location.href="' + nextpath +'"</script>')
+                else:
+                    request.session ['user_id'] = user_S.id
+                    auth.login(request, use)
+                    return redirect('/')
             else:
                 data ['ERRO'] = 1
                 return JsonResponse(data)
@@ -57,7 +64,6 @@ def login(request):
 
 def BC2_User(request):
     data={}
-
     if request.POST:
         email=request.POST.get('email')
         name = request.POST.get('name')
@@ -99,7 +105,7 @@ def create(request):
     return render(request,'BC2_html/create.html',context)
 
 def up_User(request):
-    context = a( )
+    context = a()
     use=User.objects.get(id=request.GET.get('id'))
 
     return render(request, 'BC2_html/blog.html',context)
@@ -222,9 +228,9 @@ def addcart(request):
         # 如果不存在,则把商品添加到购物车中
         # 把要添加的商品加入到购物车数据中
         data[gid] = {'gid':gid,'num':num}
-
+    
     # 把配置号的购物车数据,再存入到session
-    request.session['cart'] = data
+    request.session['cart'] =data
 
 
     # 返回json
@@ -236,15 +242,26 @@ def addcart(request):
 def cart(request):
     context = a()
     if request.session.get('cart', {}):
-        
         data = request.session['cart']
+        user_data = request.session.get('user_id', '')
+        aa = User.objects.get(id=user_data)
+        for i in aa.cart_set.all( ):
+            data[i.goos_id.id]={'gid':i.goos_id.id,'num':i.num}
         for k, v in data.items( ):
             # ob =
             data [k] ['goods'] = commodity.objects.get(id=k)
-
         context ['data'] = data
-    else:
-        pass
+    elif request.session.get('user_id', {}):
+        data = request.session.get('cart',{})
+        user_data = request.session.get('user_id', '')
+        aa = User.objects.get(id=user_data)
+        for i in aa.cart_set.all( ):
+            data [i.goos_id.id] = { 'gid': i.goos_id.id, 'num': i.num }
+        for k, v in data.items( ):
+            # ob =
+            data [k] ['goods'] = commodity.objects.get(id=k)
+    
+        context ['data'] = data
    
     return render(request, 'BC2_html/shopping_cart.html',context)
 
@@ -260,20 +277,70 @@ def cart_sc(request):
     return JsonResponse({})
 
 
-from django.contrib.auth.decorators import login_required
-
-
 def ddsc(request):
     context = a()
     data=(request.GET.get('gid'))
-    dictinfo = json.loads(data)
-    user=User.objects.get(id=14)
-    b={}
-
-    if request.GET:
-        for i, v in dictinfo.items( ):
+    if bool(data):
+        dictinfo = json.loads(data)
+        b={}
+        for i, v in dictinfo.items():
             gods = commodity.objects.get(id=i)
-            b[v]=(gods)
-    context ['gods']=b
-    print(context ['gods'])
+            b[gods] =v[1]
+        context['gods']=b
+        request.session ['order'] = data
     return render(request, 'BC2_html/ddym.html', context)
+
+def address(request):
+    if request.POST:
+        data = request.POST.dict()
+        if data.get('isstatus'):
+            usdr_add=Address.objects.filter(uid=data.get('uid_id'))
+            for i in usdr_add:
+                i.isstatus=False
+                i.save()
+        data.pop('csrfmiddlewaretoken')
+        Address.objects.create(**data)
+        
+    return render(request, 'BC2_html/addaddress.html')
+# Order
+def place_order(request):
+    if request.POST:
+        data = request.session.get('order', { })
+        Data=request.session.get('order', { })
+        data = json.loads(data)
+        Data = json.loads(Data)
+        address=request.POST.get('Address')
+        Addre=Address.objects.get(id=address)
+        user = User.objects.get(id=request.session.get('user_id'))
+        order=Order()
+        order.user_id=user
+        order.Consignee=Addre.aname
+        order.Receiving_address=Addre.ads
+        order.phone=Addre.aphone
+        order.Amount=0
+        order.state=0
+        order.save()
+        num=0
+        for i,v in Data.items():
+            gods = commodity.objects.get(id=i)
+            OrdIn=OrderInfo()
+            OrdIn.orderid=order
+            OrdIn.gid=gods
+            OrdIn.num=int(v[1])
+            OrdIn.price=int(v [1]) * int(gods.Price)
+            OrdIn.save( )
+            num+=(int(v[1])*int(gods.Price))
+            Cart_s.objects.filter(goos_id=gods).delete()
+            data.pop(i)
+        order.Amount = num
+        order.save()
+        request.session ['cart'] = data
+        return render(request, 'BC2_html/addaddress.html')
+def test(request):
+    a=reverse('login')
+    a+='?a=1'
+    return  redirect(a)
+
+
+def Personal_Center(request):
+    return render(request, 'BC2_html/Personal_Center.html')

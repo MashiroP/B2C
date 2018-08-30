@@ -1,0 +1,63 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>后台登录</title>
+<!-- Meta tag Keywords -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Coloring Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<link rel="stylesheet" href="{% static 'login/css/style.css' %}" type="text/css" media="all" /> <!-- Style-CSS -->
+<link rel="stylesheet" href="{% static 'login/css/font-awesome.css' %}"> <!-- Font-Awesome-Icons-CSS -->
+</head>
+<body>
+<form method="post">
+<div data-vide-bg="{% static 'login/video/color1.mp4' %}">
+    {% csrf_token %}
+	<div class="center-container">
+            <!--header-->
+            <div class="header-w3l">
+
+		</div>
+		<!--//header-->
+		<!--main-->
+		<div class="main-content-agile">
+			<div class="wthree-pro">
+				<h2>登录</h2>
+			</div>
+			<div class="sub-main-w3">	
+				<form action="#" method="post">
+					<input placeholder="用户名" name="name" type="text" required="">
+
+					<input  placeholder="密码" name="Password" type="password" required="">
+
+                    <input  placeholder="验证码" name="vcod" type="password" required="" style='position: relative;'>
+                    <img src='{% url 'verifycode' %}' style="position: absolute;top:230px;right: 50px" onclick="this.src='{% url 'verifycode' %}?'+Math.random()">
+
+
+					<div class="rem-w3">
+
+					</div>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+		</div>
+		<!--//main-->
+		<!--footer-->
+		<div class="footer">
+			</div>
+		<!--//footer-->
+	</div>
+</div>
+</form>
+<script type="text/javascript" src="{% static 'login/js/jquery-2.1.4.min.js' %}"></script>
+<script src="{% static 'login/js/jquery.vide.min.js' %}"></script>
+<!-- //js -->
+</body>
+</html>
