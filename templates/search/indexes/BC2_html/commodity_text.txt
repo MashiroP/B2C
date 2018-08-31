@@ -1,2 +1,0 @@
-{{ object.Commodity_name }}
-{{ object.describe }}

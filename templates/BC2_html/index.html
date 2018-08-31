@@ -1,9 +1,10 @@
  {% load static staticfiles %}
-{% block head %}
+
 
 <!DOCTYPE html>
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+{% block head %}
 <head>
     <meta charset="utf-8">
 
@@ -11,6 +12,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="favicon.ico">
+{% block css %}
     <link rel="stylesheet" href="{% static 'html/css/grid.css'%}">
     <link rel="stylesheet" href="{% static 'html/css/style.css'%}">
     <link rel="stylesheet" href="{% static 'html/css/normalize.css'%}">
@@ -28,19 +30,23 @@
     <script src="{% static 'html/js/jquery.easing.1.2.js' %}"></script>
     <script src="{% static 'html/js/jquery.anythingslider.js' %}"></script>
     <script src="{% static 'html/js/jquery.anythingslider.fx.js' %}"></script>
+{% endblock %}
     <script src="{% static 'layui/layui.js' %}"></script>
 <link rel="stylesheet" href={% static 'layui/css/layui.css' %}>
 </head>
 {% endblock %}
 <body>
-<div class="layui-layout layui-layout-admin">
+
+	<div class="layui-layout layui-layout-admin">
   <div class="layui-header">
     <div class="layui-logo "><a href="/" style='color: white'>在线商城</a></div>
-       {% if user.is_authenticated %}
+
         <ul class="layui-nav layui-layout-right">
+	         {% if user.is_authenticated %}
           <li class="layui-nav-item">
             <a href="{% url 'create' %}">个人中心</a>
           </li>
+
           <li class="layui-nav-item">
             <a href="javascript:;"><img src="{{ user.profile.headimage }}" class="layui-nav-img">张文杰<span class="layui-nav-more"></span></a>
             <dl class="layui-nav-child">
@@ -48,13 +54,17 @@
               <dd><a href="{% url 'Backstage'  %}">后台管理</a></dd>
             </dl></li>
           <li class="layui-nav-item"><a href="{% url 'logut' %}">退出登录</a></li>
+                {% else%}
+        <li class="layui-nav-item"><a href="{% url 'login' %}">登录</a></li>
+         <li class="layui-nav-item"><a href="{% url 'register' %}">注册 </a></li>
          </ul>
-        {% else%}
-         <li class="layui-nav-item"><a href="{% url 'login' %}">登录</a></li>
-         <li class="layui-nav-item"><a href="{% url 'BC2_User' %}">注册 </a></li>
         {% endif %}
   </div>
 </div>
+
+
+
+
 {% block header %}
     <header>
         <div class="container_12">

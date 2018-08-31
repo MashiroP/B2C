@@ -103,7 +103,6 @@
     <script src="{% static 'jQueryGwc/js/carts.js' %}"></script>
 
 
-
 <script>
 
 $('.a').click(function () {
@@ -240,11 +239,11 @@ $(".calBtn").click(function() {
     ids=f()
     console.log(ids)
 res = JSON.stringify(ids);
-    {% if user.id %}
+    {% if request.session.User.uid %}
 
     {% else %}
+	  location.href="{% url 'login' %}?nextpath={{ request.path }}"
 
-     location.href="{% url 'login' %}?nextpath="+res+'&url='+"{% url 'ddsc' %}"
      return false
 
     {% endif %}
@@ -253,7 +252,7 @@ res = JSON.stringify(ids);
     if(!a){
 
     }
-    var a="{% url 'ddsc' %}"+'?gid='+res
+    var a="{% url '/ddsc' %}"+'?gid='+res
     $('.tj').attr('href',a)
 
     if(res == "{}"){return false}

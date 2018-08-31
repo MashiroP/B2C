@@ -1,0 +1,189 @@
+{% extends 'BC2_html/index.html' %}
+
+{% block title %}
+    创建用户
+{% endblock %}
+{% block css %}
+	{% load static %}
+<script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block body %}
+	<fieldset class="layui-elem-field">
+  <legend>字段集区块 - 默认风格</legend>
+  <div class="layui-field-box">
+	<div class="layui-col">
+		<div class="layui-col-md4">
+			<div class="layui-card">
+			  <div class="layui-card-header">卡片面板</div>
+			  <div class="layui-card-body">
+			    卡片式面板面板通常用于非白色背景色的主体内<br>
+			    从而映衬出边框投影
+			  </div>
+			</div>
+			<div class="layui-card">
+			  <div class="layui-card-header">卡片面板</div>
+			  <div class="layui-card-body">
+			    卡片式面板面板通常用于非白色背景色的主体内<br>
+			    从而映衬出边框投影
+			  </div>
+			</div>
+		</div>
+		<div class="layui-col-md6">
+			<form class="layui-form" action="{% url 'register' %}" method="post">
+				{% csrf_token %}
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">账户名称</label>
+			    <div class="layui-input-inline">
+			      <input type="text" name="user" required  lay-verify="required" placeholder="请输入账户名称" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">电话号码</label>
+			    <div class="layui-input-inline">
+			      <input type="text" name="Phone" id="Phone" required  lay-verify="required" placeholder="请输入电话号码" autocomplete="off" class="layui-input">
+			    </div>
+				<button class="layui-btn" type="button"  id="vcod" lay-filter="formDemo" value="" >立即发送</button>
+			  </div>
+
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">短信验证码</label>
+			    <div class="layui-input-inline ">
+				<input type="text" name="vcod"  required  lay-verify="required" placeholder="短信验证码"  class="layui-input">
+			    </div>
+			  </div>
+
+
+
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">邮箱</label>
+			    <div class="layui-input-inline">
+			      <input type="text" name="email" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">密码框</label>
+			    <div class="layui-input-inline">
+			      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+			    </div>
+			  </div>
+
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">性别</label>
+			    <div class="layui-input-block">
+			      <input type="radio" name="sex" value="1" title="男">
+			      <input type="radio" name="sex" value="0" title="女" checked>
+			    </div>
+			  </div>
+
+			  <div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+			      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			    </div>
+			  </div>
+			</form>
+
+		</div>
+	</div>
+  </div>
+</fieldset>
+{% block footer %}
+{% endblock %}
+<script>//Demo
+    function buttonCountdown($el, msNum, timeFormat) {
+        var text = $el.data("text") || $el.text(),
+            timer = 0;
+        $el.prop("disabled", true).addClass("disabled")
+            .on("bc.clear", function () {
+                clearTime();
+            });
+        (function countdown() {
+            var time = showTime(msNum)[timeFormat];
+            $el.text(time + '重新发送');
+            if (msNum <= 0) {
+                msNum = 0;
+                clearTime();
+            } else {
+                msNum -= 1000;
+                timer = setTimeout(arguments.callee, 1000);
+            }
+        })();
+
+        function clearTime() {
+            clearTimeout(timer);
+            $el.prop("disabled", false).removeClass("disabled").text(text);
+        }
+
+        function showTime(ms) {
+            var d = Math.floor(ms / 1000 / 60 / 60 / 24),
+                h = Math.floor(ms / 1000 / 60 / 60 % 24),
+                m = Math.floor(ms / 1000 / 60 % 60),
+                s = Math.floor(ms / 1000 % 60),
+                ss = Math.floor(ms / 1000);
+
+            return {
+                d: d + "天",
+                h: h + "小时",
+                m: m + "分",
+                ss: ss + "秒",
+                "d:h:m:s": d + "天" + h + "小时" + m + "分" + s + "秒",
+                "h:m:s": h + "小时" + m + "分" + s + "秒",
+                "m:s": m + "分" + s + "秒"
+            };
+        }
+
+        return this;
+    }
+
+    //使用演示 显示为 秒
+
+
+    //清理$("#test1")的倒计时  比如请求出错或者什么原因要清理倒计时按钮
+    $("#test1-clear").on("click",function(){
+        $("#test1").trigger("bc.clear");
+    })
+  layui.use('form',
+  function() {
+    var form = layui.form;
+
+  });
+
+  $("#vcod").click(function() {
+
+
+    var Phone = $('#Phone').val()
+
+    if (Phone == "") {
+      layer.msg('请输入电话号码 ')
+    } else {
+      buttonCountdown($(this), 1000 * 60* 3, "ss");
+      $.get('{% url 'SMS' %}', {'Phone': Phone},
+      function(data) {
+        if (data.error == '2') {
+            layer.msg('请输入正确的手机号码 ')
+
+        } else if (data.error) {
+          layer.msg('验证码发送成功 ')
+	        data.error
+        }
+      },
+      'json')
+    }
+    return false
+  })</script>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+

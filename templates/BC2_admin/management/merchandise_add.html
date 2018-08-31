@@ -1,0 +1,151 @@
+{% extends 'admin_head.html' %}
+{% load static staticfiles %}
+{% block title %}
+    商品添加
+{% endblock %}
+
+{% block body %}
+
+
+<form class="layui-form layui-form-pane" action="{% url 'merchandise_add_data' %}" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+    <div class="layui-form-item">
+    <label class="layui-form-label">商品名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="name" autocomplete="off" placeholder="请输入标题" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">价格</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input type="text" name="Price" placeholder="￥" autocomplete="off" class="layui-input">
+      </div>
+
+    </div>
+  </div>
+  <div class="layui-form-item" style="width: 30%;" title="主要材质">
+    <label class="layui-form-label">选择分类</label>
+    <div class="layui-input-block">
+      <select name="uid" lay-filter="aihao" >
+        {% for i in category %}
+         <option value="{{ i.id }}">{{ i.Subgrade_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">库存</label>
+         <div class="layui-input-inline" style="width: 100px;">
+         <input type="number" name="Stock" placeholder="" autocomplete="off" class="layui-input">
+         </div>
+    </div>
+  </div>
+  </div>
+  <div class="layui-form-item" pane="">
+    <label class="layui-form-label">状态</label>
+    <div class="layui-input-block">
+      <input type="radio" name="state" value="1" title="新发布" checked="">
+      <input type="radio" name="state" value="0" title="在售">
+      <input type="radio" name="state" value="2" title="下架">
+    </div>
+  </div>
+  <div class="layui-form-item" style="width: 850px;">
+    <label class="layui-form-label">上传商品图片</label>
+    <div class="layui-input-block">
+    <label id="realBtn" class="btn btn-info">
+    <img src="" alt="" width="200">
+     <input type="file" id="file" name="file" class="mFileInput" style="left:-9999px;position:absolute;" onchange="previewFile()"  >
+     <span class="layui-btn">上传图片</span>
+     <span id="hade"></span>
+     </label>
+    </div>
+  </div>
+
+
+
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">商品描述 </label>
+    <div class="layui-input-block">
+     <div id="div1">
+    </div>
+<textarea  id="text1" placeholder="请输入内容" class="layui-textarea layui-hide" name="describe"></textarea>
+
+    </div>
+  </div>
+  <div class="layui-form-item layui-col-xs-offset3" >
+    <button class="layui-btn" id="sim">添加</button>
+  </div>
+</div>
+</form>
+
+<link rel="stylesheet" href="{% static 'wangEditor/wangEditor.css' %}">
+<script type="text/javascript" src="{% static 'wangEditor/wangEditor.js' %}"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#div1')
+    var $text1 = $('#text1')
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text1.val(html)
+    }
+    editor.create()
+    // 初始化 textarea 的值
+    $text1.val(editor.txt.html())
+</script>
+<script src="{% static 'layui/layui.js' %}" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  laydate.render({
+    elem: '#date'
+  });
+  laydate.render({
+    elem: '#date1',type: 'datetime'
+  });
+});
+
+
+
+function getFileName(path) {
+    var pos1 = path.lastIndexOf('/');
+    var pos2 = path.lastIndexOf('\\');
+    var pos = Math.max(pos1, pos2);
+    if (pos < 0) {
+        return path;
+    }
+    else {
+        return path.substring(pos + 1);
+    }
+}
+
+$(document).ready(function () {
+    $('#file').change(function () {
+        var scr=$(this).attr("src");
+        var str = $(this).val();
+        var fileName = getFileName(str);
+        var scr=$('#hade').text(fileName)
+    });
+});
+
+ function previewFile() {
+      var preview = document.querySelector('img');
+      var file    = document.querySelector('input[type=file]').files[0];
+      var reader  = new FileReader();
+
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+</script>
+
+{% endblock %}

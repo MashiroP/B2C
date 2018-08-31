@@ -1,0 +1,97 @@
+{% extends 'admin_head.html' %}
+{% load static staticfiles %}
+{% block title %}
+商品列表
+{% endblock %}
+{% block body %}
+
+<form class="layui-form layui-col-xs-offset3" action="{% url 'merchandise_list' %}" method="get">
+<input type="hidden" value="{{ contacts.number }}" name="page">
+  <div class="layui-form-item">
+    <div class="layui-input-inline">
+      <select name="city" lay-verify="required">
+        <option value="" selected="selected"></option>
+        <option value="Texture"{% if  request.GET.city ==  'Texture'  %} selected="selected" {% endif %} > 商品类别 </option>
+        <option value="bt"{% if  request.GET.city ==  'bt'  %} selected="selected" {% endif %} >商品标题</option>
+      </select>
+    </div>
+    <div class="layui-input-inline">
+      <input type="text" name="search" required  lay-verify="required" placeholder="搜索" autocomplete="off" class="layui-input" value="{{ request.GET.title }}">
+    </div>
+
+    <div class="layui-input-inline" style="color: white">
+      <button class="layui-btn"  lay-submit lay-filter="formDemo"> <i class="layui-icon" style="color: white">&#xe615;</i></button>
+     </div>
+  </div>
+<div class="layui-form-item">
+</div>
+</form>
+<table class="layui-table lay-size='sm" id="barDemo" >
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>商品图片</th>
+      <th>商品标题</th>
+      <th>商品价格</th>
+      <th>商品库存</th>
+      <th>商品类别</th>
+      <th>点击量</th>
+      <th>创建时间</th>
+      <th>状态</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in contacts.object_list %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td><img src="../../{{ i.Commodity_img }}"  height="50"></td>
+      <td>{{ i.Commodity_name }}</td>
+      <td>{{ i.Price }}</td>
+      <td>{{ i.Stock }}</td>
+      <td>{{ i.uid.Subgrade_name }}</td>
+      <td>{{ i.Clicks }}</td>
+      <td>{{ i.addtime }}</td>
+      <td class="selected"><samp data="{{ i.state  }}">{% if  i.state == '0'  %} 新品  {% elif i.state == '1'  %} 在售  {% else %} 下架  {% endif %}</samp> </td>
+      <td>
+        <div class="layui-btn-group">
+          <a class="layui-btn layui-btn-md aaa" style="background:#b2b2b2;" lay-event="{{ i.id }}" title="查看">查看</a>
+          <a class="layui-btn layui-btn-md" href="{% url 'merchandise_edit' %}?uid={{ i.id }}" title="修改">修改</a>
+	          <a class="layui-btn layui-btn-md layui-bg-red" href="{% url 'merchandise_state' %}?uid={{ i.id }}" >{% if i.state == '2' %} 上架 {%  else  %}下架 {% endif %}</a>
+        </div>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="layui-col-xs-offset3">
+                {% if contacts.has_previous %}
+                    <a class="layui-btn layui-btn-primary" href="?page=1&city={{ request.GET.city}}&title={{ request.GET.title }}">首页</a>
+                    <a class="layui-btn layui-btn-primary" href="?page={{ contacts.previous_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">上一页</a>
+                    {% endif %}
+                    {% for i in page_number %}
+                        {%  if i == contacts.number %}
+                          <a class="layui-btn layui-btn-primary layui-bg-orange "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
+                        {% else %}
+                          <a class="layui-btn layui-btn-primary "  href="?page={{ i }}&city={{ request.GET.city}}&title={{ request.GET.title }}">{{ i}}</a>
+                        {% endif %}
+                        {% endfor %}
+                {% if contacts.has_next %}
+                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.next_page_number }}&city={{ request.GET.city}}&title={{ request.GET.title }}">下一页</a>
+                     <a class="layui-btn layui-btn-primary" href="?page={{ contacts.paginator.num_pages }}&city={{ request.GET.city}}&title={{ request.GET.title }}">尾页 &raquo;</a>
+                    {% endif %}
+<p>当前页面 {{ contacts.number }}，共 {{ contacts.paginator.num_pages }}页</p>
+</div>
+<script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  form.render(); //更新全部
+  form.render('select'); //刷新select选择框渲染
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+        });
+    });
+</script>
+{% endblock %}

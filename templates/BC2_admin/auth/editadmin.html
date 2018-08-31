@@ -1,0 +1,75 @@
+{% extends 'admin_head.html' %}
+{% load static staticfiles %}
+{% block title %}
+详情资料
+{% endblock %}
+
+{% block body %}
+<form class="layui-form" action='' method='post'>
+<fieldset class="layui-elem-field layui-col-xs-offset3" style='width: 500px;'>
+  <legend>修改管理员</legend>
+  <div class="layui-field-box">
+
+        {% csrf_token %}
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-block">
+      <input type="text" name="username" value={{ user.username }} placeholder="用户名" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+<div class="layui-form-item">
+    <label class="layui-form-label">选择框</label>
+    <div class="layui-input-block">
+    <select name="authority" xm-select="select1" xm-select-direction="down">
+        {% for i in  user.groups.all %}
+
+        <option value='{{ i.id }}' selected="selected"> {{ i.name }}</option>
+        {% endfor  %}
+
+        {% for i in Perlist %}
+        <option value='{{ i.id }}' > {{ i.name }}</option>
+        {% endfor %}
+
+    </select>
+    </div>
+</div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">超级管理员</label>
+    <div class="layui-input-block">
+      {% if user.is_superuser %}
+          <input type="checkbox" name="isstatus" value="True" lay-skin="switch" lay-text="是|否" checked>
+          {% else %}
+          <input type="checkbox" name="isstatus" value="False" lay-skin="switch" lay-text="是|否">
+        {% endif %}
+    </div>
+  </div>
+
+   <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+  </div>
+</fieldset>
+<input type="hidden" value="{{ user.id }}" name="uid">
+ </form>
+
+<link rel="stylesheet" type="text/css" href="{% static 'layui/css/formSelects-v4.css' %}"/>
+<script src="{% static 'layui/formSelects-v4.js' %}" type="text/javascript" charset="utf-8"></script>
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+form.render(); //更新全部
+
+
+});
+</script>
+
+{% endblock %}
+
+
+

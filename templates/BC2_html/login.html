@@ -1,63 +1,112 @@
 {% extends 'BC2_html/index.html' %}
 
 {% block title %}
-    登录
+    创建用户
 {% endblock %}
-
+{% block css %}
+	{% load static %}
+<script src="{% static 'html/js/jquery-1.8.3.min.js' %}"></script>
+{% endblock %}
+{% block header %}
+{% endblock %}
 {% block body %}
-    <section id="main" class="page-login">
-        <div class="container_12">
-            <div id="content" class="grid_12">
-                <header>
-                    <h1 class="page_title">登录用户</h1>
-                </header>
-                <article>
-                    <div class="grid_6 new_customers">
-			<h2><a href="{% url 'BC2_User' %}">新用户</a></h2>
-			<p>通过在本商店注册，您可以更快地完成结帐流程，存储多个送货地址，查看和跟踪您帐户中的订单等
-            </p>
-			<div class="clear"></div>
-                    </div>
-                    <div class="grid_6 registed_form">
-			<form class="registed" action="?nextpath={{ request.GET.nextpath }}&url={{ request.GET.url }}" method="post" id="fo">
-                {% csrf_token %}
-			    <h2>登录一个帐户</h2>
-                <p>输入手机号码登录<br> 通过手机号码之后可以在个人资料中填写更多信息</p>
-			    <div class="email">
-				<strong>手机号码：</strong><sup>*</sup><br>
-				<input type="text" name="email">
-			    </div>
-                <input type="hidden" name="next" value="{{ request.GET.get.next}}">
+<span class="layui-breadcrumb">
+  <a href="">首页</a>
+  <a href="">国际新闻</a>
+  <a href="">亚太地区</a>
+  <a><cite>正文</cite></a>
+</span>
+	<hr>
+	<fieldset class="layui-elem-field">
+  <legend><h1>登录</h1></legend>
 
-			    <div class="email">
-				<strong>密码:</strong><sup>*</sup><br>
-				<input type="password" name="password" >
-                    <samp style="color: red" id="span_password"></samp>
+  <div class="layui-field-box">
+	<div class="layui-col">
+		<div class="layui-col-md4">
+			<div class="layui-card">
+			  <div class="layui-card-header">卡片面板</div>
+			  <div class="layui-card-body">
+			    卡片式面板面板通常用于非白色背景色的主体内<br>
+			    从而映衬出边框投影
+			  </div>
+			</div>
+			<div class="layui-card">
+			  <div class="layui-card-header">卡片面板</div>
+			  <div class="layui-card-body">
+			    卡片式面板面板通常用于非白色背景色的主体内<br>
+			    从而映衬出边框投影
+			  </div>
+			</div>
+			<div class="layui-card">
+			  <div class="layui-card-header">卡片面板</div>
+			  <div class="layui-card-body">
+			    卡片式面板面板通常用于非白色背景色的主体内<br>
+			    从而映衬出边框投影
+			  </div>
+			</div>
+		</div>
+		<div class="layui-col-md6">
+			<form class="layui-form" action="" method="post" id="fo">
+				{% csrf_token %}
+			  <div class="layui-form-item layui-btn-lg">
+			    <label class="layui-form-label">手机号码</label>
+			    <div class="layui-input-inline">
+			      <input type="text" name="Phone" required  lay-verify="required" placeholder="请输入手机号码" autocomplete="off" class="layui-input">
 			    </div>
-			    <div class="submit">
-				<input type="submit" value="登录">
-                <a class="forgot" href="#">忘记密码了吗？</a>
-				<sup>*</sup><span>必填字段</span>
+			  </div>
+			  <div class="layui-form-item layui-btn-lg">
+			    <label class="layui-form-label">密码框</label>
+			    <div class="layui-input-inline">
+			      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 			    </div>
+			  </div>
+
+			  <div class="layui-form-item layui-btn-lg" >
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="*" style="width: 190px">登录</button>
+			    </div>
+			  </div>
 			</form>
-                    </div>
-		</article>
+		</div>
+	</div>
+  </div>
+</fieldset>
+  <div class="layui-footer">
 
-                <div class="clear"></div>
-            </div><!-- #content -->
+© layui.com - 底部固定区域© layui.com - 底部固定区域© layui.com - 底部固定区域© layui.com - 底部固定区域© layui.com - 底部固定区域© layui.com - 底部固定区域© layui.com - 底部固定区域
+  </div>
+</div>
+{% block footer %}
+{% endblock %}
+<script>//Demo
+  layui.use('form',
+  function() {
+    var form = layui.form;
 
-            <div class="clear"></div>
-        </div><!-- .container_12 -->
-    </section><!-- #main -->
-    <div class="clear"></div>
+  });
+$("#fo").submit(function () {
+         data = {};
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
+    $.ajax({
+        type: "post",
+        url: "{% url 'login' %}"+'?nextpath='{{ request.GET.nextpath }},
+        dataType: "json",
+        data:$(this).serialize(),
+        success: function(data) {
+            if( data.error=='1'){
+                layer.msg('手机号码错误,或者密码错误 ')
 
-
-
-
+            }else {
+                alert(data.error)
+				eval(data.error)
+            }
+        },error:function (xhr) {
+        }
+    });
+    return false;
+    });
+ </script>
 
 {% endblock %}
-
-
-
-
 

@@ -1,0 +1,75 @@
+{% extends 'admin_head.html' %}
+{% load static staticfiles %}
+{% block title %} 商品分类管理 {% endblock %}
+{% block body %}
+  <br />
+  <hr />
+    <div class='layui-col'>
+    <div class='layui-col-md3'>
+        <br>
+    </div>
+
+    <div class='layui-col-md4'>
+        <form class="layui-form" action="" method=post>
+        {% csrf_token %}
+  <div class="layui-form-item">
+    <label class="layui-form-label">组名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="title" placeholder="请输入组名称" autocomplete="off" class="layui-input" >
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">选择框</label>
+    <div class="layui-input-block">
+    <select name="authority" xm-select="select1" xm-select-direction="down">
+        {% for i in Perlist %}
+
+        <option value={{ i.id }}> {{ i.name }}</option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+
+    </div>
+
+    <div class='layui-col-md4'>
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'layui/css/formSelects-v4.css' %}"/>
+<script src="{% static 'layui/formSelects-v4.js' %}" type="text/javascript" charset="utf-8"></script>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+    form.render();
+  //各种基于事件的操作，下面会有进一步介绍
+});
+
+
+</script>
+{% endblock %}

@@ -19,7 +19,7 @@
       <input type="text" name="aname" required  lay-verify="required" placeholder="请输入收货人姓名" autocomplete="off" class="layui-input">
     </div>
   </div>
-    <input type='hidden'value='{{ user.id }}' name='uid_id'>
+    <input type='hidden'value='{{ request.session.User.uid }}' name='uid_id'>
   <div class="layui-form-item">
     <label class="layui-form-label">联系电话</label>
     <div class="layui-input-block">

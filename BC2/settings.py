@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'BC2_admin.LoginMiddleware.LoginMiddleware',
 ]
 
 ROOT_URLCONF = 'BC2.urls'
