@@ -1,0 +1,57 @@
+{% extends 'BC2_html/index.html' %}
+{% load static staticfiles %}
+{% block title %}
+    个人资料
+{% endblock %}
+
+{% block body %}
+    <style>
+            img{
+        overflow: hidden;
+
+    }
+     img{
+        cursor: pointer;
+        transition: all 0.6s;
+    }
+     img:hover{
+
+        transform: scale(2);
+    }
+    </style>
+    <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"  media="all">
+    <script src="{% static 'layui/layui.all.js' %}" charset="utf-8"></script>
+<div class="layui-container layui-col-xs-offset4">
+  <div class="layui-row">
+    <div class="layui-col-md5">
+        <fieldset class="layui-elem-field">
+          <legend>个人资料</legend>
+          <div class="layui-field-box">
+             <blockquote class="layui-elem-quote layui-quote-nm">
+
+                 <p>用户头像 :<img src="{{ user.headimage }}" alt="" class="layui-nav-img" width="100px"></p>
+                 <hr>
+                 <p>账户 :{{ user.user }}</p>
+                 <hr>
+                 <p>性别 :{% if  user.sex  == '1' %} 男 {% else %}女 {% endif %}</p>
+                 <hr>
+                 <p>手机号码 :{{ user.Phone }}
+
+                 </p>
+                 <br>
+                 <a class="layui-btn layui-btn-primary layui-col-xs-offset3 aaa" href="{% url 'modify_information' %}">修改个人资料</a>
+             </blockquote>
+          </div>
+        </fieldset>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="{% static 'layui/layui.js' %}"></script>
+
+<script>
+
+</script>
+{% endblock %}

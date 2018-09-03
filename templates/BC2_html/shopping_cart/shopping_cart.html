@@ -4,7 +4,33 @@
 {% block title %}
 购物车
 {% endblock %}
+{% block top %}
+	<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo "><a href="/" style='color: white'>在线商城</a></div>
 
+        <ul class="layui-nav layui-layout-right">
+
+	         {% if request.session.User.activation == '1'  %}
+          <li class="layui-nav-item">
+	            <a href="{% url 'Personal_Center' %}">个人中心</a>
+          </li>
+
+
+          <li class="layui-nav-item">
+            <dl class="layui-nav-child">
+              <dd><a href="{% url 'create' %}">基本资料</a></dd>
+              <dd><a href="{% url 'Backstage'  %}">后台管理</a></dd>
+            </dl></li>
+          <li class="layui-nav-item"><a href="{% url 'logut' %}">退出登录</a></li>
+                {% else%}
+        <li class="layui-nav-item"><a href="{% url 'login' %}">登录</a></li>
+         <li class="layui-nav-item"><a href="{% url 'register' %}">注册 </a></li>
+         </ul>
+        {% endif %}
+  </div>
+</div>
+{% endblock %}
 {% block body %}
 
     <link rel="stylesheet" href="{% static 'jQueryGwc/css/reset.css' %}">
@@ -238,11 +264,11 @@ function f() {
 $(".calBtn").click(function() {
     ids=f()
     console.log(ids)
-res = JSON.stringify(ids);
+	res = JSON.stringify(ids);
     {% if request.session.User.uid %}
 
     {% else %}
-	  location.href="{% url 'login' %}?nextpath={{ request.path }}"
+	  location.href="{% url 'login' %}?nextpath={{ request.path }}&gid="+res+""
 
      return false
 

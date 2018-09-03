@@ -1,0 +1,92 @@
+{% extends 'BC2_html/index.html' %}
+{% load static staticfiles %}
+{% block title %}
+    订单完成
+{% endblock %}
+{% block top %}
+	<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo "><a href="/" style='color: white'>在线商城</a></div>
+
+        <ul class="layui-nav layui-layout-right">
+
+	         {% if request.session.User.activation == '1'  %}
+          <li class="layui-nav-item">
+	            <a href="{% url 'Personal_Center' %}">个人中心</a>
+          </li>
+
+
+          <li class="layui-nav-item">
+            <dl class="layui-nav-child">
+              <dd><a href="{% url 'create' %}">基本资料</a></dd>
+              <dd><a href="{% url 'Backstage'  %}">后台管理</a></dd>
+            </dl></li>
+          <li class="layui-nav-item"><a href="{% url 'logut' %}">退出登录</a></li>
+                {% else%}
+        <li class="layui-nav-item"><a href="{% url 'login' %}">登录</a></li>
+         <li class="layui-nav-item"><a href="{% url 'register' %}">注册 </a></li>
+         </ul>
+        {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+
+
+
+
+
+
+<div class="layui-row">
+
+
+
+    <div class="layui-col-md5">
+	    <br>
+    </div>
+
+
+    <div class="layui-col-md2">
+      <i class="layui-icon layui-icon-ok layui-col-space30" style="font-size: 80px; color: #1dff11;"></i>
+
+
+    </div>
+
+
+
+
+
+    <div class="layui-col-md5">
+	    <br>
+    </div>
+
+
+
+</div>
+<div class="layui-col-xs-offset5">
+
+
+	<br>
+<h1 class="layui-col-xs-p" style="left: -40px;position: relative;">下订完成</h1>
+</div>
+
+<div class="layui-col-xs-offset5"  style="left: -25px;position: relative;">
+	<br>
+<button class="layui-btn">点击支付</button>
+
+
+
+
+</div>
+<script src={% static 'layui/layui.js' %}></script>
+<script>
+//Demo
+
+
+
+</script>
+
+
+
+
+{% endblock %}

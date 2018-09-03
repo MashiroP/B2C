@@ -3,7 +3,34 @@
 {% block title %}
     商品列表
 {% endblock %}
+{% block top %}
+	<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo "><a href="/" style='color: white'>在线商城</a></div>
 
+        <ul class="layui-nav layui-layout-right">
+
+	         {% if request.session.User.activation == '1'  %}
+          <li class="layui-nav-item">
+	            <a href="{% url 'Personal_Center' %}">个人中心</a>
+          </li>
+
+
+          <li class="layui-nav-item">
+            <a href="javascript:;"><img src="{{ request.session.User.headimage  }}" class="layui-nav-img"><span class="layui-nav-more"></span></a>
+            <dl class="layui-nav-child">
+              <dd><a href="{% url 'create' %}">基本资料</a></dd>
+              <dd><a href="{% url 'Backstage'  %}">后台管理</a></dd>
+            </dl></li>
+          <li class="layui-nav-item"><a href="{% url 'logut' %}">退出登录</a></li>
+                {% else%}
+        <li class="layui-nav-item"><a href="{% url 'login' %}">登录</a></li>
+         <li class="layui-nav-item"><a href="{% url 'register' %}">注册 </a></li>
+         </ul>
+        {% endif %}
+  </div>
+</div>
+{% endblock %}
 {% block body %}
 
 
@@ -31,7 +58,7 @@
 				<a href="product_page.html"><h3 class="title">{{ i.Commodity_name }}</h3></a>
                     <div class="availability_sku">
                         <div class="availability">
-                        库存 <span>{{ i.Stock }}</span>
+                       库存 <span>{{ i.Stock }}</span>
                         </div>
                         <div class="sku">
                         浏览次数: <span>{{ i.Clicks }}</span>
